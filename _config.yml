@@ -59,7 +59,7 @@ kramdown:
     input: GFM
 highlighter: rouge
 paginate: 8
-paginate_path: "/blog-page:num/"
+paginate_path: "/blog/page:num/"
 lsi: false
 quiet: false
 excerpt_separator: "\n\n"
