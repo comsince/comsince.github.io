@@ -81,7 +81,8 @@ comments: false
           {% if count == paginator.page %}
               <a href="javascript:;"  class="active btn btn-outline">{{count}}</a>
           {% else %}
-              <a href="/page{{count}}"  class="btn btn-outline">{{count}}</a>
+              <!--<a href="/page{{count}}"  class="btn btn-outline">{{count}}</a> -->
+			  <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">{{count}}</a>
           {% endif %}
         {% endfor %}
         {% if paginator.next_page %}
