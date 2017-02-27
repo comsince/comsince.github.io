@@ -68,7 +68,7 @@ comments: false
               <a href="/" class="btn btn-outline">&laquo;</a>
           {% else %}
               <!--<a href="/page{{paginator.previous_page}}"  class="btn btn-outline">&laquo;</a>-->
-			  <a href="{{ site.paginate_path | replace: ':num', paginator.previous_page }}" class="btn btn-outline">&raquo;</a>
+			  <a href="{{ site.paginate_path | replace: ':num', paginator.previous_page }}" class="btn btn-outline">&laquo;</a>
           {% endif %}
         {% else %}
             <button disabled="disabled" href="javascript:;" class="btn btn-outline">&laquo;</button>
