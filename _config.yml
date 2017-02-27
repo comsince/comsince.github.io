@@ -1,7 +1,7 @@
 # ---------------- #
 #   Main Configs   #
 # ---------------- #
-baseurl:https://comsince.github.io
+baseurl: https://comsince.github.io
 url: https://comsince.github.io
 date_format: "ordinal"
 title: comsince
