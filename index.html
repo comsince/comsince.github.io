@@ -65,7 +65,7 @@ comments: false
       <div class="btn-group">
         {% if paginator.previous_page %}
           {% if paginator.previous_page == 1 %}
-              <a href="/blog/" class="btn btn-outline">&laquo;</a>
+              <a href="/" class="btn btn-outline">&laquo;</a>
           {% else %}
               <!--<a href="/page{{paginator.previous_page}}"  class="btn btn-outline">&laquo;</a>-->
 			  <a href="{{ site.paginate_path | replace: ':num', paginator.previous_page }}">&raquo;</a>
@@ -76,19 +76,19 @@ comments: false
         {% if paginator.page == 1 %}
             <a href="javascript:;" class="active btn btn-outline">1</a>
         {% else %}
-            <a href="/blog/"  class="btn btn-outline">1</a>
+            <a href="/"  class="btn btn-outline">1</a>
         {% endif %}
         {% for count in (2..paginator.total_pages) %}
           {% if count == paginator.page %}
               <a href="javascript:;"  class="active btn btn-outline">{{count}}</a>
           {% else %}
              <!--<a href="/blog-page{{count}}"  class="btn btn-outline">{{count}}</a>-->
-             <a href="{{ site.paginate_path | replace: ':num', count }}">{{ count }}</a>
+             <a href="{{ site.paginate_path | replace: ':num', count }}" class="btn btn-outline">{{ count }}</a>
           {% endif %}
         {% endfor %}
         {% if paginator.next_page %}
             <!--<a href="/blog-page{{paginator.next_page}}"  class="btn btn-outline">&raquo;</a>-->
-			<a href="{{ site.paginate_path | replace: ':num', paginator.next_page }}">&raquo;</a>
+			<a href="{{ site.paginate_path | replace: ':num', paginator.next_page }} class="btn btn-outline"">&raquo;</a>
         {% else %}
             <button disabled="disabled" href="javascript:;" class="btn btn-outline">&raquo;</button>
         {% endif %}
