@@ -14,7 +14,7 @@ category: tech
 
 Bintray 是一个非常好的库托管平台，深受开发者的喜爱，有很多优秀的开源库，都托管在此；Gradle默认是支持jcenter自动依赖下载的，我们完全可以依赖其发布我们自己的开源库
 
-关于Bintray的注册可以参考[Register_Jcenter](2017-03-04-jcenter-register.md)这篇文章
+关于Bintray的注册可以参考[Register_Jcenter](https://comsince.github.io/2017/03/04/jcenter-register/)这篇文章
 
 **NOTE:** 注意你的用户名和apikey它将是你以后需要频繁使用的参数
 
@@ -52,7 +52,7 @@ Bintray 是一个非常好的库托管平台，深受开发者的喜爱，有很
 ### 3.2 Gradle插件集成
 
 * 发布插件到JFrog Artifactory
-  如果你想通过Artifactory Gradle Plugin 发布开源库，可以利用如下插件实现[Gradle_Plugin_For_Publish](2017-02-21-gradle-plugin-for-publish.md)
+  如果你想通过Artifactory Gradle Plugin 发布开源库，可以利用如下插件实现[Gradle_Plugin_For_Publish](https://comsince.github.io/2017/02/21/gradle-plugin-for-publish/)
 
 ### 3.3 完成快照版本发布
 
