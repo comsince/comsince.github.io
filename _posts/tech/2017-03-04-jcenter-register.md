@@ -1,4 +1,13 @@
-# Jcenter注册申请步骤
+---
+layout: post
+title: "Jcenter注册与账户信息说明"
+description: 本文主要讲解Jcenter注册，以及如何创建group发布自己的library，以及在注册过程中的注意事项
+category: tech
+---
+
+
+##  概述
+本文主要讲解Jcenter注册，以及如何创建group发布自己的library，以及在注册过程中的注意事项，为以后使用gradle插件实现自动发布做准备
 
 ## 一.注册
 
