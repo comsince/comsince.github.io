@@ -2,7 +2,7 @@
 layout: post
 title: "Push推送对比研究分析"
 description: 针对市场各个推送SDK做一些简要的说明，方便SDK的设计与开发
-category: blog
+category: tech
 ---
 
 

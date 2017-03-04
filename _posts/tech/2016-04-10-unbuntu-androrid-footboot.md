@@ -2,7 +2,7 @@
 layout: post
 title: "FastBoot 刷机教程"
 description: 刷机基本原理，一般步骤，fastboot模式
-category: blog
+category: tech
 ---
 
 ## 一 基本原理

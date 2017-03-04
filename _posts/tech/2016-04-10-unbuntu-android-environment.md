@@ -2,7 +2,7 @@
 layout: post
 title: "Unbuntu android 环境初始配置"
 description: Unbuntu android 环境初始配置,java environment,Android SDK,ADB 配置，虚拟机安装
-category: blog
+category: tech
 ---
 
 ## 一.配置JDK

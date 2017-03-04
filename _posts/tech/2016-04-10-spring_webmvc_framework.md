@@ -2,7 +2,7 @@
 layout: post
 title: "SpringMVC 框架"
 description: SpringMVC 框架,核心控制器，IOC
-category: blog
+category: tech
 ---
 
 ## 一. SpringMVC 框架

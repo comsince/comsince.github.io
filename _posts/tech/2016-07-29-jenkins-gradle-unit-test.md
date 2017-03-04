@@ -2,7 +2,7 @@
 layout: post
 title: "Jenkins+Gradle Plugin+Android Unit Test"
 description: jenkin api and gradle plugin for Android unit test
-category: blog
+category: tech
 ---
 
 ## 一. 概述
