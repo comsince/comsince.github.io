@@ -144,3 +144,9 @@ You can create a separate project for your plugin. This project produces and pub
 	}
 
 ```
+
+## 参考文档
+
+* [Android 单元测试工具概览](https://github.com/codepath/android_guides/wiki/Android-Testing-Options)
+* [美团技术博客-Android单元测试研究与实践](http://tech.meituan.com/Android_unit_test.html)
+* [Unit Testing with Robolectric](https://github.com/codepath/android_guides/wiki/Unit-Testing-with-Robolectric)
