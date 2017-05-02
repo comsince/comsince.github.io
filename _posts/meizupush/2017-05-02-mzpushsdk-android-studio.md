@@ -188,8 +188,8 @@ PushSDK3.0以后的版本使用了最新的魅族插件发布aar包，因此大�
 
 | 接口名称      | 接口说明| 使用建议|是否已经废弃|对应MzPushReceiver回调方法|
 | :--------: | :--------:| :--: |:--: |:--: |
-|register(Context context)|旧版订阅接口|请使用新版订阅接口|是|onRegister(Context context,String pushId)|
-|unRegister(Context context)|旧版反订阅接口|请使用新版的反订阅接口|是|onUnRegister(Context context,boolean success)|
+|~~register(Context context)~~|旧版订阅接口|请使用新版订阅接口|是|onRegister(Context context,String pushId)|
+|~~unRegister(Context context)~~|旧版反订阅接口|请使用新版的反订阅接口|是|onUnRegister(Context context,boolean success)|
 |register(Context context,String appId,String appKey)|新版订阅接口|建议Application onCreate调用|否|onRegisterStatus(Context context,RegisterStatus registerStatus)|
 |unRegister(Context context,String appId,String appKey)|新版反订阅接口|取消所有推送时使用,慎用,如果取消,将有可能停止所有推送|否|onUnRegisterStatus(Context context,UnRegisterStatus unRegisterStatus)|
 |subScribeTags(Context context,String appId,String appKey,String pushId,String tags)|订阅标签|无|否|onSubTagsStatus(Context context,SubTagsStatus subTagsStatus)|
