@@ -208,8 +208,8 @@ PushSDK3.0以后的版本使用了最新的魅族插件发布aar包，因此大�
 
 | 接口名称      | 接口说明| 使用建议|是否已经废弃|
 | :--------: | :--------:| :--: |:--: |
-|onRegister(Context context,String pushId)|旧版pushid回调接口|建议不再使用|是|
-|onUnRegister(Context context,boolean success)|旧版反订阅回调接口|建议不再使用|是|
+|~~onRegister(Context context,String pushId)~~|旧版pushid回调接口|建议不再使用|是|
+|~~onUnRegister(Context context,boolean success)~~|旧版反订阅回调接口|建议不再使用|是|
 |onMessage(Context context,String message)|透传消息回调|请选择一个实现即可|否|
 |onMessage(Context context,String message,String platformExtra)| 透传消息回调|跟上面方法两者选其一实现,不要两个方法同时覆盖,否则一次透传消息会回调两次,此方法多一个平台参数,格式如下格式如下:```{"task_id":"1232"}```|否|                                                                                  
 |onMessage(Context context,Intent intent)|处理flyme3.0平台的推送消息|flyme3.0平台支持透传消息,只有本方法才能处理flyme3的透传消息,具体相见flyme3获取消息的方法|否|
