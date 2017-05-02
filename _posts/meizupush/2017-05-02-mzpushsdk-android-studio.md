@@ -65,7 +65,7 @@ PushSDK3.0以后的版本使用了最新的魅族插件发布aar包，因此大�
 
 ### 3.2 必要的配置<a name="nessary_setting"/>
 
-### 3.2.1 兼容flyme5以下版本推送兼容配置<a name="permission_adpter_flyme5_down"/>
+#### 3.2.1 兼容flyme5以下版本推送兼容配置<a name="permission_adpter_flyme5_down"/>
 
 ```
   <!-- 兼容flyme5.0以下版本，魅族内部集成pushSDK必填，不然无法收到消息-->
