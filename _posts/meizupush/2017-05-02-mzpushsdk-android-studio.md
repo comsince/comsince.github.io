@@ -5,13 +5,24 @@ description: MzPushSDK 针对Flyme级的系统级推送，定制了针对Flyme�
 category: meizupush
 ---
 
-## 概述
-MzPushSDK 针对Flyme级的系统级推送，定制了针对Flyme的推送SDK，立足减少开发者接入成本，提高应用在Flyme上的推送体验，本文档主要讲解魅族PushSDK AndroidStudio详细接入步骤，对PushSDK的基本的API做出简明的介绍，讲解SDK支持的功能
-
 ## Android Studio AAR 发布说明
-* 魅族内部应用请使用内部的[Artifactory PushSDK](http://artifactory.rnd.meizu.com/artifactory/)
-* 第三方应用下载[PushSDK](https://github.com/MEIZUPUSH/PushDemo/releases),[Jcenter下载](https://bintray.com/meizupush/PushSDK/PushSDK-Internal#)
+**NOTE:** ``` 重要通知如下```
 
+* PushSDK不再区分魅族内部版与外部版本,所有的应用统一接入,目前PushSDK统一发布在[Jcenter](https://bintray.com/meizupush/PushSDK/PushSDK-Internal-Meizu),
+  统一的配置修改为```compile 'com.meizu.flyme.internet:push-internal:3.3.170420@aar'```, 先前的外部应用接入的artifactId```push-internal-publish```,还可以继续使用到版本```3.3.170329```,后期版本请尽快修改
+
+* 魅族内部应用如果从[Artifactory PushSDK](http://artifactory.rnd.meizu.com/artifactory/)下载,如果此版本不存在,会自动从jcenter拉取,以后可能不再单独发布aar到魅族内部Artifactory,以Jcenter版本为主
+
+* 魅族PushSDK SNAPSHOT版本发不在oss.jfrog.org中,流程请参考[Android开源库测试发布流程](https://comsince.github.io/2017/03/04/library-snapshot-publish/),验证通过后才会发布到jcenter
+  如果想使用SNAPSHOT版本,可以在build.gradle repository增加如下配置:
+```
+      maven{
+            url 'https://oss.jfrog.org/artifactory/oss-snapshot-local'
+        }
+```  
+
+## 概述
+如果你对pushSDK的实现原理感兴趣，请点击这里 [PushSDK第三方设计实践](http://comsince.github.io/push-design-thirdparty-doc) ，另外这个工程也提供的源码，有兴趣的同学可以star一下！
 
 ## 一 应用背景<a name="app_backgroud"/>
 
@@ -39,12 +50,12 @@ PushSDK3.0以后的版本使用了最新的魅族插件发布aar包，因此大�
 
 ```
     dependencies {
-        compile 'com.meizu.flyme.internet:push-internal-publish:3.3.+@aar'
+        compile 'com.meizu.flyme.internet:push-internal-publish:3.3.170329@aar'
     }
     
 ```
 
-**NOTE:** 加入@aar指定编译下载aar,不默认使用jar;如果你需要使用jar,请参考[Eclipse_PushDemo接入方式](https://meizupush.github.io/PushDemo-Eclipse/)
+**NOTE:** 加入@aar指定编译下载aar,不默认使用jar;如果你需要使用jar,请参考[Eclipse_PushDemo接入方式](https://comsince.github.io/2017/02/21/mzpushsdk-eclipse/)
 
 **NOTE:** 如果由于各种原因不能使用jcenter依赖，还可以从以下链接下载sdk相关支持包
 
@@ -54,7 +65,7 @@ PushSDK3.0以后的版本使用了最新的魅族插件发布aar包，因此大�
 
 ### 3.2 必要的配置<a name="nessary_setting"/>
 
-#### 3.2.1 兼容flyme5以下版本推送兼容配置<a name="permission_adpter_flyme5_down"/>
+### 3.2.1 兼容flyme5以下版本推送兼容配置<a name="permission_adpter_flyme5_down"/>
 
 ```
   <!-- 兼容flyme5.0以下版本，魅族内部集成pushSDK必填，不然无法收到消息-->
@@ -105,7 +116,7 @@ PushSDK3.0以后的版本使用了最新的魅族插件发布aar包，因此大�
     
     @Override
     public void onMessage(Context context, String s) {
-    	//接收服务器推送的消息
+    	//接收服务器推送的透传消息
     }
     
     @Override
@@ -150,7 +161,7 @@ PushSDK3.0以后的版本使用了最新的魅族插件发布aar包，因此大�
     }
     @Override
     public void onNotificationArrived(Context context, String title, String content, String selfDefineContentString) {
-       //通知栏消息到达回调
+       //通知栏消息到达回调，flyme6基于android6.0以上不再回调
        DebugLogger.i(TAG,"onNotificationArrived title "+title + "content "+content + " selfDefineContentString "+selfDefineContentString);
     }
         
@@ -162,7 +173,7 @@ PushSDK3.0以后的版本使用了最新的魅族插件发布aar包，因此大�
         
     @Override
     public void onNotificationDeleted(Context context, String title, String content, String selfDefineContentString) {
-       //通知栏消息删除回调；flyme6以上不再回调
+       //通知栏消息删除回调；flyme6基于android6.0以上不再回调
        DebugLogger.i(TAG,"onNotificationDeleted title "+title + "content "+content + " selfDefineContentString "+selfDefineContentString);
     }    
    
@@ -172,6 +183,47 @@ PushSDK3.0以后的版本使用了最新的魅族插件发布aar包，因此大�
 
 **Note:** 至此pushSDK 已经集成完毕，现在你需要在你的Application中调用新版的[register](#register)方法,并在你的Receiver中成功回调onRegisterStatus(RegisterStatus registerStatus)方法就可以了，
 你现在可以到[新版Push平台](http://push.meizu.com) 找到你的应用推送消息就可以了;以下内容是pushSDK提供的api汇总,具体功能详见api具体说明,请根据需求选用合适的功能
+
+**附表一:** PushManager接口说明汇总表:
+
+| 接口名称      | 接口说明| 使用建议|是否已经废弃|对应MzPushReceiver回调方法|
+| :--------: | :--------:| :--: |:--: |:--: |
+|register(Context context)|旧版订阅接口|请使用新版订阅接口|是|onRegister(Context context,String pushId)|
+|unRegister(Context context)|旧版反订阅接口|请使用新版的反订阅接口|是|onUnRegister(Context context,boolean success)|
+|register(Context context,String appId,String appKey)|新版订阅接口|建议Application onCreate调用|否|onRegisterStatus(Context context,RegisterStatus registerStatus)|
+|unRegister(Context context,String appId,String appKey)|新版反订阅接口|取消所有推送时使用,慎用,如果取消,将有可能停止所有推送|否|onUnRegisterStatus(Context context,UnRegisterStatus unRegisterStatus)|
+|subScribeTags(Context context,String appId,String appKey,String pushId,String tags)|订阅标签|无|否|onSubTagsStatus(Context context,SubTagsStatus subTagsStatus)|
+|unSubScribeTags(Context context, String appId, String appKey, String pushId,String tags)|取消标签订阅|无|否|onSubTagsStatus(Context context,SubTagsStatus subTagsStatus)|
+|unSubScribeAllTags(Context context, String appId, String appKey, String pushId)|取消所有标签订阅|无|否|onSubTagsStatus(Context context,SubTagsStatus subTagsStatus)|
+|checkSubScribeTags(Context context,String appId,String appKey,String pushId)|获取标签列表|无|否|onSubTagsStatus(Context context,SubTagsStatus subTagsStatus)|
+|subScribeAlias(Context context,String appId,String appKey,String pushId,String alias)|订阅别名|无|否|onSubAliasStatus(Context context,SubAliasStatus subAliasStatus)|
+|unSubScribeAlias(Context context,String appId,String appKey,String pushId,String alias)|取消别名|无|否|onSubAliasStatus(Context context,SubAliasStatus subAliasStatus)|
+|checkSubScribeAlias(Context context,String appId,String appKey,String pushId)|获取别名|无|否|onSubAliasStatus(Context context,SubAliasStatus subAliasStatus)|
+|switchPush(Context context,String appId,String appKey,String pushId,boolean switcher)|通知栏和透传开关同时转换|如果需要同时关闭或打开通知栏和透传消息开关,可以调用此方法|否|onPushStatus(Context context,PushSwitchStatus pushSwitchStatus)|
+|switchPush(Context context,String appId,String appKey,String pushId,int pushType,boolean switcher)|通知栏和透传消息开关单独转换|无|否|onPushStatus(Context context,PushSwitchStatus pushSwitchStatus)|
+|checkPush(Context context,String appId,String appKey,String pushId)|检查当前开关状态|此方法在有无网络下都能成功返回|否|onPushStatus(Context context,PushSwitchStatus pushSwitchStatus)|
+|enableCacheRequest(Context context,boolean flag)|基于缓存重试机制的回调策略|此策略默认关闭|否|无|
+
+**附表二:** MzPushReceiver抽象方法说明
+
+| 接口名称      | 接口说明| 使用建议|是否已经废弃|
+| :--------: | :--------:| :--: |:--: |
+|onRegister(Context context,String pushId)|旧版pushid回调接口|建议不再使用|是|
+|onUnRegister(Context context,boolean success)|旧版反订阅回调接口|建议不再使用|是|
+|onMessage(Context context,String message)|透传消息回调|请选择一个实现即可|否|
+|onMessage(Context context,String message,String platformExtra)| 透传消息回调|跟上面方法两者选其一实现,不要两个方法同时覆盖,否则一次透传消息会回调两次,此方法多一个平台参数,格式如下格式如下:```{"task_id":"1232"}```|否|                                                                                  
+|onMessage(Context context,Intent intent)|处理flyme3.0平台的推送消息|flyme3.0平台支持透传消息,只有本方法才能处理flyme3的透传消息,具体相见flyme3获取消息的方法|否|
+|onNotificationClicked(Context context, String title, String content, String selfDefineContentString)|通知栏点击回调|无|否|
+|onNotificationArrived(Context context, String title, String content, String selfDefineContentString)|通知栏展示回调|Flyme6基于android6.0不再回调|否|
+|onNotificationDeleted(Context context, String title, String content, String selfDefineContentString)|通知栏删除回调|Flyme6基于android6.0不再回调|否|
+|onUpdateNotificationBuilder(PushNotificationBuilder pushNotificationBuilder)|通知栏图标设置|无|否|
+|onPushStatus(Context context,PushSwitchStatus pushSwitchStatus)|Push开关状态回调|无|否|
+|onRegisterStatus(Context context,RegisterStatus registerStatus)|订阅状态回调|无|否|
+|onUnRegisterStatus(Context context,UnRegisterStatus unRegisterStatus)|反订阅回调|无|否|
+|onSubTagsStatus(Context context,SubTagsStatus subTagsStatus)|标签状态回调|无|否|
+|onSubAliasStatus(Context context,SubAliasStatus subAliasStatus)|别名状态回调|无|否|
+
+
 
 ### 3.3 PushManager接口说明<a name="pushmanager_interface_describe"/>
 
@@ -501,6 +553,80 @@ PushSDK3.0以后的版本使用了最新的魅族插件发布aar包，因此大�
 ```
 
 
+#### 3.3.14 取消所有标签订阅<a name="un_subscribe_all_tags"/>
+
+* 接口说明
+
+```
+    /**
+          * 取消所有标签订阅
+          * @param context
+          * @param appId
+          *         push 平台申请的应用id
+          * @param appKey
+          *         push 平台申请的应用key
+          * */
+        public static void unSubScribeAllTags(Context context, String appId, String appKey, String pushId)
+```
+
+* 对应Receiver中的回调方法
+
+```
+      @Override
+      public void onSubTagsStatus(Context context,SubTagsStatus subTagsStatus) {
+        Log.i(TAG, "onSubTagsStatus " + subTagsStatus);
+        //标签回调
+      }
+```
+
+
+#### 3.3.15 同时打开或关闭通知栏和透传开关<a name="pushmessage_switcher_all"/>
+
+```
+    /**
+         * 此接口提供通知栏和透传统一开或者统一关
+         * @param appId
+         *        push 平台申请的应用id
+         * @param appKey
+         *        push 平台申请的应用key
+         * @param pushId
+         *        注册成功后返回的pushid
+         * @param switcher
+         *        修改push开关状态,包括通知栏和透传两个开关,状态只能统一修改
+         * */
+        public static void switchPush(Context context,String appId,String appKey,String pushId,boolean switcher)
+```
+
+* 对应Receiver中的回调方法
+
+```
+    @Override
+    public void onPushStatus(Context context,PushSwitchStatus pushSwitchStatus) {
+        
+    }
+```
+        
+#### 3.3.16 基于缓存重试机制的回调策略开关<a name= "pushmessage_remote_invoker_switcher"/>
+
+```
+   /**
+     * 基于缓存重试机制的回调策略,此策略默认关闭
+     *
+     * 是否启用远程调用的方式,此方式需要flyme内置应用推送服务支持
+     * 此方法原理在于,用户发出的请求不在本应用中调用,而是将请求包装发给推送服务的PushManagerService,此服务能够在断网情况下缓存
+     * 应用的请求,等到用户手机联网,再重新将请求同步到服务端
+     *
+     * 如果启动此策略,非联网情况下不会立即回调给应用,需要在有网情况下,与服务端交互成功后,才将结果返回给应用
+     * 此返回不保证一定能返回给应用,此种方式采用广播的方式发送给应用,如果应用此时不是常驻进程,应用可能会无法收到消息
+     *
+     * @param flag  是否启动远程缓存调用
+     * */
+     public static void enableCacheRequest(Context context,boolean flag);
+```
+        
+        
+        
+
 ## 四 通知栏消息扩展功能使用说明<a name="notification_description"/>
 
 ### 4.1 打开应用的主界面并获取推送消息参数<a name="open_mainactivity"/>
@@ -555,6 +681,16 @@ Push平台中页面名称实际为：应用要打开的Activity名称,即是相�
 ```
 String value = getIntent().getStringExtra("push平台配置的键值")
 通过在push平台上配置的参数，获取其value值,这里的key值就是你在push平台上配置的键值
+```
+
+**NOTE:** 点击通知栏的时候,除了传递用户自定义的参数,还可以获取平台taskid等参数,获取方法如下:
+
+ ```
+ String platfromExtra = getIntent().getStringExtra("platform_extra");
+ ```
+这个参数的格式如下:
+```
+  {"task_id":"1234564545"}
 ```
 
 ### 4.4 打开URI<a name="open_web"/>
@@ -673,15 +809,14 @@ PushMessageReceiver覆盖onMessage(Context context,Intent intent)方法接收Fly
 
 
 
-## 六 反馈与参考
+### 反馈与建议
 
-* [MzPushDemo 源码地址](https://github.com/MEIZUPUSH/PushDemo)
 
-## 七 问题汇总说明
+### 问题汇总说明
 *  1.Push服务收到推送消息，但是应用不弹出通知栏
    应用如果正确接入PushSDK，且能收到pushID表明Push服务与应用连接正常，有可能是应用没有配置混淆，导致MzPushSDK被混淆，无法正确解析消息所致
 
-### 7.1 配置类问题
+#### 一. 配置类问题
 
 * 现象
 ```
@@ -694,13 +829,13 @@ PushMessageReceiver覆盖onMessage(Context context,Intent intent)方法接收Fly
 平台配置出现空格等特殊字符
 activity配置出错
 
-### 7.2 网络问题
+#### 二. 网络问题
 * 现象
 接收不到推送
 * 解决方案
 请先确认你所连接的网络是外网还是内网，你可以清除云服务的数据，重新发起注册
 
-### 7.3 魅族手机未发布问题
+#### 三 魅族手机未发布问题
 * 现象
 注册成功，收不到推送
 * 原因分析
@@ -709,23 +844,21 @@ activity配置出错
 * 解决方案
 等待发布Brand更改为魅族，或者直接使用imei_sn的推送方式
 
-### 7.4 日志分析
+#### 四 日志分析
 * 日志地址
 ```
 /sdcard/Android/data/pushSdk
 ```
 
-### 7.5 aar引用问题
+#### 五 aar引用问题
 * 出现aar最新包不生效，删除gradle cache即可
 ```
     删除volley-gslb兼容包aar本地缓存，其他请求可自行选择目录删除
     rm -rf ~/.gradle/caches/modules-2/files-2.1/com.meizu.gslb.volley
 ```
 
-### 7.6 push服务收到推送但是应用无法收到消息
+#### 六 push服务收到推送但是应用无法收到消息
 * 现象
   在熄屏状态下应用无法收到通知栏消息，亮屏时能收到通知栏消息,最新的flyme固件不会出现该问题
 * 原因
   系统问题，熄屏状态下发起服务调用，应用无响应,最新的flyme固件不会出现该问题
-
-
