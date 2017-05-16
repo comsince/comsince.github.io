@@ -5,10 +5,11 @@ description: 探讨持续集成开github开源项目中的应用
 category: tech
 ---
 
-## 一. 概述
-
 将简单而重复的劳动尽量的交由机器自动执行，提高行业效率，工业智能制造显然已经讲这种自动化的思想运用的淋漓尽致；软件工程也希望运用这种思想持续规范软件开发，测试，发布流程
 因此有了以下三种概念
+
+
+## 一. 概述
 
 ### 持续集成 
 持续集成的目的，就是让产品可以快速迭代，同时还能保持高质量。它的核心措施是，代码集成到主干之前，必须通过自动化测试。只要有一个测试用例失败，就不能集成。
@@ -21,20 +22,27 @@ category: tech
 
 
 ## 二. 名词解释
-### Unit Test 
-     利用单元测试，验证代码正确性以及覆盖率等数据
-### [CoverAlls](https://coveralls.io)
-      代码覆盖率统计平台，支持可视化显示代码测试的覆盖率数据
-### Artifactory SnapShot-Repo
-      免费的snapshot代码仓库托管平台
-### Bintray Jcenter
-      提供正式版本的开源库托管平台
-### [Travis](https://travis-ci.org/)
-      开源的持续集成平台
-### [GitHub](https://github.com)
-      开源的代码托管平台
-### Gradle
-      自动化编译工具，比maven更加强大，可自动定制插件实现持续集成中功能
+
+* Unit Test 
+   利用单元测试，验证代码正确性以及覆盖率等数据
+
+* [CoverAlls](https://coveralls.io)
+  代码覆盖率统计平台，支持可视化显示代码测试的覆盖率数据
+
+* [Artifactory SnapShot-Repo](https://oss.jfrog.org)
+  免费的snapshot代码仓库托管平台
+
+* [Bintray Jcenter](https://bintray.com/meizupush)
+   提供正式版本的开源库托管平台
+
+* [Travis](https://travis-ci.org/)
+  开源的持续集成平台
+
+* [GitHub](https://github.com)
+  开源的代码托管平台
+
+* [Gradle](https://gradle.org/)
+  自动化编译工具，比maven更加强大，可自动定制插件实现持续集成中功能
 
 
 具体的流程图如下:
@@ -54,6 +62,7 @@ category: tech
 ### 4.1. 代码覆盖率统计平台
    代码覆盖率插件上传覆盖率报告后，此平台可以进行代码覆盖率趋势查看以及各个类测试率报告如下：
    ![image](/images/tech/continuous-intergration/coverall-snow-android-tracker.png)
+
 ### 4.2. 持续集成平台Travis
    Travis和Jenkins都是比较常用的持续集成平台，但是Travis与Github天然集成，成为许多开源项目的首选的持续集成工具
    以下是一次编译的日志
@@ -100,9 +109,11 @@ category: tech
 	    tags: true
 ```
 
-## 六 总结
+## 五 总结
 然后在开源项目配置编译以及代码覆盖率连接，就可以实时查看项目状态
 ![image](/images/tech/continuous-intergration/project-readme.png)
+
+
 ## 参考文档
 
 * [持续集成是什么](http://www.ruanyifeng.com/blog/2015/09/continuous-integration.html)
