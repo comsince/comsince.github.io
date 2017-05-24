@@ -116,3 +116,6 @@ com_crashlytics_export_strings.xml
 # temp file
 *~
 
+# lock file
+*.lock
+
