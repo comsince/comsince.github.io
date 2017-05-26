@@ -21,18 +21,47 @@ category: go
    语言的发展总是相互学习，因此对比式的方法能帮助我们快速理解新语言的新特性
    * [对比java看go语言的基本特性](http://www.flysnow.org/2016/12/28/from-java-to-golang.html)
 
+### 1.1 Go 语言安装
+
+**NOTE:** 这里解释一下安装过程中出现的问题，方便以后追溯
+go安装，推荐gvm方式安装，类似node的npm，ruby的rvm 
+
+* go get 无法下载github项目，可以使用如下类似的命令手动下载项目
+
+```
+git clone https://github.com/revel/examples.git $GOPATH/src/github.com/revel/examples
+```      
+
 ## 二.基本要点
    
    * [官方网站go学习站点](https://tour.go-zh.org/list) 带你一步一步的认识go语言基本特性
    * [build-web-application-with-golang](https://github.com/astaxie/build-web-application-with-golang/blob/master/zh/preface.md)   
    * [Go 语言学习资料与社区索引](https://github.com/Unknwon/go-study-index)
+   * [ An Introduction to Programming in Go](https://www.golang-book.com/books/intro)
+
+### 2.1 [基本数据结构](https://gobyexample.com)
+
+   * array
+   * slice
+   * point
+
+### 2.2 面向对象
+
+#### 2.2.1 [struct]()
+
+#### 2.2.2 [interface](https://github.com/astaxie/build-web-application-with-golang/blob/master/zh/02.6.md)
+
+* 空interface
+   任意的类型都实现了空interface(我们这样定义：interface{})，也就是包含0个method的interface
+   一个函数把interface{}作为参数，那么他可以接受任意类型的值作为参数，如果一个函数返回interface{},那么也就可以返回任意类型的值
 
 ## 三.高级进阶
    开源项目是进一步学习一门语言的敲门砖，每当你感觉技术瓶颈的时候，开源项目总能改你带来意外的惊喜，因此学习别人的代码也是在促进自己进步。这里推荐的开源项目包括一种框架提供解决问题的整体方案；一个独立项目能够独立完成一项业务需求即可
+* [revel](https://github.com/revel/revel)
 
 
 
+## 参考资料
 
-
-
+* [如何同步 Github fork 出来的分支](https://jinlong.github.io/2015/10/12/syncing-a-fork/)
 
