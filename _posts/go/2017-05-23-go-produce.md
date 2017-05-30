@@ -317,4 +317,5 @@ func (myType *MyType) someMethod()
 ## 参考资料
 
 * [如何同步 Github fork 出来的分支](https://jinlong.github.io/2015/10/12/syncing-a-fork/)
+* [How To Install Ruby on Rails on Ubuntu & LinuxMint using RVM ](https://tecadmin.net/install-ruby-on-rails-on-ubuntu/)
 
