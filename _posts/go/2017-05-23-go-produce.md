@@ -301,6 +301,8 @@ func (myType *MyType) someMethod()
 
 * 反射
 
+### 2.3 并发
+ * [Go Concurrency 实战](https://my.oschina.net/tjt/blog/910153)
 
 ## 三.高级进阶
 
@@ -316,6 +318,8 @@ func (myType *MyType) someMethod()
 
 ## 参考资料
 
+* [Effective Go](https://golang.org/doc/effective_go.html#introduction)
 * [如何同步 Github fork 出来的分支](https://jinlong.github.io/2015/10/12/syncing-a-fork/)
 * [How To Install Ruby on Rails on Ubuntu & LinuxMint using RVM ](https://tecadmin.net/install-ruby-on-rails-on-ubuntu/)
+* [GitHub Pages 绑定来自阿里云的域名](http://quantumman.me/blog/setting-up-a-domain-with-gitHub-pages.html)
 
