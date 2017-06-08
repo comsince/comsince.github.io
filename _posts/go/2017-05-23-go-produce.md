@@ -20,6 +20,7 @@ category: go
 ## 一.学习指引
    语言的发展总是相互学习，因此对比式的方法能帮助我们快速理解新语言的新特性
    * [对比java看go语言的基本特性](http://www.flysnow.org/2016/12/28/from-java-to-golang.html)
+   * [go_for_java_programmers](http://www.nada.kth.se/~snilsson/go_for_java_programmers/)
 
 ### 1.1 Go 语言安装
 
