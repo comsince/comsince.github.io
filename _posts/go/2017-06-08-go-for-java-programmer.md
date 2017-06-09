@@ -500,3 +500,340 @@ f(v)               // INVALID
 
 ### 接口
 
+Go的接口类似Java的接口，在Go的接口中声明的任何提供方法的类型都可以当做这个接口的实现。并不需要明确的实现。
+
+下面的接口：
+
+```
+type MyInterface interface {
+    Get() int
+    Set(i int)
+}
+```
+
+因为`MyType`已经有一个`Get`方法，我们可以使`MyType`满足这个接口通过增加
+
+```
+func (p *MyType) Set(i int) {
+    p.i = i
+}
+```
+
+现在任何一个接收`MyInterface`作为参数的函数都可以接收类型为`*MyType`的变量。
+
+```
+func GetAndSet(x MyInterface) {}
+
+func f1() {
+    var p MyType
+    GetAndSet(&p)
+}
+```
+
+在java中，对于`*MyType`定义`Set`和`Get`会自动实现`MyInterface`。一个类型可以实现多个接口。这是鸭式类型的一种形式。
+
+**NOTE:** 当我看见一只鸟，它不管是走路，游泳，咯咯叫都像一只鸭子，我就把这只鸟称作鸭子。
+* - James Whitcomb Riley
+
+### 匿名区域
+
+一个匿名区域可以用来实现一些东西，就像java的子类一样。
+
+```
+type MySubType struct {
+    MyType
+    j int
+}
+
+func (p *MySubType) Get() int {
+    p.j++
+    return p.MyType.Get()
+}
+```
+
+这有效实现了`MySubType`作为`MyType`的子类型。
+
+```
+func f2() {
+    var p MySubType
+    GetAndSet(&p)
+}
+```
+
+`Set`方法继承自`MyType`,因为与匿名区域相关的方法进一步变成封闭类型的方法。在这种情况下，因为`MySubType`有一个匿名类型`MyType`,`MyType`的方法就会变成`MySubType`的方法。`Get`方法这重写，`Set`方法也被继承过来。
+
+这个和Java的子类还不完全相同。当匿名区域的方法被调用时，它的receiver即是这个区域，而不是周围的结构体。换句话说，在匿名区域的方法不会被动态调用。当你想和Java一样实现动态的方法查找，使用一个接即可。
+
+```
+func f3() {
+    var v MyInterface
+
+    v = new(MyType)
+    v.Get()  // Call the Get method for *MyType.
+
+    v = new(MySubType)
+    v.Get()  // Call the Get method for *MySubType.
+}
+```
+
+### 类型断言
+
+一个拥有interface类型的变量可以通过断言转换成另一个不同的interface类型的变量。这将在运行时动态实现。不像Java，两个接口之间不需要声明任何关系。
+
+```
+type Printer interface {
+    Print()
+}
+
+func f4(x MyInterface) {
+    x.(Printer).Print()  // type assertion to Printer
+}
+```
+
+上面转换成`Printer`是完全动态的。只要动态类型x(这个值的真实类型存储在x中)定义了`Print`方法，转换将会立即执行。
+
+
+## 错误
+
+当Java一般使用异常时，Go有两种不同的机制。大多数函数都会返回错误；只有一些真实的不可恢复的条件，例如数组越界，将会产生运行时异常。
+
+Go的多值返回可以将异常信息和正常的信息同时返回。一般来说，这些消息都有错误类型，一个简单的内置接口。
+
+```
+type error interface {
+    Error() string
+}
+```
+
+例如，`os.Open`函数返回一个非空的error信息，当其无法打开一个文件时。
+
+```
+func Open(name string) (file *File, err error)
+```
+
+下面的代码使用`os.Open`来打开文件。如果一个错误发生了，他会调用`log.Fatal`来打印出错误信息并且停止。
+
+```
+f, err := os.Open("filename.ext")
+if err != nil {
+    log.Fatal(err)
+}
+// do something with the open *File f
+```
+
+这个`error`接口只需要一个`Error`方法，但是特有的`error`的实现经常需要额外的方法，允许调用者追踪错误的具体信息。
+
+## Panic 和 恢复
+
+一个Panic是一个运行时错误，例如退回goroutine的堆栈，随后运行延时的函数，然后停止程序。Panics类似Java的异常，但是只是针对运行时错误，一个空指针或者尝试访问越界数组。为了标记一个文件结尾的事件，Go程序使用内置的错误类型。
+
+内置的`recover`函数可以用于恢复错误的goroutine的控制并且重新执行。调用`recover`函数会阻止退栈返回传递给`panic`的参数。因为在展开过程中运行的唯一代码是延迟函数，`recover`只对内部的延迟函数有用。如果`goruntine`没有出错，`recover`会返回`nil`.
+
+## Goroutine(线程) 和通道
+
+### Goroutines
+
+ Go 允许开启一个新的线程执行，叫做`goroutines`,在go中使用`go`关键字。其将在新建的不同的goroutine 中执行此函数。所有的goroutines 在一个程序中共享地址空间。
+
+
+ Goroutines 是一个轻量级的，消耗较小的栈空间。栈开始很小并在需要时分配和释放堆内存而增长。内部的goroutines类似于在多个操作系统线程之间复用的协同程序。你不需要担心这些细节。
+
+ ```
+ go list.Sort()  // Run list.Sort in parallel; don’t wait for it.  
+ ```
+
+ Go 有一个函数关键字，它可以向闭包一样，当它与go 声明联合使用会非常强大。
+
+ ```
+ // Publish prints text to stdout after the given time has expired.
+func Publish(text string, delay time.Duration) {
+    go func() {
+        time.Sleep(delay)
+        fmt.Println(text)
+    }()  // 注意后面的括号，我们必须调用这个函数.
+}
+ ```
+
+ ### 通道
+
+ 通道提供一种机制，用于两个goroutines 同步执行并且通过传递特定类型的元素进行通信。`<-` 操作符代表通道的方向，是发送还是接收。如果目标没有给出，那么通道就是双向的。
+
+ ```
+ chan Sushi      // can be used to send and receive values of type Sushi
+ chan<- float64  // can only be used to send float64s
+ <-chan int      // can only be used to receive ints
+ ```
+
+ 通道是一个引用类型，它可以使用make初始化。
+
+ ```
+ ic := make(chan int)        // unbuffered channel of ints
+ wc := make(chan *Work, 10)  // buffered channel of pointers to Work
+ ```
+
+ 在一个通道上发送数据，使用`<-`作为操作符. 在一个通道上接收数据，使用作为一元操作符。
+
+ ```
+ ic <- 3       // Send 3 on the channel.
+ work := <-wc  // Receive a pointer to Work from the channel.
+ ```
+
+ 如果一个通道是没有缓存的，发送者将会阻塞直到接收者接收数据。如果一个通道有缓存，发送者只会在数据复制到缓存时阻塞；如果缓存满了，就意味着发送者需要等待知道接收者取出数据。接收者会阻塞知道有数据可以接收。
+
+ `close`函数记录着没有任何数据发送到通道中。调用`close`并且之前发送的数据已经被接收之后，接收操作将会返回零值并且不会阻塞。多值返回的操作会额外的返回该通道是否关闭的迹象。
+
+ ```
+ch := make(chan string)
+go func() {
+    ch <- "Hello!"
+    close(ch)
+}()
+fmt.Println(<-ch)  // Print "Hello!".
+fmt.Println(<-ch)  // Print the zero value "" without blocking.
+fmt.Println(<-ch)  // Once again print "".
+v, ok := <-ch      // v is "", ok is false.
+ ```
+
+ 在一个例子中，我们让`Publish`函数返回一个通道，这将在文本发布后用于广播消息。
+
+
+ ```
+ // Publish prints text to stdout after the given time has expired.
+ // It closes the wait channel when the text has been published.
+func Publish(text string, delay time.Duration) (wait <-chan struct{}) {
+    ch := make(chan struct{})
+    go func() {
+        time.Sleep(delay)
+        fmt.Println(text)
+        close(ch)
+    }()
+    return ch
+}
+ ```
+
+下面是你如果使用`Publish`函数。
+
+```
+wait := Publish("important news", 2 * time.Minute)
+// Do some more work.
+<-wait // blocks until the text has been published
+```
+
+### Select 声明
+
+select 声明是Go并发工具包的终极工具。它用来选择那一系列可能的通讯被执行。如果任何的通讯都被执行，它们中的任意一个会被随机选择并且响应的声明也会被执行。否则，如果没有默认的情况，这个声明将会阻塞知道其中的一个通讯完成为止。
+
+这里有一个玩具程序展示了这个选择的声明如何应用来实现一个随机的数字生成器。
+
+```
+rand := make(chan int)
+for { // Send random sequence of bits to rand.
+    select {
+    case rand <- 0: // note: no statement
+    case rand <- 1:
+    }
+}
+
+```
+
+然而更加实际的是，一个select 声明如何使用用于在一个接收操作中设置一个时间极限。
+
+
+```
+select {
+case news := <-AFP:
+    fmt.Println(news)
+case <-time.After(time.Minute):
+    fmt.Println("Time out: no news in one minute.")
+}
+```
+
+函数`time.After`属于标准库的一部分；它会一直等待知道设定的时间过去并且将当前的时间发送到返回的通道中。
+
+
+## 并发(例子)
+
+最后我们应用一个简单但是完整的例子来展示如果将这些片段组合在一起。下面的代码主要是一个服务端接收通过一个通道接收`Work`的请求。每一个请求都在一个单独的`goroutine`中执行。`Work`结构体本身包含一个通道用于返回结果。
+
+```
+package server
+
+import "log"
+
+// New creates a new server that accepts Work requests
+// through the req channel.
+func New() (req chan<- *Work) {
+    wc := make(chan *Work)
+    go serve(wc)
+    return wc
+}
+
+type Work struct {
+    Op    func(int, int) int
+    A, B  int
+    Reply chan int  // Server sends result on this channel.
+}
+
+func serve(wc <-chan *Work) {
+    for w := range wc {
+        go safelyDo(w)
+    }
+}
+
+func safelyDo(w *Work) {
+    // Regain control of a panicking goroutine to avoid
+    // killing the other executing goroutines.
+    defer func() {
+        if err := recover(); err != nil {
+            log.Println("work failed:", err)
+        }
+    }()
+    do(w)
+}
+
+func do(w *Work) {
+    w.Reply <- w.Op(w.A, w.B)
+}
+```
+
+以下是使用代码
+
+```
+package server_test
+
+import (
+    "fmt"
+    "server"
+    "time"
+)
+
+func main() {
+    s := server.New()
+
+    divideByZero := &server.Work{
+        Op:    func(a, b int) int { return a / b },
+        A:     100,
+        B:     0,
+        Reply: make(chan int),
+    }
+    s <- divideByZero
+
+    select {
+    case res := <-divideByZero.Reply:
+        fmt.Println(res)
+    case <-time.After(time.Second):
+        fmt.Println("No result in one second.")
+    }
+    // Output: No result in one second.
+}
+```
+
+并发编程是一个高级主题并且Go的使用方法和Java是大不相同的。下面有两篇文章包含这个主题。
+
+* [Fundamentals of concurrent programming](http://blog.xiayf.cn/2015/05/20/fundamentals-of-concurrent-programming/) 应用小例子介绍go的并发编程
+
+* [Share Memory by Communicating](https://golang.org/doc/codewalk/sharemem/)拥有很多例子的在线编码网站
+
+
+
+
