@@ -315,7 +315,9 @@ func (myType *MyType) someMethod()
 * [Revel Web开发重量级框架](https://github.com/revel/revel)
 * [GoIn 高性能网络框架](https://github.com/gin-gonic/gin)
 
+### 3.3 分布式系统设计
 
+* [go-kit](https://github.com/go-kit/kit)
 
 ## 参考资料
 
@@ -324,3 +326,6 @@ func (myType *MyType) someMethod()
 * [How To Install Ruby on Rails on Ubuntu & LinuxMint using RVM ](https://tecadmin.net/install-ruby-on-rails-on-ubuntu/)
 * [GitHub Pages 绑定来自阿里云的域名](http://quantumman.me/blog/setting-up-a-domain-with-gitHub-pages.html)
 
+## 工具彩蛋
+
+* [在线github代码预览服务](https://sourcegraph.com)
