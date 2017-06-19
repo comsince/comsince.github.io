@@ -69,6 +69,10 @@ SSL 的握手协议非常有效的让客户和服务器之间完成相互之间�
 
 ## Andriod客户端优化
 
+ 优化策略一般有以下两种：
+ * SessionId(一般由由服务端分布式存储seesionid实现)
+ * Session Ticket(一般由客户端支持，服务服务端提供session ticket支持)
+
  客户端如果要支持session ticket，必须开启，否则在client sayhello Extentsion中就不会带有sessionticket支持，如下是不支持的包文格式：
 
  ![client-hello-with-no-session-ticket](/images/network/https/client-hello-no-session-ticket.png)
@@ -214,9 +218,22 @@ try {
 服务端响应回复session tick
 ![server-send-session-ticket](/images/network/https/server-send-session-ticket.png)
 
-经过上面优化，不管应用重启，还是同一接口的请求救护重用session ticket，减少一次交换证书，协商秘钥的请求，如下图所示：
+经过上面优化，不管应用重启，还是同一接口的请求，始终会重用session ticket，直到服务端session ticket 更换，这样就会减少一次交换证书，协商秘钥的请求，如下图所示：
 
 ![communication-with-session-ticket](/images/network/https/communication-with-session-ticket.png)
+
+## 问题分析
+
+* 证书问题
+
+```
+com.meizu.cloud.pushsdk.networking.error.ANError: javax.net.ssl.SSLHandshakeException: 
+com.android.org.bouncycastle.jce.exception.ExtCertPathValidatorException: 
+Could not validate certificate: 
+Certificate expired at Thu Aug 16 13:34:06 GMT+03:00 2018 (compared to Mon Jun 24 04:55:04 GMT+03:00 2019)
+```
+
+这个问题一般是因为手机在校验服务器下发的证书时，发现证书过期，就会断开链接，如果手机的时间改成证书日期之后的时间也会报上面的错误。
 
 ## 参考文档
 * [HTTPS性能优化实践](https://mp.weixin.qq.com/s/Twe-fjo4JShsphfcWx573Q)
