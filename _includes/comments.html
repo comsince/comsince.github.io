@@ -2,12 +2,12 @@
   {% case site.comments_provider %}
     {% when 'disqus' %}
       {% if site.disqus_username %}
-        {% assign load_disqus = false %}
+        {% assign load_disqus = true %}
         <!-- Disqus Protection, see https://github.com/mzlogin/mzlogin.github.io/issues/2 -->
         {% if site.disqus_username == 'comsince' %}
-          {% assign load_disqus = false %}
+          {% assign load_disqus = true %}
           {% if site.url contains 'comsince' %}
-            {% assign load_disqus = false %}
+            {% assign load_disqus = true %}
           {% endif %}
         {% endif %}
         {% if load_disqus %}

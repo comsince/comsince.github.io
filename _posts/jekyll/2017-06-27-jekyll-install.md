@@ -85,3 +85,4 @@ sudo apt-get install nodejs
 ## 参考资料
 
 * [How To Install Ruby on Rails on Ubuntu](https://tecadmin.net/install-ruby-on-rails-on-ubuntu/)
+* [Jekyll中国](http://jekyllcn.com/)

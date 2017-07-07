@@ -12,6 +12,12 @@ category: Linux
 ## linux C 编程基础
   c 语言编程的基本语法这里不再赘述，基本大同小异，这里主要研究，在工程的条件下，如果快速的编译c代码，像一些面向对象的编程语言都有提供相应的工具入maven，gradle；c也有自己独特的方式。
  * [Linux C编程一站式学习](https://akaedu.github.io/book/index.html)
+ * [Awesome-C](https://github.com/aleksandar-todorovic/awesome-c)
+
+## C/C++ 基础
+
+* [Learn c](https://www.tutorialspoint.com/cprogramming/index.htm)
+* [Learn c++](https://www.tutorialspoint.com/cplusplus/index.htm)
 
 ### 指针
 
@@ -23,17 +29,26 @@ category: Linux
 * 参考：
    * [大话C 语言指针](http://c.biancheng.net/cpp/html/72.html)
 
+* [char* const args[] defintion [duplicate]](https://stackoverflow.com/questions/15576291/char-const-args-defintion)
+
+以下说明c编译的相关知识
+   由于c没有import自动关联编译的，需要[Header File](https://gcc.gnu.org/onlinedocs/cpp/Header-Files.html)进行类型声明，接口暴露
+
+* [The C Preprocessor](https://gcc.gnu.org/onlinedocs/cpp/index.html#Top)
+
 ### 宏定义
 
 * [GCC-Macros](https://gcc.gnu.org/onlinedocs/cpp/Macros.html#Macros)
 * [GCC-HEADER-FILES](https://gcc.gnu.org/onlinedocs/cpp/Header-Files.html)
 
 ### Makefile
+C没有像gradle和maven的编译工具，需要使用makefile来组织编译，不过以后可以使用CMake
 
 * [跟我一起写Makefile](http://wiki.ubuntu.org.cn/%E8%B7%9F%E6%88%91%E4%B8%80%E8%B5%B7%E5%86%99Makefile)
 
 ## Shell
 
+* [Linux online manpage](http://man7.org/linux/man-pages/)
 * [Shell编程基础](http://wiki.ubuntu.org.cn/Shell%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80)
 
 ## Android NDK
@@ -42,13 +57,13 @@ category: Linux
 
 * [宏的基本概念](http://www.geeksforgeeks.org/interesting-facts-preprocessors-c/)
 
-## 集成开发工具
+### 集成开发工具
 
 * [What is the best C & C++ IDE?](https://www.quora.com/What-is-the-best-C-C++-IDE)
 * [Clion License Server](http://www.sdbeta.com/mf/2017/0414/177253.html)
   弹出注册窗口选择Activate》License Server》输入`http://xidea.online`，然后点击`Activete`完成认证即可
 
-## C/C++ Library
+### C/C++ Library
 
 * [awesome-cpp](https://github.com/fffaraz/awesome-cpp)
 * [A list of open source C++ libraries](http://en.cppreference.com/w/cpp/links/libs)
