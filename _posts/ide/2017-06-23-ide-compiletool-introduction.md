@@ -44,7 +44,7 @@ org.gradle.java.home=/home/user/Program/jdk1.8.0_131
   * [CircleCI Android Unsupported major.minor version 52.0](https://stackoverflow.com/questions/38209522/circleci-android-unsupported-major-minor-version-52-0)
 
 
-###
+### GLIBCXX_3 升级问题
  
  * 错误日志
 
