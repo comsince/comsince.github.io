@@ -24,6 +24,33 @@ category: go
 
 ### 1.1 Go 语言安装
 
+### [Gvm](https://github.com/moovweb/gvm) 安装
+
+```
+bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
+```
+
+执行`gvm install go1.8.1`出现以下错误：
+
+```
+##### Building Go bootstrap tool.
+
+cmd/dist
+
+ERROR: Cannot find /home/liaojinlong/go1.4/bin/go.
+
+Set $GOROOT_BOOTSTRAP to a working Go tree >= Go 1.4.
+```
+
+先安装go1.4
+
+```
+gvm install go1.4 -B
+```
+
+
+### 1.2 Go开源项目安装方法
+
 **NOTE:** 这里解释一下安装过程中出现的问题，方便以后追溯
 go安装，推荐gvm方式安装，类似node的npm，ruby的rvm 
 
@@ -32,6 +59,18 @@ go安装，推荐gvm方式安装，类似node的npm，ruby的rvm
 ```
 git clone https://github.com/revel/examples.git $GOPATH/src/github.com/revel/examples
 ```      
+
+### 开发工具JetBrain
+
+* 激活activeserver
+
+```
+http://idea.iteblog.com/key.php
+```
+
+* 安装go plugin
+
+![image](/images/go/idea-go-plugin.png)
 
 ## 二.基本要点
    
