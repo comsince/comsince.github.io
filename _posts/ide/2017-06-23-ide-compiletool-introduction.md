@@ -104,7 +104,26 @@ unable to install `/etc/os-release.dpkg-new' as `/etc/os-release': Device or res
 
 
 ## Android Studio 字体显示异常
+
 * 解决办法
+
 ![image](/images/ide/android-studo-preference.png)
 * 参考资料
+
   * [Ugly font rendering with Android Studio on Java8](https://askubuntu.com/questions/771931/ugly-font-rendering-with-android-studio-on-java8)
+
+
+## Intellij IDE
+
+### Ubuntu 16.04 idea 无法输入汉字的问题
+
+* 解决办法
+
+在IDEA的bin目录下的idea.sh文件的前面加上
+
+```
+export XMODIFIERS=@im=fcitx
+export QT_IM_MODULE=fcitx
+```
+
+* [ubuntu搜狗输入法，idea下无法输入中文 ](http://edolphin.site/2016/10/26/ubuntu-ieda-input-chinese/)
