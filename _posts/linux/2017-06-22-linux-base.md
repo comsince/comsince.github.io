@@ -326,6 +326,26 @@ nginx: configuration file /etc/nginx/nginx.conf test is successful
 * [Nginx 初步](https://moonbingbing.gitbooks.io/openresty-best-practices/content/ngx/nginx.html)
 * [Nginx - 代理、缓存](http://blog.csdn.net/zjf280441589/article/details/51501408)
 
+
+### MySql
+
+* 检查mysql本地是否安装
+
+```
+sudo netstat -tap | grep mysql
+```
+
+* 安装mysql
+
+```
+sudo apt-get install mysql-server mysql-client
+```
+
+#### 参考资料
+
+*[Linux(Ubuntu)下MySQL的安装与配置](http://blog.csdn.net/lizuqingblog/article/details/18423751)
+*[Mysql初始化root密码和允许远程访问](http://www.cnblogs.com/cnblogsfans/archive/2009/09/21/1570942.html)
+
 ## 微服务架构系列文章
 
 ### 分布式数据库
@@ -345,3 +365,7 @@ nginx: configuration file /etc/nginx/nginx.conf test is successful
 ### 微服务实战
 * [微服务实战：从架构到发布（一）](https://segmentfault.com/a/1190000004634172)
 * [微服务实战：从架构到发布（二）](https://segmentfault.com/a/1190000004655274)
+
+### 书籍
+
+* [亿级流量网站架构核心技术 跟开涛学搭建高可用高并发系统](/download/kaitao-distribute-system.pdf)
