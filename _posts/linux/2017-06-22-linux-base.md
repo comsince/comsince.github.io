@@ -324,4 +324,24 @@ nginx: configuration file /etc/nginx/nginx.conf test is successful
 
 * [彻底删除nginx](http://blog.csdn.net/u010571844/article/details/50819704)
 * [Nginx 初步](https://moonbingbing.gitbooks.io/openresty-best-practices/content/ngx/nginx.html)
+* [Nginx - 代理、缓存](http://blog.csdn.net/zjf280441589/article/details/51501408)
 
+## 微服务架构系列文章
+
+### 分布式数据库
+为提升系统性能，实现高并发的需要有事需要实现数据库读写分离，需要使用数据库中间件
+读写分离需要配置主从数据同步
+* [MySQL5.6 数据库主从（Master/Slave）同步安装与配置详解](http://blog.csdn.net/xlgen157387/article/details/51331244/)
+* [Sharing-JDBC](http://shardingjdbc.io/docs/00-overview)
+
+### 分布式RPC框架
+
+### 调用链
+
+* [Dapper，大规模分布式系统的跟踪系统](https://bigbully.github.io/Dapper-translation/)
+* [美团分布式会话跟踪系统架构设计与实践](https://tech.meituan.com/mt-mtrace.html)
+* [京东分布式服务跟踪系统-CallGraph](http://zhuanlan.51cto.com/art/201701/528304.htm)
+
+### 微服务实战
+* [微服务实战：从架构到发布（一）](https://segmentfault.com/a/1190000004634172)
+* [微服务实战：从架构到发布（二）](https://segmentfault.com/a/1190000004655274)

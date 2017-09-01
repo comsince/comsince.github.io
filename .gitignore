@@ -119,3 +119,6 @@ com_crashlytics_export_strings.xml
 # lock file
 *.lock
 
+# meizu person file
+**/meizuserver/**
+
