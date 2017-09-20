@@ -343,10 +343,42 @@ sudo apt-get install mysql-server mysql-client
 
 #### 参考资料
 
-*[Linux(Ubuntu)下MySQL的安装与配置](http://blog.csdn.net/lizuqingblog/article/details/18423751)
-*[Mysql初始化root密码和允许远程访问](http://www.cnblogs.com/cnblogsfans/archive/2009/09/21/1570942.html)
+* [Linux(Ubuntu)下MySQL的安装与配置](http://blog.csdn.net/lizuqingblog/article/details/18423751)
+* [Mysql初始化root密码和允许远程访问](http://www.cnblogs.com/cnblogsfans/archive/2009/09/21/1570942.html)
+
+
+### Redis
+
+```
+wget http://download.redis.io/redis-stable.tar.gz
+tar xvzf redis-stable.tar.gz
+cd redis-stable
+sudo make install //将redis安装到usr目录
+```
+
+* [Redis Quick Start](https://redis.io/topics/quickstart)
+
+### Zookeeper
+
+* [ZooKeeper Getting Started Guide](https://zookeeper.apache.org/doc/r3.1.2/zookeeperStarted.html#ch_GettingStarted)
+
+### TomCat
+
+* [Tomcat Home](http://tomcat.apache.org/download-70.cgi)
 
 ## 微服务架构系列文章
+
+## 基础组件
+
+### 消息队列
+
+* [activemq](http://activemq.apache.org/getting-started.html)
+
+**NOTE:** ActiveMQ 5.15.0 Release 支持java8以上版本
+
+### 权限框架
+
+* [跟我学Shiro](/download/kaitao-shiro.pdf)
 
 ### 分布式数据库
 为提升系统性能，实现高并发的需要有事需要实现数据库读写分离，需要使用数据库中间件
@@ -355,6 +387,8 @@ sudo apt-get install mysql-server mysql-client
 * [Sharing-JDBC](http://shardingjdbc.io/docs/00-overview)
 
 ### 分布式RPC框架
+
+### 容器
 
 ### 调用链
 
