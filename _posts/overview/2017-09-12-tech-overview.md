@@ -125,6 +125,9 @@ Your APP_BUILD_SCRIPT points to an unknown file: ./main/cpp/jni/Android.mk
 
 * [Java 动态代理机制分析及扩展](https://www.ibm.com/developerworks/cn/java/j-lo-proxy1/index.html)
 
+### 设计模式
+
+
 ## Server
 
  远程登录命令
