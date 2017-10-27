@@ -122,11 +122,14 @@ Your APP_BUILD_SCRIPT points to an unknown file: ./main/cpp/jni/Android.mk
 * [Java并发编程实战](/download/Java-concurency-in-practice.pdf)
 
 ### Java Reflection
+  
+Java 动态代理机制实际是代理模式的实现，其局限性是其无法代码class只能代理接口，因此对于需要继承类但是父类需要反射，就会变得极其复杂
 
 * [Java 动态代理机制分析及扩展](https://www.ibm.com/developerworks/cn/java/j-lo-proxy1/index.html)
 
 ### 设计模式
 
+* [研磨设计模式]()
 
 ## Server
 
@@ -409,6 +412,15 @@ sudo make install //将redis安装到usr目录
 * [Sharing-JDBC](http://shardingjdbc.io/docs/00-overview)
 
 ### 分布式RPC框架
+
+#### Dubbo官方说明文档
+
+* [Dubbo user guide](https://dubbo.gitbooks.io/dubbo-user-book/)
+* [Dubbo develop guide](https://dubbo.gitbooks.io/dubbo-dev-book/)
+
+#### Dubbo 原理分析系列文章
+* [Spring Schema扩展](https://gist.github.com/dchjmichael/07dfd189c4c29bab63ec)
+* [Dubbo spi 扩展点机制](http://cxis.me/2017/02/18/Dubbo%E4%B8%ADSPI%E6%89%A9%E5%B1%95%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/)
 
 ### 容器
 
