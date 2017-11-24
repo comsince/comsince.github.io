@@ -127,3 +127,19 @@ export QT_IM_MODULE=fcitx
 ```
 
 * [ubuntu搜狗输入法，idea下无法输入中文 ](http://edolphin.site/2016/10/26/ubuntu-ieda-input-chinese/)
+
+
+## Gradle 依赖加入@aar无法传递依赖
+
+* 现象
+  例如`compile ('com.meizu.flyme.internet:push-ups:1.0.2-20171121.085103-2@aar')`依赖关系无法传递
+* 解决方法
+  
+```
+compile ('com.meizu.flyme.internet:push-ups:1.0.2-20171121.085103-2@aar'){
+        transitive=true
+    }
+```
+
+* [参考](https://stackoverflow.com/questions/22795455/transitive-dependencies-not-resolved-for-aar-library-using-gradle)
+    
