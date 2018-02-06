@@ -110,4 +110,4 @@ category: meizupush
 
 ## 三 通知栏自定义行为使用方式
 
-统一推送平台目前由五种方式，[详情参见](UpsIntegrateReadme.md)
+统一推送平台目前由五种方式，[详情参见](http://172.17.141.99:4000/2017/10/27/ups-integrate/#%E4%B8%89-%E6%B6%88%E6%81%AF%E8%87%AA%E5%AE%9A%E4%B9%89%E8%A1%8C%E4%B8%BA%E5%88%86%E6%9E%90)

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <meta charset="utf-8">
+    <title>技术平台应用数据统计</title>
+    <!-- 引入 echarts.js -->
+    <script src="js/echarts.min.js"></script>
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+</head>
+
+
+<body class="gray-bg">
+    <div class="row  border-bottom white-bg dashboard-header">
+        <div class="col-sm-12">
+            <p>以下展示技术平台客户端四大应用的崩溃率，应用严重Bug修复率，应用整体Bug修复率 <a href="/2017/11/01/work-history/" target="_blank">了解更多</a>
+            </p>
+        </div>
+
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+          <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>应用崩溃率</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div style="height:500px" id="echarts-line-crash-chart"></div>
+                    </div>
+                </div>
+           </div>
+           <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>应用崩溃率</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div style="height:500px" id="echarts-bar-crash-chart"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>严重Bug修复率</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div style="height:500px" id="echarts-serious-bug-bar-chart"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>整体Bug修复率</h5>
+                    </div>
+                    <div class="ibox-content">
+
+                        <div style="height:500px" id="echarts-all-bug-bar-chart"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <!-- 全局js -->
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+
+
+
+    <!-- ECharts -->
+    <!-- <script src="js/plugins/echarts/echarts-all.js"></script> -->
+    <script src="js/echarts.min.js"></script>
+
+    <!-- 自定义js -->
+    <script src="js/content.js?v=1.0.0"></script>
+
+
+    <!-- ECharts demo data -->
+    <!-- <script src="js/demo/echarts-demo.js"></script> -->
+
+    <!-- tech android echart-->
+    <script src="js/demo/echarts-tech-android.js"></script>
+    
+
+</body>
+</html>
