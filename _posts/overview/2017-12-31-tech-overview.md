@@ -461,7 +461,7 @@ sudo make install //将redis安装到usr目录
 
 #### 书籍资料
 * [Hadoop实战-陆嘉恒]()
-* [Hadoop权威指南-第三版](/download/bigdata/Hadoop-overall.pdf)
+* [Hadoop权威指南-第三版](/download/largfile-100M/Hadoop-overall.pdf)
 * [Hadoop技术内幕：深入解析Hadoop Common和HDFS](/download/bigdata/Hadoop_Common_HDFS.pdf)
 * [Hadoop技术内幕：深入解析YARN架构设计与实现原理](/download/bigdata/Hadoop_YARN_artitect.pdf)
 * [Hadoop技术内幕：深入解析MapReduce架构设计与实现原理 (大数据技术丛书)](/download/bigdata/Hadoop_MapReduce_artitect.pdf)

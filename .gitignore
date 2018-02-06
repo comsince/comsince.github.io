@@ -121,4 +121,5 @@ com_crashlytics_export_strings.xml
 
 # meizu person file
 **/meizuserver/**
+**/download/largfile-100M/**
 

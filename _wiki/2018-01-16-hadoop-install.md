@@ -208,7 +208,22 @@ rpm -qvh kernel-devel-2.6.32.358.el6.x86_64 下载安装
 
 OK，安装增强工具完成，开始设置共享文件夹
 
-### centOs 免密码登陆
+### 关闭防火墙
+
+```
+关闭命令：  service iptables stop 
+永久关闭防火墙：chkconfig iptables off
+```
+
+* 查看路由表
+
+```
+netstat -rn
+添加路由表
+route add default gw 172.17.140.1
+```
+
+### 免密码登陆
 * 使用root登录修改配置文件 `/etc/ssh/sshd_config`
 ```
 RSAAuthentication yes
@@ -322,6 +337,16 @@ export PATH=$JAVA_HOME/bin:$JRE_HOME/bin:$PATH
 ```
 
 
+### Telnet Server 安装
+
+```
+如下三个包先安装
+telnet-0.17-47.el6_3.1.x86_64.rpm  telnet-server-0.17-47.el6_3.1.x86_64.rpm  xinetd-2.3.14-38.el6.x86_64.rpm
+rpm -ivh *.rpm
+启动telnet
+service xinetd start
+```
+
 ## Hadoop 编译安装
 * protobuffer ububtu环境安装
 
@@ -384,6 +409,14 @@ $ protoc --version
     bzip2:   false 
     openssl: false Cannot load libcrypto.so (libcrypto.so: cannot open shared object file: No such file or directory)!
   ```
+
+
+
+
+```
+
+```
+
    
 ## 常用工具
 * [EditPlus 在线注册](http://www.jb51.net/tools/editplus/)
