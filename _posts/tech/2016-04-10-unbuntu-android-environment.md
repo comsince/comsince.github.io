@@ -21,6 +21,30 @@ category: tech
 
 ```
 
+
+```
+#scala home
+export SCALA_HOME=~/Share/jdk/scala-2.10.4
+
+#maven
+export MAVEN_HOME=~/Share/web/apache-maven-3.3.9
+
+#android
+export ANDROID_SDK_HOME=~/Share/android/SDK
+export NDK_HOME=$ANDROID_SDK_HOME/ndk-bundle
+
+#java home
+#export JAVA_HOME=~/Share/jdk/jdk1.7.0_17
+export JAVA_HOME=~/Share/jdk/jdk1.8.0_131
+export JRE_HOME=$JAVA_HOME/jre
+export CLASSPATH=.:$JAVA_HOME/lib:$JRE_HOME/lib:$CLASSPATH
+export PATH=$JAVA_HOME/bin:$JRE_HOME/bin:$ANDROID_SDK_HOME/platform-tools:$NDK_HOME:$MAVEN_HOME/bin:$SCALA_HOME/bin:$PATH
+
+#go
+export GOPATH=~/Share/GitWorkPlace/go
+
+```
+
 ## 二.配置Android SDK
 在配置环境变量时如有不理解请参考如下的说明文档[环境变量配置说明](http://www.cnblogs.com/bluestorm/archive/2012/10/12/2721210.html)
 

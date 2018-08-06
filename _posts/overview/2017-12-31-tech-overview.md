@@ -4,7 +4,7 @@ title: "IT软件知识-技能图谱"
 description: Linux 基础技能
 category: overview
 ---
-主要说明不断更新的软件技术指引未来发展方向，此文持续更新。
+主要说明不断更新的软件技术指引未来发展方向，此文持续更新。对于技术的共性给出必要的原理解释。
 linux的基本技能，主要说明linux环境下c编程，shell；着重于基础概念，并不是作为进阶的工具，主要起到一个抛砖抛砖引玉的作用，能够通过对这些基本的技能的学习初步掌握解决问题的基本技能。此文章并不深入讨论各个技术点的细节，只是总结出技能之间的依赖关系，归纳出一般的学习步骤，希望对自己的思路有一个清晰的认识。
 
 ## Linux 基础
@@ -63,6 +63,21 @@ C没有像gradle和maven的编译工具，需要使用makefile来组织编译，
 * [Linux online manpage](http://man7.org/linux/man-pages/)
 * [Shell编程基础](http://wiki.ubuntu.org.cn/Shell%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80)
 
+
+
+之前我在ubuntu上跑代码时，当运行一个shell脚本的时候,出现了如下错误
+../runcmake: 行 2: $'\r': 未找到命令
+../runcmake: 行 3: 未预期的符号 `$'{\r'' 附近有语法错误
+
+考虑到代码是从windows下一直过来的，脚本可能在格式上存在问题
+
+* 解决方案：
+```
+   sudo apt-get install dos2unix
+
+   dos2unix  **.sh
+```
+
 ## Android NDK
 
 ### NDK Build Problem
@@ -111,6 +126,9 @@ Your APP_BUILD_SCRIPT points to an unknown file: ./main/cpp/jni/Android.mk
 
 * [Java IO](http://ifeve.com/java-io/)
 * [java I/O书籍](/download/JavaIO.pdf)
+* [Java NIO Tutorial](http://tutorials.jenkov.com/java-nio/index.html)
+
+* [java nio解决半包 粘包问题](https://blog.csdn.net/nongfuyumin/article/details/78343999)
 
 ### Java Networking
 
@@ -468,3 +486,19 @@ sudo make install //将redis安装到usr目录
 
 ### Python
 * [Python教程](https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001431608990315a01b575e2ab041168ff0df194698afac000)
+
+
+
+
+## 技术博客
+从技术博客中寻找解决问题的方案，下面列出较为出名的博客
+* [美团技术博客](https://tech.meituan.com/)
+
+
+## 机器学习
+
+* [Python getstarted](https://anandology.com/python-practice-book/getting-started.html)
+
+* [tensorflow-for-poets](https://codelabs.developers.google.com/codelabs/tensorflow-for-poets/index.html#0)
+* [tf-android](https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2-tflite/#0)
+* [TensorFlow固化模型](https://www.jianshu.com/p/091415b114e2)
