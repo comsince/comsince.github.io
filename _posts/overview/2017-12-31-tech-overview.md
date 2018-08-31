@@ -139,11 +139,20 @@ Your APP_BUILD_SCRIPT points to an unknown file: ./main/cpp/jni/Android.mk
 
 * [Java并发编程实战](/download/Java-concurency-in-practice.pdf)
 
+* [通俗解释java并发原理教程](http://tutorials.jenkov.com/java-concurrency/thread-signaling.html)
+
 ### Java Reflection
   
 Java 动态代理机制实际是代理模式的实现，其局限性是其无法代码class只能代理接口，因此对于需要继承类但是父类需要反射，就会变得极其复杂
 
 * [Java 动态代理机制分析及扩展](https://www.ibm.com/developerworks/cn/java/j-lo-proxy1/index.html)
+
+
+* [深入理解Java：类加载机制及反射](https://yq.aliyun.com/articles/133181)
+
+### Java web
+
+* [Servelet规范](http://zhanjindong.com/assets/pdf/Servlet3.1-Specification.pdf)
 
 ### 设计模式
 

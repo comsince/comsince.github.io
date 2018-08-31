@@ -82,6 +82,16 @@ Jekyll 3.4.3 | Error:  Could not find a JavaScript runtime. See https://github.c
 ```
 sudo apt-get install nodejs
 ```
+
+## 问题描述
+
+```
+  Liquid Exception: undefined method `map' for false:FalseClass Did you mean? tap in /_layouts/page.html
+
+```
+
+* [问题参考](https://github.com/github/pages-gem/issues/351) 使用jekyll新建一个主页，解决此问题
+
 ## 参考资料
 
 * [How To Install Ruby on Rails on Ubuntu](https://tecadmin.net/install-ruby-on-rails-on-ubuntu/)
