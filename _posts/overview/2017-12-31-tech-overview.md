@@ -127,138 +127,40 @@ Your APP_BUILD_SCRIPT points to an unknown file: ./main/cpp/jni/Android.mk
 * [Java IO](http://ifeve.com/java-io/)
 * [java I/O书籍](/download/JavaIO.pdf)
 * [Java NIO Tutorial](http://tutorials.jenkov.com/java-nio/index.html)
-
 * [java nio解决半包 粘包问题](https://blog.csdn.net/nongfuyumin/article/details/78343999)
 
 ### Java Networking
 
 * [Java 网络编程]()
 * [Essential Netty in Action 《Netty 实战(精髓)》](https://www.kancloud.cn/kancloud/essential-netty-in-action)
+* [SSL/TLS协议运行机制的概述](http://www.ruanyifeng.com/blog/2014/02/ssl_tls.html)
+* [Java Secure Socket Extension (JSSE) Reference Guide](https://docs.oracle.com/javase/6/docs/technotes/guides/security/jsse/JSSERefGuide.html)
 
 ### Java Connurency
 
 * [Java并发编程实战](/download/Java-concurency-in-practice.pdf)
-
 * [通俗解释java并发原理教程](http://tutorials.jenkov.com/java-concurrency/thread-signaling.html)
+* [Java 并发编程的艺术](/download/Java_concurrency_artifact.pdf)
 
 ### Java Reflection
   
 Java 动态代理机制实际是代理模式的实现，其局限性是其无法代码class只能代理接口，因此对于需要继承类但是父类需要反射，就会变得极其复杂
 
 * [Java 动态代理机制分析及扩展](https://www.ibm.com/developerworks/cn/java/j-lo-proxy1/index.html)
-
-
 * [深入理解Java：类加载机制及反射](https://yq.aliyun.com/articles/133181)
 
 ### Java web
 
 * [Servelet规范](http://zhanjindong.com/assets/pdf/Servlet3.1-Specification.pdf)
+* [深入解析Spring 内幕](/download/spring-tech-invoke_anayisis.pdf)
+
 
 ### 设计模式
 
 * [研磨设计模式]()
+* [图说设计模式](https://design-patterns.readthedocs.io/zh_CN/latest/)
 
-## Server
-
- 远程登录命令
- 
-### SSH
-
- ```
- ssh user@host
- ```
-### SCP
-
-#### 命令格式：
-
-```
-scp [参数] [原路径] [目标路径]
-```
-
-#### 命令参数：
-
-    -1 强制scp命令使用协议ssh1
-    -2 强制scp命令使用协议ssh2
-    -4 强制scp命令只使用IPv4寻址
-    -6 强制scp命令只使用IPv6寻址
-    -B 使用批处理模式（传输过程中不询问传输口令或短语）
-    -C 允许压缩。（将-C标志传递给ssh，从而打开压缩功能）
-    -p 留原文件的修改时间，访问时间和访问权限。
-    -q 不显示传输进度条。
-    -r 递归复制整个目录。
-    -v 详细方式显示输出。scp和ssh(1)会显示出整个过程的调试信息。这些信息用于调试连接，验证和配置问题。
-    -c cipher 以cipher将数据传输进行加密，这个选项将直接传递给ssh。
-    -F ssh_config 指定一个替代的ssh配置文件，此参数直接传递给ssh。
-    -i identity_file 从指定文件中读取传输时使用的密钥文件，此参数直接传递给ssh。
-    -l limit 限定用户所能使用的带宽，以Kbit/s为单位。
-    -o ssh_option 如果习惯于使用ssh_config(5)中的参数传递方式，
-    -P port 注意是大写的P, port是指定数据传输用到的端口号
-    -S program 指定加密传输时所使用的程序。此程序必须能够理解ssh(1)的选项。
-
-
-
-#### 使用说明
-从本地服务器复制到远程服务器
-
-* 复制文件:
-
-```
-$scp local_file remote_username@remote_ip:remote_folder
-$scp local_file remote_username@remote_ip:remote_file
-$scp local_file remote_ip:remote_folder
-$scp local_file remote_ip:remote_file
-```
-
-指定了用户名，命令执行后需要输入用户密码；如果不指定用户名，命令执行后需要输入用户名和密码；
-
-* 复制目录:
-
-```
-$scp -r local_folder remote_username@remote_ip:remote_folder
-$scp -r local_folder remote_ip:remote_folder
-```
-
-第1个指定了用户名，命令执行后需要输入用户密码； 第2个没有指定用户名，命令执行后需要输入用户名和密码；
-
-**NOTE:** 从远程复制到本地的scp命令与上面的命令一样，只要将从本地复制到远程的命令后面2个参数互换顺序就行了
-
-#### 使用示例
-#### 实例1：从远处复制文件到本地目录
-
-```
- $scp root@10.6.159.147:/opt/soft/demo.tar /opt/soft/
-``` 
-说明： 从10.6.159.147机器上的/opt/soft/的目录中下载demo.tar 文件到本地/opt/soft/目录中
-
-#### 实例2：从远处复制到本地
-
-```
-$scp -r root@10.6.159.147:/opt/soft/test /opt/soft/
-```
-
-说明： 从10.6.159.147机器上的/opt/soft/中下载test目录到本地的/opt/soft/目录来。
-
-#### 实例3：上传本地文件到远程机器指定目录
-
-```
-$scp /opt/soft/demo.tar root@10.6.159.147:/opt/soft/scptest
-```
-
-说明： 复制本地opt/soft/目录下的文件demo.tar 到远程机器10.6.159.147的opt/soft/scptest目录
-
-#### 实例4：上传本地目录到远程机器指定目录
-
-```
-$scp -r /opt/soft/test root@10.6.159.147:/opt/soft/scptest
-```
-
-说明： 上传本地目录 /opt/soft/test到远程机器10.6.159.147上/opt/soft/scptest的目录中
-
-
-#### 参考资料
-
-* [scp](https://www.computerhope.com/unix/scp.htm)
-* [cp 跨机远程拷贝](http://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/scp.html)
+## 持续集成工具
 
 ### MAVEN
 
@@ -272,6 +174,9 @@ $scp -r /opt/soft/test root@10.6.159.147:/opt/soft/scptest
 
 #### 参考资料
 * [Maven实战](/download/maven.pdf)
+
+
+## 中间件
 
 ### NGINX
 
@@ -511,3 +416,106 @@ sudo make install //将redis安装到usr目录
 * [tensorflow-for-poets](https://codelabs.developers.google.com/codelabs/tensorflow-for-poets/index.html#0)
 * [tf-android](https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2-tflite/#0)
 * [TensorFlow固化模型](https://www.jianshu.com/p/091415b114e2)
+
+
+## Server
+
+ 远程登录命令
+ 
+### SSH
+
+ ```
+ ssh user@host
+ ```
+### SCP
+
+#### 命令格式：
+
+```
+scp [参数] [原路径] [目标路径]
+```
+
+#### 命令参数：
+
+    -1 强制scp命令使用协议ssh1
+    -2 强制scp命令使用协议ssh2
+    -4 强制scp命令只使用IPv4寻址
+    -6 强制scp命令只使用IPv6寻址
+    -B 使用批处理模式（传输过程中不询问传输口令或短语）
+    -C 允许压缩。（将-C标志传递给ssh，从而打开压缩功能）
+    -p 留原文件的修改时间，访问时间和访问权限。
+    -q 不显示传输进度条。
+    -r 递归复制整个目录。
+    -v 详细方式显示输出。scp和ssh(1)会显示出整个过程的调试信息。这些信息用于调试连接，验证和配置问题。
+    -c cipher 以cipher将数据传输进行加密，这个选项将直接传递给ssh。
+    -F ssh_config 指定一个替代的ssh配置文件，此参数直接传递给ssh。
+    -i identity_file 从指定文件中读取传输时使用的密钥文件，此参数直接传递给ssh。
+    -l limit 限定用户所能使用的带宽，以Kbit/s为单位。
+    -o ssh_option 如果习惯于使用ssh_config(5)中的参数传递方式，
+    -P port 注意是大写的P, port是指定数据传输用到的端口号
+    -S program 指定加密传输时所使用的程序。此程序必须能够理解ssh(1)的选项。
+
+
+
+#### 使用说明
+从本地服务器复制到远程服务器
+
+* 复制文件:
+
+```
+$scp local_file remote_username@remote_ip:remote_folder
+$scp local_file remote_username@remote_ip:remote_file
+$scp local_file remote_ip:remote_folder
+$scp local_file remote_ip:remote_file
+```
+
+指定了用户名，命令执行后需要输入用户密码；如果不指定用户名，命令执行后需要输入用户名和密码；
+
+* 复制目录:
+
+```
+$scp -r local_folder remote_username@remote_ip:remote_folder
+$scp -r local_folder remote_ip:remote_folder
+```
+
+第1个指定了用户名，命令执行后需要输入用户密码； 第2个没有指定用户名，命令执行后需要输入用户名和密码；
+
+**NOTE:** 从远程复制到本地的scp命令与上面的命令一样，只要将从本地复制到远程的命令后面2个参数互换顺序就行了
+
+#### 使用示例
+#### 实例1：从远处复制文件到本地目录
+
+```
+ $scp root@10.6.159.147:/opt/soft/demo.tar /opt/soft/
+``` 
+说明： 从10.6.159.147机器上的/opt/soft/的目录中下载demo.tar 文件到本地/opt/soft/目录中
+
+#### 实例2：从远处复制到本地
+
+```
+$scp -r root@10.6.159.147:/opt/soft/test /opt/soft/
+```
+
+说明： 从10.6.159.147机器上的/opt/soft/中下载test目录到本地的/opt/soft/目录来。
+
+#### 实例3：上传本地文件到远程机器指定目录
+
+```
+$scp /opt/soft/demo.tar root@10.6.159.147:/opt/soft/scptest
+```
+
+说明： 复制本地opt/soft/目录下的文件demo.tar 到远程机器10.6.159.147的opt/soft/scptest目录
+
+#### 实例4：上传本地目录到远程机器指定目录
+
+```
+$scp -r /opt/soft/test root@10.6.159.147:/opt/soft/scptest
+```
+
+说明： 上传本地目录 /opt/soft/test到远程机器10.6.159.147上/opt/soft/scptest的目录中
+
+
+#### 参考资料
+
+* [scp](https://www.computerhope.com/unix/scp.htm)
+* [cp 跨机远程拷贝](http://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/scp.html)
