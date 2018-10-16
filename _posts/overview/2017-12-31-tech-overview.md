@@ -152,8 +152,28 @@ Java 动态代理机制实际是代理模式的实现，其局限性是其无法
 ### Java web
 
 * [Servelet规范](http://zhanjindong.com/assets/pdf/Servlet3.1-Specification.pdf)
+* [Servelet规范-本地版](/download/Servlet3.1-Specification.pdf)
+
+* [职责链模式(Chain of responsibility)以及servlet中filter的原理](http://dapple.iteye.com/blog/696008)
+
+#### Spring 框架原理
+
 * [深入解析Spring 内幕](/download/spring-tech-invoke_anayisis.pdf)
 
+AOP模式实现切面编程中，利用职责链模式，建立一种拦截器模式，比如Servelet与filter机制，切面编程的advice拦截调用链
+
+#### 权限设计
+
+* [Shiro权限设计](https://waylau.com/apache-shiro-1.2.x-reference/II.%20Core%20%E6%A0%B8%E5%BF%83/6.%20Authorization%20%E6%8E%88%E6%9D%83.html)
+* [新的RBAC：基于资源的权限管理(Resource-Based Access Control)](https://waylau.com/new-rbac-resource-based-access-control/)
+* [Tomcat中session的管理机制](https://blog.csdn.net/lantian0802/article/details/8914157)
+
+
+#### ORM 框架
+
+* [myBatis-core](http://www.mybatis.org/mybatis-3/zh/index.html)
+* [myBatis-spring](http://www.mybatis.org/spring/zh/)
+* [《深入理解mybatis原理》 MyBatis的架构设计以及实例分析](https://blog.csdn.net/luanlouis/article/details/40422941)
 
 ### 设计模式
 
@@ -407,6 +427,12 @@ sudo make install //将redis安装到usr目录
 ## 技术博客
 从技术博客中寻找解决问题的方案，下面列出较为出名的博客
 * [美团技术博客](https://tech.meituan.com/)
+
+
+## 搜索技术
+
+* [Elasticsearch 5.4 中文文档](http://cwiki.apachecn.org/pages/viewpage.action?pageId=4260360)
+* [Elasticsearch 权威指南（中文版](https://es.xiaoleilu.com/index.html)
 
 
 ## 机器学习
