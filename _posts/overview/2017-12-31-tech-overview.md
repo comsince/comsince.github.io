@@ -180,168 +180,7 @@ AOP模式实现切面编程中，利用职责链模式，建立一种拦截器�
 * [研磨设计模式]()
 * [图说设计模式](https://design-patterns.readthedocs.io/zh_CN/latest/)
 
-## 持续集成工具
 
-### MAVEN
-
-```
- // 跳过测试
- mvn clean package -Dmaven.test.skip=true
-
- // mvn jetty run
- mvn jetty:run -Djetty.port=80
-```
-
-#### 参考资料
-* [Maven实战](/download/maven.pdf)
-
-
-## 中间件
-
-### NGINX
-
-#### Nginx Ubuntu 安装
-
-这里根据官网的步骤总结出来
-
-#### 下载nginx_signing.key
-
-```
-wget https://nginx.org/keys/nginx_signing.key
-```
-
-#### 将nginx_signing.key添加到apt程序中
-
-```
-sudo apt-key add nginx_signing.key
-```
-
-#### 在`/etc/apt/sources.list` 尾部添加下面的代码
-
-```
-deb http://nginx.org/packages/ubuntu/ xenial nginx
-deb-src http://nginx.org/packages/ubuntu/ xenial nginx
-```
-
-上面的xenial是nginx在Ubuntu平台下发布版本的代码名称，也就是说不同版本的Ubuntu代码名称是不一样的，下面列举了各个Ubuntu版本的代码名称,[具体详见](https://nginx.org/en/linux_packages.html#distributions)
-
-#### 更新源并安装nginx
-
-```
-apt-get update
-apt-get install nginx
-```
-
-**NOTE:** 如果以前安装nginx失败一定要完全卸载后在重新安装，不然会出现很多错误,nginx卸载方法如下
-
-* 删除nginx，–purge包括配置文件
-
-```
-sudo apt-get --purge remove nginx
-```
-
-* 自动移除全部不使用的软件包
-
-```
-sudo apt-get autoremove
-```
-
-* 罗列出与nginx相关的软件
-
-```
-dpkg --get-selections|grep nginx
-```
-
-执行结果如下：unbutu16.04
-
-```
-nginx						install
-nginx-common			    deinstall
-```
-
-* 删除查询出与nginx有关的软件
-
-```
-sudo apt-get --purge remove nginx
-sudo apt-get --purge remove nginx-common
-```
-
-* 查看nginx正在运行的进程，如果有就kill掉
-
-```
-ps -ef |grep nginx
-```
-
-结果如下：
-
-```
-root      5309  2614  0 17:03 ?        00:00:00 nginx: master process nginx
-nginx     5310  5309  0 17:03 ?        00:00:00 nginx: worker process
-```
-
-* kill nginx进程
-
-```
-sudo kill  -9  5309 5310
-```
-
-* 查看nginx配置
-
-```
-sudo nginx -t
-```
-结果如下：
-
-```
-nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
-nginx: configuration file /etc/nginx/nginx.conf test is successful
-```
-
-#### 参考资料
-
-* [彻底删除nginx](http://blog.csdn.net/u010571844/article/details/50819704)
-* [Nginx 初步](https://moonbingbing.gitbooks.io/openresty-best-practices/content/ngx/nginx.html)
-* [Nginx - 代理、缓存](http://blog.csdn.net/zjf280441589/article/details/51501408)
-
-
-### MySql
-
-* 检查mysql本地是否安装
-
-```
-sudo netstat -tap | grep mysql
-```
-
-* 安装mysql
-
-```
-sudo apt-get install mysql-server mysql-client
-```
-
-#### 参考资料
-
-* [Linux(Ubuntu)下MySQL的安装与配置](http://blog.csdn.net/lizuqingblog/article/details/18423751)
-* [Mysql初始化root密码和允许远程访问](http://www.cnblogs.com/cnblogsfans/archive/2009/09/21/1570942.html)
-
-
-### Redis
-
-```
-wget http://download.redis.io/redis-stable.tar.gz
-tar xvzf redis-stable.tar.gz
-cd redis-stable
-sudo make install //将redis安装到usr目录
-```
-
-* [Redis Quick Start](https://redis.io/topics/quickstart)
-
-### Zookeeper
-
-* [ZooKeeper Getting Started Guide](https://zookeeper.apache.org/doc/r3.1.2/zookeeperStarted.html#ch_GettingStarted)
-
-### TomCat
-
-* [Tomcat Home](http://tomcat.apache.org/download-70.cgi)
 
 ## 微服务架构系列文章
 
@@ -422,8 +261,6 @@ sudo make install //将redis安装到usr目录
 * [Python教程](https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001431608990315a01b575e2ab041168ff0df194698afac000)
 
 
-
-
 ## 技术博客
 从技术博客中寻找解决问题的方案，下面列出较为出名的博客
 * [美团技术博客](https://tech.meituan.com/)
@@ -431,8 +268,15 @@ sudo make install //将redis安装到usr目录
 
 ## 搜索技术
 
+### ElasticSearch
 * [Elasticsearch 5.4 中文文档](http://cwiki.apachecn.org/pages/viewpage.action?pageId=4260360)
 * [Elasticsearch 权威指南（中文版](https://es.xiaoleilu.com/index.html)
+
+
+### Solr
+* [SolrTutorial](http://www.solrtutorial.com/basic-solr-concepts.html)
+* [Apache Solr Tutorial for Beginners](https://examples.javacodegeeks.com/enterprise-java/apache-solr/apache-solr-tutorial-beginners/)
+
 
 
 ## 机器学习
@@ -444,104 +288,4 @@ sudo make install //将redis安装到usr目录
 * [TensorFlow固化模型](https://www.jianshu.com/p/091415b114e2)
 
 
-## Server
 
- 远程登录命令
- 
-### SSH
-
- ```
- ssh user@host
- ```
-### SCP
-
-#### 命令格式：
-
-```
-scp [参数] [原路径] [目标路径]
-```
-
-#### 命令参数：
-
-    -1 强制scp命令使用协议ssh1
-    -2 强制scp命令使用协议ssh2
-    -4 强制scp命令只使用IPv4寻址
-    -6 强制scp命令只使用IPv6寻址
-    -B 使用批处理模式（传输过程中不询问传输口令或短语）
-    -C 允许压缩。（将-C标志传递给ssh，从而打开压缩功能）
-    -p 留原文件的修改时间，访问时间和访问权限。
-    -q 不显示传输进度条。
-    -r 递归复制整个目录。
-    -v 详细方式显示输出。scp和ssh(1)会显示出整个过程的调试信息。这些信息用于调试连接，验证和配置问题。
-    -c cipher 以cipher将数据传输进行加密，这个选项将直接传递给ssh。
-    -F ssh_config 指定一个替代的ssh配置文件，此参数直接传递给ssh。
-    -i identity_file 从指定文件中读取传输时使用的密钥文件，此参数直接传递给ssh。
-    -l limit 限定用户所能使用的带宽，以Kbit/s为单位。
-    -o ssh_option 如果习惯于使用ssh_config(5)中的参数传递方式，
-    -P port 注意是大写的P, port是指定数据传输用到的端口号
-    -S program 指定加密传输时所使用的程序。此程序必须能够理解ssh(1)的选项。
-
-
-
-#### 使用说明
-从本地服务器复制到远程服务器
-
-* 复制文件:
-
-```
-$scp local_file remote_username@remote_ip:remote_folder
-$scp local_file remote_username@remote_ip:remote_file
-$scp local_file remote_ip:remote_folder
-$scp local_file remote_ip:remote_file
-```
-
-指定了用户名，命令执行后需要输入用户密码；如果不指定用户名，命令执行后需要输入用户名和密码；
-
-* 复制目录:
-
-```
-$scp -r local_folder remote_username@remote_ip:remote_folder
-$scp -r local_folder remote_ip:remote_folder
-```
-
-第1个指定了用户名，命令执行后需要输入用户密码； 第2个没有指定用户名，命令执行后需要输入用户名和密码；
-
-**NOTE:** 从远程复制到本地的scp命令与上面的命令一样，只要将从本地复制到远程的命令后面2个参数互换顺序就行了
-
-#### 使用示例
-#### 实例1：从远处复制文件到本地目录
-
-```
- $scp root@10.6.159.147:/opt/soft/demo.tar /opt/soft/
-``` 
-说明： 从10.6.159.147机器上的/opt/soft/的目录中下载demo.tar 文件到本地/opt/soft/目录中
-
-#### 实例2：从远处复制到本地
-
-```
-$scp -r root@10.6.159.147:/opt/soft/test /opt/soft/
-```
-
-说明： 从10.6.159.147机器上的/opt/soft/中下载test目录到本地的/opt/soft/目录来。
-
-#### 实例3：上传本地文件到远程机器指定目录
-
-```
-$scp /opt/soft/demo.tar root@10.6.159.147:/opt/soft/scptest
-```
-
-说明： 复制本地opt/soft/目录下的文件demo.tar 到远程机器10.6.159.147的opt/soft/scptest目录
-
-#### 实例4：上传本地目录到远程机器指定目录
-
-```
-$scp -r /opt/soft/test root@10.6.159.147:/opt/soft/scptest
-```
-
-说明： 上传本地目录 /opt/soft/test到远程机器10.6.159.147上/opt/soft/scptest的目录中
-
-
-#### 参考资料
-
-* [scp](https://www.computerhope.com/unix/scp.htm)
-* [cp 跨机远程拷贝](http://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/scp.html)
