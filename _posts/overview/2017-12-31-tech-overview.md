@@ -122,6 +122,11 @@ Your APP_BUILD_SCRIPT points to an unknown file: ./main/cpp/jni/Android.mk
 
 ## Java 高级主题
 
+### Java 日志框架
+
+* [Java日志框架那些事儿](https://www.cnblogs.com/chanshuyi/p/something_about_java_log_framework.html)
+* [Log4j ConsoleAppender Configuration Example](https://howtodoinjava.com/log4j/log4j-console-appender-example/)
+
 ### Java I/O
 
 * [Java IO](http://ifeve.com/java-io/)
@@ -159,8 +164,26 @@ Java 动态代理机制实际是代理模式的实现，其局限性是其无法
 #### Spring 框架原理
 
 * [深入解析Spring 内幕](/download/spring-tech-invoke_anayisis.pdf)
+* [Spring的BeanFactoryPostProcessor和BeanPostProcessor](https://blog.csdn.net/caihaijiang/article/details/35552859)
 
 AOP模式实现切面编程中，利用职责链模式，建立一种拦截器模式，比如Servelet与filter机制，切面编程的advice拦截调用链
+* [Spring AOP aspect vs advisor 以及基于xml和annotation的两种配置](https://howtodoinjava.com/spring-aop/spring-aop-aspectj-xml-configuration-example/)
+* [aop:aspect与aop:advisor的区别](https://blog.csdn.net/u011983531/article/details/70504281)
+
+
+* Spring-context
+* Spring-jdbc 
+* Spring-tx 支持数据库事务
+* spring-session
+
+#### 分布式session
+
+* [通过 Spring Session 实现新一代的 Session 管理](https://www.infoq.cn/article/Next-Generation-Session-Management-with-Spring-Session)
+* [Spring Session+Spring Data Redis 解决分布式系统架构中 Session 共享问题](https://juejin.im/post/58957c3b61ff4b006b066b1c)
+
+#### 分布式锁
+
+* [分布式锁的几种实现方式](https://www.hollischuang.com/archives/1716)
 
 #### 权限设计
 
@@ -174,6 +197,10 @@ AOP模式实现切面编程中，利用职责链模式，建立一种拦截器�
 * [myBatis-core](http://www.mybatis.org/mybatis-3/zh/index.html)
 * [myBatis-spring](http://www.mybatis.org/spring/zh/)
 * [《深入理解mybatis原理》 MyBatis的架构设计以及实例分析](https://blog.csdn.net/luanlouis/article/details/40422941)
+
+#### 权限框架
+
+* [跟我学Shiro](/download/kaitao-shiro.pdf
 
 ### 设计模式
 
@@ -189,20 +216,29 @@ AOP模式实现切面编程中，利用职责链模式，建立一种拦截器�
 ### 消息队列
 
 * [activemq](http://activemq.apache.org/getting-started.html)
+* [为什么选择RocketMQ消息中间件](https://mp.weixin.qq.com/s/KfBruI-tOz-eJuM2fgqyew?)
 
 **NOTE:** ActiveMQ 5.15.0 Release 支持java8以上版本
 
-### 权限框架
-
-* [跟我学Shiro](/download/kaitao-shiro.pdf)
-
 ### 分布式数据库
+
+#### 数据库基本技能
+* [SQL Tutorial](https://www.w3schools.com/sql/sql_join_inner.asp)
+
+
 为提升系统性能，实现高并发的需要有事需要实现数据库读写分离，需要使用数据库中间件
 读写分离需要配置主从数据同步
+
 * [MySQL5.6 数据库主从（Master/Slave）同步安装与配置详解](http://blog.csdn.net/xlgen157387/article/details/51331244/)
 * [Sharing-JDBC](http://shardingjdbc.io/docs/00-overview)
 
 ### 分布式RPC框架
+
+#### 服务治理
+
+* 限流
+* 熔断
+* 降级
 
 #### Dubbo官方说明文档
 
@@ -212,6 +248,18 @@ AOP模式实现切面编程中，利用职责链模式，建立一种拦截器�
 #### Dubbo 原理分析系列文章
 * [Spring Schema扩展](https://gist.github.com/dchjmichael/07dfd189c4c29bab63ec)
 * [Dubbo spi 扩展点机制](http://cxis.me/2017/02/18/Dubbo%E4%B8%ADSPI%E6%89%A9%E5%B1%95%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3/)
+* [XML Schema Authoring](https://docs.spring.io/spring/docs/5.1.2.RELEASE/spring-framework-reference/core.html#xml-custom)
+
+
+### Hystrix
+* [Hystrix原理与实战](https://my.oschina.net/7001/blog/1619842)
+
+### 负载均衡
+
+* [OpenResty Nginx](https://moonbingbing.gitbooks.io/openresty-best-practices/ngx/nginx_brief.html)
+
+### 配置中心
+* 实现配置修改，自动下发
 
 ### 容器
 
@@ -288,4 +336,26 @@ AOP模式实现切面编程中，利用职责链模式，建立一种拦截器�
 * [TensorFlow固化模型](https://www.jianshu.com/p/091415b114e2)
 
 
+### 源码解析
 
+* [纯源码解析博客](http://www.iocoder.cn/)
+
+## 视频资料
+
+* Elasticsearch顶尖高手系列课程
+链接: `https://pan.baidu.com/s/1qYmPrQcLYQ0dXbNe4DpIkw` 密码: `qi81`
+
+
+* 亿级流量电商详情页系统实战（第二版）：缓存架构+高可用服务架构+微服务架构
+链接: `https://pan.baidu.com/s/1jMpnK0zLB8CCXkwZcNZ6Sg` 密码: `iaa6`
+
+
+
+* Spark从入门到精通
+链接: `https://pan.baidu.com/s/10bbPT-hlp5BiF_SugteAuQ` 密码: `evst`
+
+
+* Spark大型项目实战
+链接: `https://pan.baidu.com/s/12qFMct1l8GWe6KphQxY9tg` 密码: `cnwx`
+
+* [原始链接](https://blog.csdn.net/jeversoncui123/article/details/80677848)

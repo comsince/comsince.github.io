@@ -109,6 +109,14 @@ $scp -r /opt/soft/test root@10.6.159.147:/opt/soft/scptest
 * [cp 跨机远程拷贝](http://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/scp.html)
 
 
+#### 查看端口命令
+
+* 根据端口号查看进程id
+
+```
+lsof -i:端口号
+```
+
 
 ## 持续集成工具
 
@@ -234,6 +242,43 @@ nginx: configuration file /etc/nginx/nginx.conf test is successful
 * [Nginx - 代理、缓存](http://blog.csdn.net/zjf280441589/article/details/51501408)
 
 
+#### Nginx CentoS
+
+* [CentOS6.5编译安装Nginx的方法](https://blog.csdn.net/gnail_oug/article/details/52719178)
+* [nginx启动、重启、重新加载配置文件和平滑升级](https://blog.csdn.net/gnail_oug/article/details/52754491)
+
+
+#### Unbutu nginx 库支持
+
+（1）PCRE库
+
+PCRE库支持正则表达式。如果我们在配置文件nginx.conf中使用了正则表达式，那么在编译Nginx时就必须把PCRE库编译进Nginx，因为Nginx的HTTP模块需要靠它来解析正则表达式。另外，pcre-devel是使用PCRE做二次开发时所需要的开发库，包括头文件等，这也是编译Nginx所必须使用的。可以这样安装：
+
+```
+sudo apt-get install libpcre3 libpcre3-dev  
+```
+
+（2）zlib库
+zlib库用于对HTTP包的内容做gzip格式的压缩，如果我们在nginx.conf中配置了gzip on，并指定对于某些类型（content-type）的HTTP响应使用gzip来进行压缩以减少网络传输量，则在编译时就必须把zlib编译进Nginx。zlib-devel是二次开发所需要的库。可以这样安装：
+
+```
+sudo apt-get install zlib1g-dev
+```
+
+（3）OpenSSL库
+如果服务器不只是要支持HTTP，还需要在更安全的SSL协议上传输HTTP，那么需要拥有OpenSSL。另外，如果我们想使用MD5、SHA1等散列函数，那么也需要安装它。可以这样安装：
+
+```
+sudo apt-get install openssl libssl-dev 
+```
+
+* 查看端口监听进程
+
+```
+sudo su
+netstat -ntpl
+```
+
 ### MySql
 
 * 检查mysql本地是否安装
@@ -272,3 +317,41 @@ sudo make install //将redis安装到usr目录
 ### TomCat
 
 * [Tomcat Home](http://tomcat.apache.org/download-70.cgi)
+
+
+
+## Solr
+
+### Solr Cloud
+
+* [Apache SolrCloud安装](http://blog.javachen.com/2014/03/10/how-to-install-solrcloud.html)
+
+#### 启动solr Cloud
+
+```
+./bin/solr start -e cloud -z localhost:2181/galaxy2/solr -noprompt
+```
+
+
+#### 上传一个配置目录
+
+```
+./server/scripts/cloud-scripts/zkcli.sh -zkhost 127.0.0.1:9983 \
+-cmd upconfig -confname my_new_config -con-fdir
+server/solr/configsets/basic_configs/conf
+```
+
+#### 将一个集合连接到一个配置集
+
+```
+./server/scripts/cloud-scripts/zkcli.sh -zkhost 127.0.0.1:9983 \
+-cmd linkconfig -collection gettingstarted -confname my_new_config
+```
+
+
+
+
+## 正则表达式
+
+* [正则表达式30分钟入门教程](https://deerchao.net/tutorials/regex/regex.htm#mission)
+* [XPath 教程](http://www.w3school.com.cn/xpath/index.asp)
