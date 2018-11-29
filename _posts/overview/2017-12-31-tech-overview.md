@@ -150,7 +150,7 @@ Your APP_BUILD_SCRIPT points to an unknown file: ./main/cpp/jni/Android.mk
 ### Java Reflection
   
 Java 动态代理机制实际是代理模式的实现，其局限性是其无法代码class只能代理接口，因此对于需要继承类但是父类需要反射，就会变得极其复杂
-
+AOP模式实现切面编程中，利用职责链模式，建立一种拦截器模式，比如Servelet与filter机制，切面编程的advice拦截调用链
 * [Java 动态代理机制分析及扩展](https://www.ibm.com/developerworks/cn/java/j-lo-proxy1/index.html)
 * [深入理解Java：类加载机制及反射](https://yq.aliyun.com/articles/133181)
 
@@ -159,22 +159,27 @@ Java 动态代理机制实际是代理模式的实现，其局限性是其无法
 * [Servelet规范](http://zhanjindong.com/assets/pdf/Servlet3.1-Specification.pdf)
 * [Servelet规范-本地版](/download/Servlet3.1-Specification.pdf)
 
-* [职责链模式(Chain of responsibility)以及servlet中filter的原理](http://dapple.iteye.com/blog/696008)
-
 #### Spring 框架原理
 
 * [深入解析Spring 内幕](/download/spring-tech-invoke_anayisis.pdf)
 * [Spring的BeanFactoryPostProcessor和BeanPostProcessor](https://blog.csdn.net/caihaijiang/article/details/35552859)
-
-AOP模式实现切面编程中，利用职责链模式，建立一种拦截器模式，比如Servelet与filter机制，切面编程的advice拦截调用链
 * [Spring AOP aspect vs advisor 以及基于xml和annotation的两种配置](https://howtodoinjava.com/spring-aop/spring-aop-aspectj-xml-configuration-example/)
 * [aop:aspect与aop:advisor的区别](https://blog.csdn.net/u011983531/article/details/70504281)
+* [职责链模式(Chain of responsibility)以及servlet中filter的原理](http://dapple.iteye.com/blog/696008)
 
+#### Spring 主要模块
 
 * Spring-context
 * Spring-jdbc 
 * Spring-tx 支持数据库事务
 * spring-session
+
+### Spring boot
+
+* [Spring Boot 2.0 极简教程](https://www.jianshu.com/p/fc24de0c585d)
+* [《Spring Boot极简教程》第1章 Spring Boot史前简述](https://www.jianshu.com/p/ef6214ad115a)
+* [《Spring Boot极简教程》第2章 Spring Boot简史](https://www.jianshu.com/p/4475f1d079b9)
+* [第5章 Spring Boot自动配置原理](https://www.jianshu.com/p/346cac67bfcc)
 
 #### 分布式session
 
