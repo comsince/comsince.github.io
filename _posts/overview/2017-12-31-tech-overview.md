@@ -169,6 +169,7 @@ AOP模式实现切面编程中，利用职责链模式，建立一种拦截器�
 
 #### Spring 主要模块
 
+* [Spring-Aop](https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html#aop)
 * Spring-context
 * Spring-jdbc 
 * Spring-tx 支持数据库事务
@@ -267,6 +268,8 @@ AOP模式实现切面编程中，利用职责链模式，建立一种拦截器�
 * 实现配置修改，自动下发
 
 ### 容器
+
+* DevOps
 
 ### 调用链
 
