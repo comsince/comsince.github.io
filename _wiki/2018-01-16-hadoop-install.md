@@ -1,6 +1,6 @@
 ---
 layout: wiki
-title: "Hadoop安装简介"
+title: "【BigData】-Hadoop安装简介"
 categories: [Hadoop]
 description: hadoop 安装说明
 keywords: Hadoop,Linux

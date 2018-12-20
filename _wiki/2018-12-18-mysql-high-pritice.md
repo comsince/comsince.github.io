@@ -1,6 +1,6 @@
 ---
 layout: wiki
-title: "InnoDB引擎精要与索引优化实践"
+title: "【DataBase】-InnoDB引擎精要与索引优化实践"
 categories: [中间件]
 description: 关系型数据库
 keywords: Mysql

@@ -1,6 +1,6 @@
 ---
 layout: wiki
-title: "Elastissearch核心知识摘要"
+title: "【DataBase】-Elastissearch核心知识摘要"
 categories: [NoSQL 搜索]
 description: 搜索
 keywords: elasticsearch

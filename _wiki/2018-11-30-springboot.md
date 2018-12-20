@@ -1,6 +1,6 @@
 ---
 layout: wiki
-title: "SpringBoot 核心要点"
+title: "【Spring】-【SpringBoot】-核心要点"
 categories: [中间件]
 description: 消息中间件说明
 keywords: Kafka,RocketMq

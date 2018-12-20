@@ -347,23 +347,3 @@ AOP模式实现切面编程中，利用职责链模式，建立一种拦截器�
 ### 源码解析
 
 * [纯源码解析博客](http://www.iocoder.cn/)
-
-## 视频资料
-
-* Elasticsearch顶尖高手系列课程
-链接: `https://pan.baidu.com/s/1qYmPrQcLYQ0dXbNe4DpIkw` 密码: `qi81`
-
-
-* 亿级流量电商详情页系统实战（第二版）：缓存架构+高可用服务架构+微服务架构
-链接: `https://pan.baidu.com/s/1jMpnK0zLB8CCXkwZcNZ6Sg` 密码: `iaa6`
-
-
-
-* Spark从入门到精通
-链接: `https://pan.baidu.com/s/10bbPT-hlp5BiF_SugteAuQ` 密码: `evst`
-
-
-* Spark大型项目实战
-链接: `https://pan.baidu.com/s/12qFMct1l8GWe6KphQxY9tg` 密码: `cnwx`
-
-* [原始链接](https://blog.csdn.net/jeversoncui123/article/details/80677848)
