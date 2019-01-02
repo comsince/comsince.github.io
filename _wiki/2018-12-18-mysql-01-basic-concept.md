@@ -1,6 +1,6 @@
 ---
 layout: wiki
-title: "【DataBase】- MySQL基础精要"
+title: "【数据库】- MySQL基础精要"
 categories: [中间件]
 description: 关系型数据库
 keywords: Mysql
@@ -732,5 +732,46 @@ END
     |character_set_results|服务器向客户端返回数据时使用的字符集|
 
     一般情况下要使用保持这三个变量的值和客户端使用的字符集相同。
-    
+
 * 比较规则的作用通常体现比较字符串大小的表达式以及对某个字符串列进行排序中。
+
+
+
+## 常见问题
+
+### Mysql链接问题
+
+* 堆栈信息
+
+```
+** BEGIN NESTED EXCEPTION **
+
+java.net.SocketException
+MESSAGE: java.security.AccessControlException: access denied (java.net.SocketPermission 
+127.0.0.1:3306 connect,resolve)
+
+STACKTRACE:
+
+java.net.SocketException: java.security.AccessControlException: access denied 
+(java.net.SocketPermission 127.0.0.1:3306 connect,resolve)
+        at com.mysql.jdbc.StandardSocketFactory.unwrapExceptionToProperClassAndThrowIt(StandardSocketFactory.
+java:407)
+        at com.mysql.jdbc.StandardSocketFactory.connect(StandardSocketFactory.java:268)
+
+......
+
+```
+
+* 解决方案
+
+This is a Java exception, caused by your java.policy file. Its in your JAVA_HOME/jre/lib/security folder. Heres where it is in Ubuntu (using java 6).
+```
+/usr/lib/jvm/java-6-sun/jre/lib/security/java.policy
+```
+You need to add the following lines:
+```
+grant{
+permission java.net.SocketPermission "127.0.0.1:3306", "connect, resolve";
+};
+```
+* [MySQL - Java connection Exception - All](http://programminglinuxblog.blogspot.com/2008/01/mysql-java-connection-exception-all.html)

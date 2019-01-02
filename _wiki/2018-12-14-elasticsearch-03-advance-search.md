@@ -1,6 +1,6 @@
 ---
 layout: wiki
-title: "【DataBase】-Elastissearch核心知识摘要"
+title: "【分布式搜索】- Elastissearch高级搜索"
 categories: [NoSQL 搜索]
 description: 搜索
 keywords: elasticsearch
@@ -748,6 +748,26 @@ GET /forum/article/_search
 * 问题2：most_fields，没办法用minimum_should_match去掉长尾数据，就是匹配的特别少的结果
 * 问题3：TF/IDF算法，比如Peter Smith和Smith Williams，搜索Peter Smith的时候，由于first_name中很少有Smith的，所以query在所有document中的频率很低，得到的分数很高，可能Smith Williams反而会排在Peter Smith前面
 
+
+**NOTE:** 
+要求Peter必须在author_first_name或author_last_name中出现
+要求Smith必须在author_first_name或author_last_name中出现
+
+```
+GET /forum/article/_search
+{
+  "query": {
+    "multi_match": {
+      "query": "Peter Smith",
+      "type": "cross_fields", 
+      "operator": "and",
+      "fields": ["author_first_name", "author_last_name"]
+    }
+  }
+}
+```
+
+
 #### copy_to策略
 
 ```
@@ -783,3 +803,474 @@ GET /forum/article/_search
 ```
 
 **NOTE:** 次文档内容均来自Elastic顶尖高手系列课程笔记，如有侵权，请联系删除！
+
+
+#### 近似匹配
+
+phrase match，proximity match：短语匹配，近似匹配
+
+* match_phrase语法
+
+```
+GET /forum/article/_search
+{
+    "query": {
+        "match_phrase": {
+            "content": "java spark"
+        }
+    }
+}
+```
+
+* match_phrase的基本原理
+
+根据索引在每个doc中的position位置进行临近计算，position之间差值越小，两个搜索分词term越临近
+
+* slop
+
+uery string，搜索文本，中的几个term，要经过几次移动才能与一个document匹配，这个移动的次数，就是slop
+这里slop准确的说是最多移动几次
+
+* 精准度与召回率
+
+但是有时可能我们希望的是匹配到几个term中的部分，就可以作为结果出来，这样可以提高召回率。同时我们也希望用上match_phrase根据距离提升分数的功能，让几个term距离越近分数就越高，优先返回
+就是优先满足召回率，同时兼顾精准度
+
+
+```
+GET /forum/article/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {"match": { "java spark" --> java或spark或java spark，java和spark靠前，但是没法区分java和spark的距离，也许java和spark靠的很近，但是没法排在最前面
+          "content": "java spark"
+        }}
+      ],
+      "should": [
+        {
+          "match_phrase": { --> 在slop以内，如果java spark能匹配上一个doc，那么就会对doc贡献自己的relevance score，如果java和spark靠的越近，那么就分数越高
+            "content": {
+              "query": "java spark",
+              "slop": 50
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+```
+
+
+* Rescore机制优化近似匹配
+
+match和phrase match(proximity match)区别
+  * match: 只要简单的匹配到了一个term，就可以理解将term对应的doc作为结果返回，扫描倒排索引，扫描到了就ok
+  * phrase match --> 首先扫描到所有term的doc list; 找到包含所有term的doc list; 然后对每个doc都计算每个term的position，是否符合指定的范围; slop，需要进行复杂的运算，来判断能否通过slop移动，匹配一个doc
+
+优化proximity match的性能，一般就是减少要进行proximity match搜索的document数量。
+  * 主要思路：用match query先过滤出需要的数据，然后再用proximity match来根据term距离提高doc的分数，同时proximity match只针对每个shard的分数排名前n个doc起作用，来重新调整它们的分数，这个过程称之为rescoring，重计分。因为一般用户会分页查询，只会看到前几页的数据，所以不需要对所有结果进行proximity match操作。
+
+```
+GET /forum/article/_search
+{
+  "query": {
+    "match": {
+      "content": "spark java"
+    }
+  },
+  "rescore": {
+    "query": {
+      "rescore_query":{
+        "match_phrase":{
+          "content":{
+            "query":"java spark",
+            "slop":50
+          }
+        }
+      }
+    },
+    "window_size": 50
+  }
+}
+```
+
+
+#### 高级搜索规则
+
+* 前缀搜索
+
+```
+GET my_index/my_type/_search
+{
+  "query": {
+    "prefix": {
+      "title": {
+        "value": "C3"
+      }
+    }
+  }
+}
+```
+
+* 通配符搜索
+
+?：任意字符
+*：0个或任意多个字符
+
+```
+GET my_index/my_type/_search
+{
+  "query": {
+    "wildcard": {
+      "title": {
+        "value": "C?K*5"
+      }
+    }
+  }
+}
+```
+
+* 正则搜索
+
+[0-9]：指定范围内的数字
+[a-z]：指定范围内的字母
+.：一个字符
++：前面的正则表达式可以出现一次或多次
+
+```
+GET /my_index/my_type/_search 
+{
+  "query": {
+    "regexp": {
+      "title": "C[0-9].+"
+    }
+  }
+}
+```
+
+#### 搜索推荐
+
+```
+GET /my_index/my_type/_search 
+{
+  "query": {
+    "match_phrase_prefix": {
+      "title": "hello d"
+    }
+  }
+}
+```
+
+原理跟match_phrase类似，唯一的区别，就是把最后一个term作为前缀去搜索
+
+hello就是去进行match，搜索对应的doc
+w，会作为前缀，去扫描整个倒排索引，找到所有w开头的doc
+然后找到所有doc中，即包含hello，又包含w开头的字符的doc
+根据你的slop去计算，看在slop范围内，能不能让hello w，正好跟doc中的hello和w开头的单词的position相匹配
+
+
+#### ngram和index-time搜索推荐原理
+
+使用edge ngram将每个单词都进行进一步的分词切分，用切分后的ngram来实现前缀搜索推荐功能
+
+```
+PUT /my_index
+{
+    "settings": {
+        "analysis": {
+            "filter": {
+                "autocomplete_filter": { 
+                    "type":     "edge_ngram",
+                    "min_gram": 1,
+                    "max_gram": 20
+                }
+            },
+            "analyzer": {
+                "autocomplete": {
+                    "type":      "custom",
+                    "tokenizer": "standard",
+                    "filter": [
+                        "lowercase",
+                        "autocomplete_filter" 
+                    ]
+                }
+            }
+        }
+    }
+}
+```
+
+
+* 使用match_pharse进行搜索匹配
+
+```
+GET /my_index/my_type/_search
+{
+  "query": {
+    "match_phrase": {
+      "title": "hello m"
+    }
+  }
+}
+```
+
+### TF&IDF算法
+
+* bool model
+
+类似and这种逻辑操作符，先过滤出包含指定term的doc
+
+query "hello world" --> 过滤 --> hello / world / hello & world
+bool --> must/must not/should --> 过滤 --> 包含 / 不包含 / 可能包含
+doc --> 不打分数 --> 正或反 true or false --> 为了减少后续要计算的doc的数量，提升性能
+
+
+* TF/IDF
+ * TF: term frequency 
+  一个term在一个doc中，出现的次数越多，那么最后给的相关度评分就会越高
+ * IDF：inversed document frequency
+ 一个term在所有的doc中，出现的次数越多，那么最后给的相关度评分就会越低
+
+* length norm 
+
+hello搜索的那个field的长度，field长度越长，给的相关度评分越低; field长度越短，给的相关度评分越高
+
+
+* vector space model
+
+会给每一个doc，拿每个term计算出一个分数来,组成空间向量模型
+
+
+### luence相关度算法
+
+* boolean model
+
+普通multivalue搜索，转换为bool搜索，boolean model
+
+```
+"match": {
+  "title": "hello world"
+}
+```
+转化为：
+```
+"bool": {
+  "should": [
+    {
+      "match": {
+        "title": "hello"
+      }
+    },
+    {
+      "natch": {
+        "title": "world"
+      }
+    }
+  ]
+}
+```
+
+* lucene practical scoring function
+  ```
+  score(q,d)  =  
+              queryNorm(q)  
+            · coord(q,d)    
+            · ∑ (           
+                  tf(t in d)   
+                · idf(t)2      
+                · t.getBoost() 
+                · norm(t,d)    
+              ) (t in q) 
+  ```
+  * score(q,d) score(q,d) is the relevance score of document d for query q.
+    这个公式的最终结果，就是说是一个query（叫做q），对一个doc（叫做d）的最终的总评分
+    queryNorm(q) is the query normalization factor (new).
+  * queryNorm，是用来让一个doc的分数处于一个合理的区间内，不要太离谱，举个例子，一个doc分数是10000，一个doc分数是0.1，你们说好不好，肯定不好
+  * coord(q,d) is the coordination factor (new).
+    简单来说，就是对更加匹配的doc，进行一些分数上的成倍的奖励
+  * The sum of the weights for each term t in the query q for document d.
+    ∑：求和的符号
+    ∑ (t in q)：query中每个term，query = hello world，query中的term就包含了hello和world
+    query中每个term对doc的分数，进行求和，多个term对一个doc的分数，组成一个vector space，然后计算吗，就在这一步
+  * tf(t in d) is the term frequency for term t in document d.
+    计算每一个term对doc的分数的时候，就是TF/IDF算法
+  * idf(t) is the inverse document frequency for term t.
+  * t.getBoost() is the boost that has been applied to the query (new).
+  * norm(t,d) is the field-length norm, combined with the index-time field-level boost, if any. (new).
+
+
+* query normalization factor
+
+queryNorm = 1 / √sumOfSquaredWeights
+
+sumOfSquaredWeights = 所有term的IDF分数之和，开一个平方根，然后做一个平方根分之1
+主要是为了将分数进行规范化 --> 开平方根，首先数据就变小了 --> 然后还用1去除以这个平方根，分数就会很小 --> 1.几 / 零点几
+分数就不会出现几万，几十万，那样的离谱的分数
+
+* query coodination
+
+奖励那些匹配更多字符的doc更多的分数
+```
+Document 1 with hello → score: 1.5
+Document 2 with hello world → score: 3.0
+Document 3 with hello world java → score: 4.5
+
+Document 1 with hello → score: 1.5 * 1 / 3 = 0.5
+Document 2 with hello world → score: 3.0 * 2 / 3 = 2.0
+Document 3 with hello world java → score: 4.5 * 3 / 3 = 4.5
+```
+把计算出来的总分数 * 匹配上的term数量 / 总的term数量，让匹配不同term/query数量的doc，分数之间拉开差距
+
+* field level boost
+
+
+
+### 相关度评分进行调节和优化
+
+* query-time boost
+
+```
+GET /forum/article/_search
+{
+  "query": {
+    "bool": {
+      "should": [
+        {
+          "match": {
+            "title": {
+              "query": "java spark",
+              "boost": 2
+            }
+          }
+        },
+        {
+          "match": {
+            "content": "java spark"
+          }
+        }
+      ]
+    }
+  }
+}
+```
+
+* negative boost
+
+```
+GET /forum/article/_search 
+{
+  "query": {
+    "boosting": {
+      "positive": {
+        "match": {
+          "content": "java"
+        }
+      },
+      "negative": {
+        "match": {
+          "content": "spark"
+        }
+      },
+      "negative_boost": 0.2
+    }
+  }
+}
+```
+
+**NOTE:** negative的doc，会乘以negative_boost，降低分数
+
+* constant_score
+
+```
+GET /forum/article/_search 
+{
+  "query": {
+    "bool": {
+      "should": [
+        {
+          "constant_score": {
+            "filter": {
+               "bool": {
+                 "should":{
+                   "match":{
+                     "title":{
+                       "query":"java",
+                       "boost":"7"
+                     }
+                   }
+                 }
+               }
+            }
+          }
+          
+        }
+      ]
+    }
+  }
+}
+```
+
+### function_score函数相关度评分算法
+
+```
+GET /forum/article/_search
+{
+  "query": {
+    "function_score": {
+      "query": {
+        "multi_match": {
+          "query": "java spark",
+          "fields": ["tile", "content"]
+        }
+      },
+      "field_value_factor": {
+        "field": "follower_num",
+        "modifier": "log1p",
+        "factor": 0.5
+      },
+      "boost_mode": "sum",
+      "max_boost": 2
+    }
+  }
+}
+```
+
+* 如果只有field，那么会将每个doc的分数都乘以follower_num，如果有的doc follower是0，那么分数就会变为0，效果很不好。因此一般会加个log1p函数，公式会变为，new_score = old_score * log(1 + number_of_votes)，这样出来的分数会比较合理
+再加个factor，可以进一步影响分数，new_score = old_score * log(1 + factor * number_of_votes)
+* boost_mode，可以决定分数与指定字段的值如何计算，multiply，sum，min，max，replace
+* max_boost，限制计算出来的分数不要超过max_boost指定的值
+
+### fuzzy搜索技术
+
+* fuzziness，你的搜索文本最多可以纠正几个字母去跟你的数据进行匹配，默认如果不设置，就是2
+
+```
+GET /my_index/my_type/_search 
+{
+  "query": {
+    "fuzzy": {
+      "text": {
+        "value": "surprize",
+        "fuzziness": 2
+      }
+    }
+  }
+}
+```
+
+```
+GET /my_index/my_type/_search 
+{
+  "query": {
+    "match": {
+      "text": {
+        "query": "SURPIZE ME",
+        "fuzziness": "AUTO",
+        "operator": "and"
+      }
+    }
+  }
+}
+```

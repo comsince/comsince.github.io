@@ -1,6 +1,6 @@
 ---
 layout: wiki
-title: "【DataBase】-Redis 单机与集群部署方案"
+title: "【内存数据库】- Redis部署篇 - 单机与集群部署方案"
 categories: [中间件]
 description: 消息中间件说明
 keywords: Kafka,RocketMq

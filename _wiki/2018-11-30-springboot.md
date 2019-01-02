@@ -1,6 +1,6 @@
 ---
 layout: wiki
-title: "【Spring】-【SpringBoot】-核心要点"
+title: "【开发框架】- SpringBoot核心要点"
 categories: [中间件]
 description: 消息中间件说明
 keywords: Kafka,RocketMq
@@ -9,6 +9,8 @@ keywords: Kafka,RocketMq
 ## 概要
 
 SpringBoot的零配置实现是局域java config来实现。在理解springboot之前需要对其充分理解
+
+* [SpringBoot知识点梳理](http://mp.weixin.qq.com/s?__biz=MzUzMTA2NTU2Ng==&mid=2247485897&idx=1&sn=a55709fa9399f37dc3e6519a602b10ab&chksm=fa497678cd3eff6eb5bed24a07ee56546b4d0881c17ef9bcfe88b6ca48b0f78862f6d939a3b3&mpshare=1&scene=23&srcid=1226DrflXY8xlsn5XKQNH5uK#rd)
 
 ## Spring 配置文件加载机制
 

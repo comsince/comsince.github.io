@@ -1,6 +1,6 @@
 ---
 layout: wiki
-title: "【MiddleWare】-Zookeeper 集群部署方案"
+title: "【分布式协调中间件】- Zookeeper 集群部署方案"
 categories: [中间件]
 description: 消息中间件说明
 keywords: Kafka,RocketMq
