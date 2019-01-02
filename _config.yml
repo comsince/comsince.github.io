@@ -93,15 +93,21 @@ twitter_username: comsince
 # ---------------- #
 #      Comments    #
 # ---------------- #
-# support provider: disqus, duoshuo
+# support provider: disqus, duoshuo,gittalk
 comments_provider: gittalk
 # !!!重要!!! 请修改下面两个用户名为你自己申请的
 # !!!Important!!! Please modify usernames below to yours
 duoshuo_username: comsince
 disqus_username: comsince
-gittalk_username: comsince
 # 在使用 disqus 的时候可点击显示多说评论框
 lazy_load_duoshuo: false
+
+# https://github.com/gitalk/gitalk#install
+gitalk:
+    owner: comsince
+    repo: comsince_blog_comment
+    clientID: 3d5c92fc81bd4570f5f5
+    lientSecret: 959134da847db8f53264485a967155df800b333b
 
 # ---------------- #
 #    Analytics     #
