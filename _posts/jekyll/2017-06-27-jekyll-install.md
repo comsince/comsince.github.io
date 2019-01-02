@@ -83,7 +83,7 @@ Jekyll 3.4.3 | Error:  Could not find a JavaScript runtime. See https://github.c
 sudo apt-get install nodejs
 ```
 
-## 问题描述
+### 问题描述
 
 ```
   Liquid Exception: undefined method `map' for false:FalseClass Did you mean? tap in /_layouts/page.html
@@ -98,6 +98,20 @@ sudo apt-get install nodejs
 配置文件_config.yml中，使用了 plugins 的配置项，应该是用plugins替换掉gems。
 
 
+## 调用github 无法获取token的问题
+
+* 问题描述
+```
+GitHub Metadata: No GitHub API authentication could be found. Some fields may be missing or have incorrect data
+```
+
+* 解决方法
+```
+JEKYLL_GITHUB_TOKEN=<your token> jekyll serve -H 172.16.42.71
+```
+
+* 参考资料
+[No GitHub API authentication" error](https://github.com/github/pages-gem/issues/399#issuecomment-361091215)
 
 ## 评论插件
 

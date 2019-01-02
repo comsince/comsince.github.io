@@ -80,6 +80,8 @@ collections:
 
 repository: comsince/comsince.github.io
 
+#github: [metadata]
+
 # ---------------- #
 #      Socials     #
 # ---------------- #
