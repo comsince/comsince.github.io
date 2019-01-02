@@ -97,6 +97,12 @@ sudo apt-get install nodejs
 ```
 配置文件_config.yml中，使用了 plugins 的配置项，应该是用plugins替换掉gems。
 
+
+
+## 评论插件
+
+* [为博客添加 Gitalk 评论插件](https://www.jianshu.com/p/78c64d07124d)
+
 ## 参考资料
 
 * [How To Install Ruby on Rails on Ubuntu](https://tecadmin.net/install-ruby-on-rails-on-ubuntu/)

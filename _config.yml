@@ -107,7 +107,7 @@ gitalk:
     owner: comsince
     repo: comsince_blog_comment
     clientID: 3d5c92fc81bd4570f5f5
-    lientSecret: 959134da847db8f53264485a967155df800b333b
+    clientSecret: 959134da847db8f53264485a967155df800b333b
 
 # ---------------- #
 #    Analytics     #
