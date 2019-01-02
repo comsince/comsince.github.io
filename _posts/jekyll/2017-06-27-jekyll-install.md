@@ -92,6 +92,11 @@ sudo apt-get install nodejs
 
 * [问题参考](https://github.com/github/pages-gem/issues/351) 使用jekyll新建一个主页，解决此问题
 
+```
+ Deprecation: The 'gems' configuration option has been renamed to 'plugins'. Please update your config file accordingly.
+```
+配置文件_config.yml中，使用了 plugins 的配置项，应该是用plugins替换掉gems。
+
 ## 参考资料
 
 * [How To Install Ruby on Rails on Ubuntu](https://tecadmin.net/install-ruby-on-rails-on-ubuntu/)

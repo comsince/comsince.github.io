@@ -64,7 +64,7 @@ lsi: false
 quiet: false
 excerpt_separator: "\n\n"
 permalink: /:year/:month/:day/:title/
-gems:
+plugins:
     - jekyll-github-metadata
     - rouge
 #     - jekyll-html-pipeline
@@ -94,11 +94,12 @@ twitter_username: comsince
 #      Comments    #
 # ---------------- #
 # support provider: disqus, duoshuo
-comments_provider: disqus
+comments_provider: gittalk
 # !!!重要!!! 请修改下面两个用户名为你自己申请的
 # !!!Important!!! Please modify usernames below to yours
 duoshuo_username: comsince
 disqus_username: comsince
+gittalk_username: comsince
 # 在使用 disqus 的时候可点击显示多说评论框
 lazy_load_duoshuo: false
 
