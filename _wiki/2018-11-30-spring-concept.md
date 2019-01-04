@@ -57,7 +57,7 @@ __BeanFactoryPostProcessor__ 处理bean的定义，而 __BeanPostProcessor__ 则
 
 ## JavaConfig与常见Annotation
 
-###JavaConfig
+### JavaConfig
 
 * XML配置方式来描述bean的定义
 

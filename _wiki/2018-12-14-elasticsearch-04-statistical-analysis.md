@@ -13,7 +13,7 @@ keywords: elasticsearch
 
 * 聚合分组语句
 
-```
+```json
 GET /tvs/sales/_search
 {
   "size": 0, 
@@ -29,7 +29,7 @@ GET /tvs/sales/_search
 
 * 查询结果
 
-```
+```json
 {
   "took" : 3,
   "timed_out" : false,
@@ -82,7 +82,7 @@ doc_count：这个bucket分组内，有多少个数据
 
 * 求平均值
 
-```
+```json
 GET /tvs/sales/_search
 {
   "size": 0,
@@ -105,13 +105,13 @@ GET /tvs/sales/_search
 
 * 类似SQL
 
-```
+```sql
 select avg(price) from tvs.sales group by color
 ```
 
 ## 多层嵌套分组
 
-```
+```json
 GET /tvs/sales/_search
 {
   "size": 0,
@@ -153,7 +153,7 @@ GET /tvs/sales/_search
 * min：求一个bucket内，指定field值最小的那个数据
 * sum：求一个bucket内，指定field值的总和
 
-```
+```json
 GET /tvs/sales/_search
 {
    "size" : 0,
@@ -177,7 +177,7 @@ GET /tvs/sales/_search
 
 histogram：类似于terms，也是进行bucket分组操作，接收一个field，按照这个field的值的各个范围区间，进行bucket分组操作
 
-```
+```json
 GET /tvs/sales/_search
 {
   "size": 0,
@@ -207,7 +207,7 @@ date histogram，按照我们指定的某个date类型的日期field，以及日
 * `min_doc_count`：即使某个日期interval，2017-01-01~2017-01-31中，一条数据都没有，那么这个区间也是要返回的，不然默认是会过滤掉这个区间的
 * `extended_bounds，min，max`：划分bucket的时候，会限定在这个起始日期，和截止日期内
 
-```
+```json
 GET /tvs/sales/_search
 {
   "size": 0,
@@ -230,7 +230,7 @@ GET /tvs/sales/_search
 
 * 根据date分组后，再进行下钻分析,注意aggs层级
 
-```
+```json
 GET /tvs/sales/_search
 {
   "size": 0,
@@ -277,7 +277,7 @@ GET /tvs/sales/_search
 
 ## 搜索+聚合
 
-```
+```json
 GET /tvs/sales/_search 
 {
   "size": 0,
@@ -300,7 +300,7 @@ GET /tvs/sales/_search
 
 ## 聚合数据范围
 
-```
+```json
 GET /tvs/sales/_search 
 {
   "size": 0, 
@@ -339,7 +339,7 @@ GET /tvs/sales/_search
 
 * 过滤后聚合分组
 
-```
+```json
 GET /tvs/sales/_search
 {
   "size": 0,
@@ -367,7 +367,7 @@ GET /tvs/sales/_search
 
 * bucket filter：对不同的bucket下的aggs，进行filter
 
-```
+```json
 GET /tvs/sales/_search 
 {
   "size": 0,
@@ -403,7 +403,7 @@ GET /tvs/sales/_search
 
 * 按照颜色分组，计算改分组的平均价格后，升序排序
 
-```
+```json
 GET /tvs/sales/_search 
 {
   "size": 0,
@@ -429,7 +429,7 @@ GET /tvs/sales/_search
 
 * 按照颜色分组后下钻在安装品牌进行分组，之后计算改分组的平均价格，降序排序
 
-```
+```json
 GET /tvs/sales/_search 
 {
   "size": 0,
