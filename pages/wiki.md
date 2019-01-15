@@ -8,7 +8,7 @@ menu: 维基
 permalink: /wiki/
 ---
 
-> 记多少命令和快捷键会让脑袋爆炸呢？
+> 梳理知识有要点，系统化知识分类解析
 
 <ul class="listing">
 {% for wiki in site.wiki %}
