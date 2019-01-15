@@ -1,6 +1,6 @@
 ---
 layout: wiki
-title: "【分布式存储与计算】- Hadoop安装简介"
+title: "【大数据】- Hadoop安装简介"
 categories: [Hadoop]
 description: hadoop 安装说明
 keywords: Hadoop,Linux

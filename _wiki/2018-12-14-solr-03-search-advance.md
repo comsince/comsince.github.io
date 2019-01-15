@@ -492,3 +492,18 @@ sort=div(popularity,price) desc, score desc
 ```
 &fl=sum(x, y),id,a,b,c,score
 ```
+
+#### 使用内置函数转义问题
+
+>bq 使用内置函数需要使用单引用引起来，不然会因此解析错误
+
+```shell
+_query_:"{!edismax qf='title label game' pf='game^50 label^10 title' mm=1 bq='{!func}recip(rord(updateTime),1,1000,1000)' v=游戏}"
+
+```
+
+> 对于多个字段查询，需要用单引号引起来，不然解析器遇到空格做语法解析导致出错
+
+```shell
+http://10.3.142.194:8080/solr/gamev2/select?q= _query_:"{!edismax bf =log(sum(1,div(downloadCount,10000))) qf='name keword' pf=name v=$q1}"&q1=冒险岛&start=0&rows=10&wt=json&fl=id,name,keyword,downloadCount
+```

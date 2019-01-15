@@ -1,6 +1,6 @@
 ---
 layout: wiki
-title: "【消息中间件】- RocketMQ概览"
+title: "【分布式基础组件】- RocketMQ概览"
 categories: [中间件]
 description: 消息中间件说明
 keywords: Kafka,RocketMq

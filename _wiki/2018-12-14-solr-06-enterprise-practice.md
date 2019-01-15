@@ -497,3 +497,5 @@ if (result == null || result.getStatus() != ResultStatus.SUCCESS
   LOG.error("query from error, msg=" + (result != null ? result.getErrorMsg() : "")+ ", ruleid=" + ruleId + ", keyword=" + keyword);    
 }
 ```
+
+> 搜索数据服务采用RPC服务化框架，实现高性能调用，这里就设计到高性能RPC框架例如`Dubbo`
