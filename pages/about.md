@@ -8,10 +8,6 @@ menu: 关于
 permalink: /about/
 ---
 
-## 个人简介
-
-* [完整简历](/resume/person-resume)
-
 ## 联系
 
 * GitHub：[@comsicne](https://github.com/comsince)
