@@ -55,20 +55,6 @@ keywords: Java,Web
 <button class="btn btn-outline" type="button">魅族Kiev</button>
 <button class="btn btn-outline" type="button">Spring框架</button>  
 
-### 微博联系人项目
-* __开发与维护Flyme 微博联系人项目__
-* __在熟悉新浪微博OAuth等相关微博接口情况独立对微博联系人项目进行精简改造，为其他应用提供快速接入微博分享功能__
-
-**关键词:** <button class="btn btn-outline" type="button">Resultful API</button>
-<button class="btn btn-outline" type="button">接口授权</button> 
-<button class="btn btn-outline" type="button">Okhttp</button>
-
-## 珠海远光软件有限公司 (2012.6~2014.6)
-负责企业内部财务审批流程客户端产品，针对企业产品规划，独立开发完整个业务流程，对整个android 应用开发流程有了较为完整的认识
-
-**关键词:**
-<button class="btn btn-outline" type="button">Android 基本组件使用</button>
-<button class="btn btn-outline" type="button">企业级产品开发</button>
 
 # 开源项目
 
