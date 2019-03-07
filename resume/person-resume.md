@@ -26,13 +26,12 @@ keywords: Java,Web
 
 # 工作经验
 
-## 珠海魅族科技有限公司 (2014.6~至今)
-### 魅族Flyme开放推送
-* __负责魅族推送开放平台客户端推送服务开发，第三方推送SDK开发与维护__
-* __从零开始构建魅族推送SDK，完善魅族第三方推送接入生态，建立[魅族推送开发小组](https://github.com/MEIZUPUSH)__
-* __针对推送服务长连接多次进行优化，降低待机功耗，提高消息到达率，实现日均在在线用户2000多万，日均15亿的推送，并不断保持增长__
-* __为提高PushSDK接入简易性以及安全性，不断重构代码，实现魅族应用商店Top100应用高达80%的接入率，包括`百度浏览器`，`今日头条`，`腾讯新闻`,`京东`,`美团`等头部应用__
-* __规范PushSDK接入包，测试，正式发布流程__
+## 魅族Flyme开放推送
+* 负责魅族推送开放平台客户端推送服务开发，第三方推送SDK开发与维护
+* 从零开始构建魅族推送SDK，完善魅族第三方推送接入生态，建立[魅族推送开发小组](https://github.com/MEIZUPUSH)
+* 针对推送服务长连接多次进行优化，降低待机功耗，提高消息到达率，实现日均在在线用户2000多万，日均15亿的推送，并不断保持增长
+* 为提高PushSDK接入简易性以及安全性，不断重构代码，实现魅族应用商店Top100应用高达80%的接入率，包括`百度浏览器`，`今日头条`，`腾讯新闻`,`京东`,`美团`等头部应用
+* 规范PushSDK接入包，测试，正式发布流程
 
 在进行魅族PushSDK推送过程中，也更加认识到开源协作的力量，更加坚信走开源道路，将自己在开发中遇到的问题以代码和文档的形式分享给社区，也为我们推送做出了很大贡献
 
@@ -42,10 +41,10 @@ keywords: Java,Web
 <button class="btn btn-outline" type="button">接入率</button>
 <button class="btn btn-outline" type="button">自动发布</button> 
 
-### 全局搜索项目
+## 全局搜索项目
 基于Flyme各项业务包括`应用商店`，`游戏中心`，`主题美化`，`用户反馈`需要实现应用内垂直搜索业务，进而集中基于solr统一实现应用内搜索功能
-* __为各个业务提供RPC高性能搜索接口__
-* __托管各个业务的核心数据到solr，进行集中搜索__
+* 为各个业务提供RPC高性能搜索接口
+* 托管各个业务的核心数据到solr，进行集中搜索
 
 项目基于魅族自研的RPC框架kiev实现分布式服务，利用solr-cloud构建集群集中管理数据，实现搜索规则即时修改生效，为其他业务提供个性化的搜索业务，基于此项目也让我更加深刻了解到[分布式搜索服务的整个流程与实现方案](https://comsince.github.io/wiki/2018-12-14-solr-06-enterprise-practice/)
 
@@ -62,8 +61,10 @@ keywords: Java,Web
 
 * __[ups_meizu_pushsdk](https://github.com/comsince/ups_meizu_pushsdk)__: 基于魅族统一推送平台构建的统一PushSDK，旨在实现魅族，小米，华为等PushSDK的统一接入,帮助开发者一次接入即可省去对接各个平台的工作，快捷高效
 
+* __[universe_push](https://gitee.com/comsince/universe_push)__:基于T-io的即时消息分发系统，采用Dubbo，SpringBoot的分布式架构，可以衍生出推送，聊天，群组通讯的基础架构 ，内附NIO PushSdk方便android 设备接入 
 
 # 联系方式
 
 * __邮箱__：`ljlong_2008@126.com`
-* [github comsince](https://github.com/comsince)
+* [github](https://github.com/comsince)
+* [gitee](https://gitee.com/comsince)

@@ -8,3 +8,8 @@ menu: 链接
 permalink: /links/
 ---
 
+# 分享友情链接，格式如下
+
+* 网站名称：comsince
+* 网站链接：[https://comsince.github.io](https://comsince.github.io)
+* 网站描述：坚持分享，分享快乐
