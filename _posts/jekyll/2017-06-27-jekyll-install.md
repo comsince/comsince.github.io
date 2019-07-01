@@ -181,6 +181,11 @@ gem install jekyll bundler
 jekyll -v
 ```
 
+### 后台运行Jekyll
+
+```shell
+jekyll serve -H 172.18.217.120 -P 80 --detach
+```
 
 ## 评论插件
 
