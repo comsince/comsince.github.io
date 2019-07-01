@@ -17,6 +17,7 @@ category: ide
 
 * [IntelliJ IDEA 最新注册码（截止到2020年3月11日）](https://guobinhit.blog.csdn.net/article/details/89040919)
 
+* [idea激活方法](http://idea.lanyus.com/)
 
 ## Idea 常用说明
 
