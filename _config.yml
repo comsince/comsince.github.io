@@ -2,7 +2,7 @@
 #   Main Configs   #
 # ---------------- #
 #baseurl: https://comsince.github.io
-url: https://comsince.github.io
+url: https://github.comsince.cn
 date_format: "ordinal"
 title: comsince
 subtitle: "坚持分享，分享快乐"
@@ -110,8 +110,8 @@ lazy_load_duoshuo: false
 gitalk:
     owner: comsince
     repo: comsince_blog_comment
-    clientID: 3d5c92fc81bd4570f5f5
-    clientSecret: 959134da847db8f53264485a967155df800b333b
+    clientID: 28ca83cafae12f7540a6
+    clientSecret: 23f34cef588f07a40d702af14dfb662eb89b1e41
 
 # ---------------- #
 #    Analytics     #

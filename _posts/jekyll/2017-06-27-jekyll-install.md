@@ -185,6 +185,7 @@ jekyll -v
 
 ```shell
 jekyll serve -H 172.18.217.120 -P 80 --detach
+jekyll server -w # 文件发生变化时，自动重新编译
 ```
 
 ## 评论插件
