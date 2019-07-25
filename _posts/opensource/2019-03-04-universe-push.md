@@ -6,7 +6,7 @@ description:
 ---
 
 # 概述
-这个一个基础的消息通信架构，只在解决服务端与客户端消息通信，可应用于消息推送，即时通信以及由此衍生出来的消息通信业务。本项目基于其他开源项目的基础上，
+这个一个基础的消息通信架构，只在解决服务端与客户端消息通信，可应用于消息推送，即时通信以及由此衍生出来的消息通信业务。本项目基于其他开源项目的基础上,如[t-io](https://gitee.com/tywo45/t-io),[wildfirechat](http://docs.wildfirechat.cn/),
 希望通过合理的分布式架构，解决大规模并发链接的问题，从而适应互联网用户不断增长的需求，本项目将会采用微服务的开发与设计模式进行架构设计，尽量保持各个业务的单一性和高可用性。
 这样的目的也是基于业务扩展的方式，方便以后能够在基于此通信架构基础上衍生其他相关业务，从而保持业务的独立性，增加项目的可维护性。
 
@@ -14,7 +14,18 @@ description:
 
 * [本项目github地址](https://github.com/comsince/universe_push)
 
+> __<font color="#dd0000">扫码体验APK下载</font>__
+
+![image](attachment/qr-chat.png)
+
+**NOTE:** 本apk基于[android-chat](https://github.com/comsince/android-chat)构建替换为java协议栈开发,登录输入你的手机号,使用超级验证码`66666`即可登录
+
+> __<font color="#dd0000">Android 运行效果图</font>__
+
+![image](/images/opensource/chat-show.gif)
+
 # 部署说明
+**NOTE:** 如果只需要单机部署聊天服务，只需要部署`push-connect`和`push-group`服务
 
 ![image](/images/opensource/push-universe.png)
 
@@ -23,7 +34,7 @@ description:
 
 ## 依赖组件
 * __redis__  
-  `push-connector`集群模式下需要进行消息推送，利用redis的`sub/pub`进行消息的订阅与发布进而进行全局推送
+  `push-connector`集群模式下需要进行消息推送，利用redis的`sub/pub`进行消息的订阅与发布进而进行全局推送,集群模式现已经换成kafka发布订阅模式
 * __zookeeper__  
   dubbo使用了zookeeper作为注册中心，因此需要安装zookeeper
   
@@ -43,7 +54,7 @@ description:
 
 ### Dubbo admin metric
 本项目引入dubbo admin监控项目，由于dubbo-2.7.2正式版没有发布所以对dubbo的相关项目做了改造以适应dubbo-metric数据统计，如果你在编译过程中遇到错误，可以到这里下载项目本地编译即可
-![image](/images/opensource/dubbo-metric.png)
+![image](attachment/dubbo-metric.png)
 
 #### 相关项目
 * [dubbo](https://github.com/comsince/incubator-dubbo)
@@ -120,13 +131,13 @@ push.kafka.broker=172.16.177.107:9092
 ```
 
 ## 推送SDK
-为了方便用户快速接入消息推送系统，特提供如下SDK
+为了方便用户快速接入消息推送系统，特提供如下SDK,[演示APK下载](attachment/PushdemoInternal-release.apk)
 
 * __[AIO-PUSHSDK](push-sdk/push-aio-sdk)__
 * __[NIO-PUSHSDK](push-sdk/push-nio-sdk)__
 * 基于NIO-PUHSDK的[AndroidPushDemo](demo/AndroidPushDemo),这个demo主要演示重定向，心跳，消息推送，群组消息的基本功能
 
-![image](/images/opensource/push1.gif)
+![image](attachment/push1.gif)
 
 # 基础架构
 ## Push-connector
@@ -161,6 +172,7 @@ push.kafka.broker=172.16.177.107:9092
 
 
 ## Push-Group
+此服务现已经改造成为聊天的基础服务，提供单聊，群聊的基本存储服务，提供RPC接口供`push-connect`调用
 * 单聊服务
 * 群组服务
 
@@ -178,6 +190,9 @@ push.kafka.broker=172.16.177.107:9092
 ## 参考项目
 * [T-io](https://github.com/tywo45/t-io)
 * [蚂蚁通信框架实践](https://mp.weixin.qq.com/s/JRsbK1Un2av9GKmJ8DK7IQ)
+* [推荐阅读-新手入门一篇就够：从零开发移动端IM](http://www.52im.net/thread-464-1-1.html)
+
+
 
 
 
