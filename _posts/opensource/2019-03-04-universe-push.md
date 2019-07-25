@@ -18,7 +18,14 @@ description:
 
 ![image](/images/opensource/qr-chat.png)
 
-**NOTE:** 本apk基于[android-chat](https://github.com/comsince/android-chat)构建替换为java协议栈开发,登录输入你的手机号,使用超级验证码`66666`即可登录
+**NOTE:** 本apk基于[android-chat](https://github.com/comsince/android-chat)构建替换为java协议栈开发
+
+> 请选择其中任何一个帐号密码进行登录即可
+
+```properties
+帐号：13800000000, 13800000001, 13800000002
+密码：556677
+```
 
 > __<font color="#dd0000">Android 运行效果图</font>__
 
