@@ -16,7 +16,7 @@ description:
 
 > __<font color="#dd0000">扫码体验APK下载</font>__
 
-![image](attachment/qr-chat.png)
+![image](/images/opensource/qr-chat.png)
 
 **NOTE:** 本apk基于[android-chat](https://github.com/comsince/android-chat)构建替换为java协议栈开发,登录输入你的手机号,使用超级验证码`66666`即可登录
 
