@@ -144,7 +144,7 @@ push.kafka.broker=172.16.177.107:9092
 * __[NIO-PUSHSDK](push-sdk/push-nio-sdk)__
 * 基于NIO-PUHSDK的[AndroidPushDemo](demo/AndroidPushDemo),这个demo主要演示重定向，心跳，消息推送，群组消息的基本功能
 
-![image](attachment/push1.gif)
+![image](/images/opensource/push1.gif)
 
 # 基础架构
 ## Push-connector
