@@ -1,4 +1,4 @@
-version: '2'
+version: '2.1'
 services:
 
   mysql:
@@ -11,8 +11,6 @@ services:
       MYSQL_PASSWORD: test  #设置test用户的密码
     ports:
       - '3306:3306'
-    networks:
-      - universe-push
 
   zookeeper:
     environment:
@@ -25,8 +23,19 @@ services:
       options:
         max-size: "10m"
         max-file: "10"
-    networks:
-      - universe-push
+# KAFKA_ADVERTISED_HOST_NAME 单击部署改为自己的主机地址
+  kafka:
+    image: wurstmeister/kafka
+    restart: always
+    depends_on:
+      - zookeeper
+    ports:
+      - 9092:9092
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: kafka
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
 
   push-connector:
     environment:
@@ -42,8 +51,6 @@ services:
       options:
         max-size: "10m"
         max-file: "10"
-    networks:
-      - universe-push
 
   push-group:
     environment:
@@ -60,9 +67,4 @@ services:
       options:
         max-size: "10m"
         max-file: "10"
-    networks:
-      - universe-push
 
-networks:
-  universe-push:
-    driver: bridge

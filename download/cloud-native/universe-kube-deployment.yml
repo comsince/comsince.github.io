@@ -26,7 +26,7 @@ spec:
     - ReadWriteOnce
   hostPath:
     path: /data/mysql
----    
+---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -113,6 +113,83 @@ spec:
               - containerPort: 2181
                 name: zookeeper            
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kafka
+  labels:
+    app: kafka-push-connector
+spec:
+  ports:
+    - port: 9092
+      targetPort: 9092
+      name: kafka
+  selector:
+    app: kafka-push-connector
+  clusterIP: None
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: local-kafka-pv
+  labels:
+    type: local
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /data/kafka
+---    
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: kafka-pv-claim
+  labels:
+    app: push-connector-kafka
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: kafka
+  labels:
+    app: kafka-push-connector
+spec:
+  template:
+    metadata:
+      labels:
+        app: kafka-push-connector
+    spec:
+      containers:
+      - env:
+        - name: KAFKA_ADVERTISED_PORT
+          value: "9092"
+        - name: KAFKA_ADVERTISED_HOST_NAME
+          value: kafka
+        - name: KAFKA_ZOOKEEPER_CONNECT
+          value: zookeeper:2181
+        - name: KAFKA_BROKER_ID
+          value: "1"
+        image: wurstmeister/kafka
+        name: kafka
+        ports:
+        - containerPort: 9092
+        volumeMounts:
+        - name: kafka-persistent-storage
+          mountPath: /var/lib/kafka
+      restartPolicy: Always    
+      volumes:
+      - name: kafka-persistent-storage
+        persistentVolumeClaim:
+          claimName: kafka-pv-claim         
+---          
 apiVersion: v1
 kind: Service
 metadata:

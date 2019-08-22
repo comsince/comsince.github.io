@@ -1246,6 +1246,7 @@ spec:
 
 #### Mysql数据持久化存储问题
 可以使用数据卷来解决。这里使用`Persistent Volumes`,详情参见[基于 Persistent Volumes 搭建 WordPress 和 MySQL 应用](https://kubernetes.io/zh/docs/tutorials/stateful-application/mysql-wordpress-persistent-volume/)
+
 **NOTE:** `PersistentVolumeClaim`必须有一个`PersistentVolume`绑定，不然claim会一直处理pending状态无法启动
 * 如下为带有数据卷的yml
 
