@@ -1441,3 +1441,108 @@ spec:
           - containerPort: 8081
 
 ```
+
+#### kafka集群问题
+
+**NOTE:** 注意KAFKA_ADVERTISED_HOST_NAME配置。这里使用的单节点部署，所以设置为该容器host
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: kafka
+  labels:
+    app: kafka-push-connector
+spec:
+  ports:
+    - port: 9092
+      targetPort: 9092
+      name: kafka
+  selector:
+    app: kafka-push-connector
+  clusterIP: None
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: local-kafka-pv
+  labels:
+    type: local
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /data/kafka
+---    
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: kafka-pv-claim
+  labels:
+    app: push-connector-kafka
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: kafka
+  labels:
+    app: kafka-push-connector
+spec:
+  template:
+    metadata:
+      labels:
+        app: kafka-push-connector
+    spec:
+      containers:
+      - env:
+        - name: KAFKA_ADVERTISED_PORT
+          value: "9092"
+        - name: KAFKA_ADVERTISED_HOST_NAME
+          value: kafka
+        - name: KAFKA_ZOOKEEPER_CONNECT
+          value: zookeeper:2181
+        - name: KAFKA_BROKER_ID
+          value: "1"
+        image: wurstmeister/kafka
+        name: kafka
+        ports:
+        - containerPort: 9092
+        volumeMounts:
+        - name: kafka-persistent-storage
+          mountPath: /var/lib/kafka
+      restartPolicy: Always    
+      volumes:
+      - name: kafka-persistent-storage
+        persistentVolumeClaim:
+          claimName: kafka-pv-claim         
+
+```
+
+* [Kubernetes部署Kafka集群](https://www.cnblogs.com/00986014w/p/9561901.html)
+
+
+#### 查看长连接状态
+
+* 查找docker的进程号
+
+```shell
+docker inspect -f '{{.State.Pid}}' <containerid> 
+$ docker inspect -f '{{.State.Pid}}' 49b98b2fbad2
+1840
+```
+
+* 查看连接
+
+```shell
+sudo nsenter -t <pid> -n netstat | grep ESTABLISHED
+$ nsenter -t 1840 -n netstat |grep ESTABLISHED
+udp        0      0 node-2:45963        10.254.0.2:domain       ESTABLISHED
+```
