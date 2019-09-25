@@ -10,9 +10,10 @@ description:
 [![Gitee stars](https://gitee.com/comsince/universe_push/badge/star.svg?theme=white)](https://gitee.com/comsince/universe_push)
 [![GitHub stars](https://img.shields.io/github/stars/comsince/universe_push?style=social)](https://github.com/comsince/universe_push)
 
-## 适合快速部署的聊天系统
 这是一个聊天系统的简单架构，解决大量用户需要即时通讯的解决方案，基于RPC框架Dubbo,SpringBoot构建微服务应用，提供Docker快速部署的解决方案。
 提供Android客户端类似微信功能，包括`好友添加`，`私聊`，`群聊`，等基本功能
+
+## 系统体验说明
 
 ![image](https://user-gold-cdn.xitu.io/2019/9/20/16d4d5136e26d163?w=270&h=480&f=gif&s=2938622)
 
