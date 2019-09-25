@@ -33,3 +33,7 @@ $ yum install net-tools
 
 ## 参考资料
 * [ifconfig缺少问题解决方案](https://www.cnblogs.com/cy60/p/9287856.html)
+
+
+# centos7 设置802x认证无法修改密码的问题
+* 在使用centos7 进行编辑认证时可能会出现无法修改配置的问题，这时可以退出当前帐号,使用root帐号进行登录，删除原来的网络配置，然后重新登录当前帐号重新设置

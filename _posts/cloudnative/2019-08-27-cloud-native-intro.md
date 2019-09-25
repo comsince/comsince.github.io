@@ -79,16 +79,22 @@ category: cloud-native
 容器编排工具，已经成为事实标准
 ### POD
 理解kubenetes的对象，进而正确使用yaml配置
+* 标签和选择器
+* 注解
 * pod hook
 * pod健康检查
+  * 存活探针
 * 初始化容器
 
 ### 常用资源对象操作
+* replicationController->replicationSet
+* DeamonSet 守护进程集
 * Deployment 
 * Job
 * HPA pod 自动扩容与缩容
 * Service
-* ConfigMap
+  * 链接集群外部的服务
+  * 将服务暴露给外部客户
 * RBAC
 * StatefulSet
 
@@ -101,6 +107,10 @@ PersistentVolumeClaim（持久化卷声明），PVC 是用户存储的一种声�
 * StorageClass  
 动态创建Pv
 
+### 特殊类型的卷
+* configMap
+* secret
+
 ### 服务发现
 kubenetes集群内部通过服务名自动实现域名地址解析
 * kubeDNS,CoreDNS 注意域名命令规则
@@ -108,6 +118,8 @@ kubenetes集群内部通过服务名自动实现域名地址解析
 
 # DevOps实践
 kubenetes容器编排加快应用自动化构建，发布，从而为持续集成，持续发布提供基础设施，弄清楚在这个过程中所涉及的问题，就能理解以下组件在各个阶段的作用
+
+**NOTE:**全流程说明，说明devops各个组件的功能用途，以及实现自动CI,CD的完整路径
 
 ## Helm简介
 利用Kubernetes部署一个应用，需要Kubernetes原生资源文件如deployment、replicationcontroller、service或pod 等。而对于一个复杂的应用，会有很多类似上面的资源描述文件，如果有更新或回滚应用的需求，可能要修改和维护所涉及的大量资源文件，且由于缺少对发布过的应用版本管理和控制，使Kubernetes上的应用维护和更新等面临诸多的挑战，而Helm可以帮我们解决这些问题。
@@ -117,7 +129,6 @@ kubenetes容器编排加快应用自动化构建，发布，从而为持续集�
 * chart：包含了创建Kubernetes的一个应用实例的必要信息
 * config：包含了应用发布配置信息
 * release：是一个chart及其配置的一个运行实例
-
 
 ### helm安装
 
@@ -504,3 +515,10 @@ helm install c7n/mysql-client \
 * [模式之服务网格](https://www.infoq.cn/article/pattern-service-mesh)
 * [cloud-native学习笔记](https://skyao.io/learning-cloudnative/)
 * [从Docker到Kubernetes进阶](https://www.qikqiak.com/k8s-book/)
+
+# 参考书籍
+
+* [Kubeneates in action]()  
+这本书循序渐进的讲解了kubenetes的核心概念，并且对每一个概念的引出作出详细的背景说明，知识总是逐渐递进，让人不觉得一上来摆出一大堆概念，让人最终迷糊。优秀的技术书籍
+总是能让人不断去深入研究，乐此不疲，这本书在讲解kebuneates的概念时做到了这点，比较符合大众的认知规律，如果你按顺序通读此书，定能对k8s的配置yaml文件由更深的理解
+
