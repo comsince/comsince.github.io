@@ -5,21 +5,21 @@ category: opensource
 description: 
 ---
 
+这是一个聊天系统的简单架构，解决大量用户需要即时通讯的解决方案，基于RPC框架Dubbo,SpringBoot构建微服务应用，提供Docker快速部署的解决方案。
+提供Android客户端类似微信功能，包括`好友添加`，`私聊`，`群聊`，等基本功能
+
 [![Build Status](https://travis-ci.org/comsince/universe_push.svg?branch=master)](https://travis-ci.org/comsince/universe_push)
 [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/comsince/universe_push/blob/master/LICENCE)
 [![Gitee stars](https://gitee.com/comsince/universe_push/badge/star.svg?theme=white)](https://gitee.com/comsince/universe_push)
 [![GitHub stars](https://img.shields.io/github/stars/comsince/universe_push?style=social)](https://github.com/comsince/universe_push)
 
-这是一个聊天系统的简单架构，解决大量用户需要即时通讯的解决方案，基于RPC框架Dubbo,SpringBoot构建微服务应用，提供Docker快速部署的解决方案。
-提供Android客户端类似微信功能，包括`好友添加`，`私聊`，`群聊`，等基本功能
-
 ## 系统体验说明
 
-![image](https://user-gold-cdn.xitu.io/2019/9/20/16d4d5136e26d163?w=270&h=480&f=gif&s=2938622)
+![image](/images/opensource/chat-show.gif)
 
 > __<font color="#dd0000">扫码体验APK下载</font>__
 
-![image](https://user-gold-cdn.xitu.io/2019/9/20/16d4d513b16a76dd?w=256&h=256&f=png&s=4365)
+![image](/images/opensource/qr-chat.png)
 
 **NOTE:** 本apk基于[android-chat](https://github.com/comsince/android-chat)构建替换为java协议栈开发
 * 请选择其中任何一个帐号密码进行登录即可
@@ -44,7 +44,7 @@ description:
 
 **NOTE:** 以下是发布持续交付工作流图
 
-![image](https://user-gold-cdn.xitu.io/2019/9/20/16d4d512ccec970e?w=1760&h=770&f=png&s=170824)
+![image](https://cloud.githubusercontent.com/assets/6069066/14159789/0dd7a7ce-f6e9-11e5-9fbb-a7fe0f4431e3.png)
 
 ## 如何启动服务
 本机部署只需要两个`SpringBoot`服务，一个`Mysql`服务，一个`zookeeper`服务,链接服务`push-connector`集群模式还需要`kafka`支持
@@ -70,7 +70,7 @@ kubectl apply -f https://www.comsince.cn/download/cloud-native/universe-kube-dep
 kubectl apply -f ./universe-kube-deployment.yml
 ```
 
-![image](https://user-gold-cdn.xitu.io/2019/9/20/16d4d512ccfd97f6?w=1920&h=1080&f=png&s=170236)
+![image](/images/cloud-native/k8s-home.png)
 
 **NOTE:** 如果你希望直接脚本部署，[参考脚本部署](README-Linux.md)
 
