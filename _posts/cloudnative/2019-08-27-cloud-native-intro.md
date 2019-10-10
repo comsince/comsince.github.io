@@ -516,6 +516,11 @@ helm install c7n/mysql-client \
 * [cloud-native学习笔记](https://skyao.io/learning-cloudnative/)
 * [从Docker到Kubernetes进阶](https://www.qikqiak.com/k8s-book/)
 
+# 开源项目
+* [KubeSphere,以应用为中心的容器平台](https://kubesphere.io/)
+* [开源多云技术平台](http://choerodon.io/zh/)
+* [kuboard快速在kubenates落地微服务](https://www.kuboard.cn/)
+
 # 参考书籍
 
 * [Kubeneates in action]()  

@@ -71,5 +71,26 @@ deb-src http://mirrors.ustc.edu.cn/ubuntu/ xenial-proposed main restricted unive
 deb-src http://mirrors.ustc.edu.cn/ubuntu/ xenial-backports main restricted universe multiverse
 ```
 
+## 参考资料
 * [清华大学开源软件镜像站](https://mirror.tuna.tsinghua.edu.cn/help/ubuntu/)
 * [【Ubuntu】修改Ubuntu的apt-get源为国内镜像源的方法](https://blog.csdn.net/zgljl2012/article/details/79065174)
+
+
+# centos yum 源更新
+
+## 备份/etc/yum.repos.d/CentOS-Base.repo
+
+```shell
+mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
+```
+
+## 下载aliyun的yum源配置文件，放入/etc/yum.repos.d/下，并更改名称为CentOS-Base.repo
+
+```shell
+wget http://mirrors.aliyun.com/repo/Centos-7.repo
+mv Centos-7.repo CentOS-Base.repo 
+```
+
+## 参考资料
+* [[CentOS]CentOS更新yum源为阿里云](https://segmentfault.com/a/1190000016151886)
+* [阿里镜像站](https://opsx.alibaba.com/mirror)

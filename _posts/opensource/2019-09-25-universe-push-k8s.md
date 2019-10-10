@@ -82,5 +82,3 @@ kubectl apply -f ./universe-kube-deployment.yml
 此项目时在参考其他项目基础上完成，在此表示感谢
 * [t-io](https://github.com/tywo45/t-io)
 * [wildfirechat](https://gitee.com/wildfirechat/server)
-
-
