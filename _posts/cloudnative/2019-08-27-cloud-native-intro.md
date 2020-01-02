@@ -425,7 +425,7 @@ helm install c7n/gitlab-service \
     --set env.open.SPRING_CLOUD_CONFIG_ENABLED=true \
     --set env.open.SPRING_CLOUD_CONFIG_URI="http://register-server.c7n-system:8000/" \
     --set env.open.GITLAB_URL="http://gitlab.example.comsince.cn" \
-    --set env.open.GITLAB_PRIVATETOKEN="qfjWAri2xqyFifaFs4Zq" \
+    --set env.open.GITLAB_PRIVATETOKEN="ynEA1bBoUYJ7atvy5Umx" \
     --name gitlab-service \
     --version 0.18.1 \
     --namespace c7n-system
@@ -505,6 +505,25 @@ helm install c7n/mysql-client \
     --namespace c7n-system
 ```
 
+### Gitlab Runner
+
+```shell
+helm install c7n/gitlab-runner \
+    --set rbac.create=true \
+    --set env.concurrent=3 \
+    --set env.gitlabUrl=http://gitlab.example.comsince.cn/ \
+    --set env.runnerRegistrationToken=m5vKDYVMKa4JvujYA6jN \
+    --set env.environment.DOCKER_REGISTRY=registry.example.comsince.cn \
+    --set env.environment.DOCKER_USER=admin \
+    --set env.environment.DOCKER_PWD=Harbor12345 \
+    --set env.environment.CHOERODON_URL=http://api.example.comsince.cn \
+    --set env.persistence.runner-maven-pvc="/root/.m2" \
+    --set env.persistence.runner-cache-pvc="/cache" \
+    --set enabled_mount_host_docker_sock=true \
+    --name runner \
+    --version 0.2.2 \
+    --namespace c7n-system
+```
 
 
 # 参考资料
