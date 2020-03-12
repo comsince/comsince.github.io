@@ -26,6 +26,7 @@ footer, header, menu, nav, section {
 
 body {
     line-height: 1;
+    overflow: hidden;
 }
 
 blockquote, q {
@@ -67,8 +68,21 @@ body {
     background-size: cover;
 }
 
+/*在mac上，增加此设置，会导致滚动条不能自动显示与隐藏，滚动条会一直显示 */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
 /* 滚动条滑块 */
 ::-webkit-scrollbar-thumb {
     border-radius: 6px;
     background: rgba(0,0,0,0.1);
+}
+
+video {
+    background: #222;
+    margin: 0 0 20px 0;
+    --width: 100%;
+    width: var(--width);
+    height: var(--width);
 }
