@@ -24,7 +24,7 @@ cd nginx-1.4.2
  
 
 # 安装tcp反向代理模块 
-./configure  --prefix=/usr/local/nginx --with-stream
+./configure  --prefix=/usr/local/nginx --with-stream --with-http_ssl_module
 make
 make install
 ```
@@ -62,6 +62,10 @@ sudo /usr/local/nginx -t #检测配置文件是否正确
 sudo /usr/local/nginx -s stop #停止 
 sudo /usr/local/nginx -s reload #重载配置文件
 ```
+
+# 免费的证书
+
+[【Nginx】使用certbot安装免费https证书使Nginx支持Https请求](https://www.cnblogs.com/756623607-zhang/p/11638506.html)
 
 # 参考资料
 
