@@ -10,6 +10,7 @@ category: cloud-native
 # MySQL安装
 
 * [【数据库】- MySQL基本安装](/wiki/2019-07-01-mysql-00-install/)  
+
 **NOTE:** 不同版本的Centos安装可能存在差异，安装过程中注意错误提示
 
 ## 密码策略
@@ -112,12 +113,11 @@ Starting zookeeper ... STARTED
 ## 项目配置
 
 
-
-### 注意事项
-
 **NOTE:** 以下证书配置都是基于我申请的域名得到的证书，如果本地部署可能导入证书错误，无法访问，实际编译的时候去掉相关配置
 
-* push-group证书配置，暂时去掉，在application.properties
+### push-group证书配置
+
+暂时去掉，在application.properties
 
 ```yaml
 ## https 证书，本地测试请注销这些配置
@@ -127,7 +127,7 @@ Starting zookeeper ... STARTED
 
 ```
 
-* push-connector 证书配置去掉
+### push-connector
 
 ```yaml
 # wss ssl 配置,本地测试可以删除
@@ -135,13 +135,16 @@ Starting zookeeper ... STARTED
 #push.ssl.truststore=classpath:trustkeystore.jks
 #push.ssl.password=123456
 ```
+**NOTE:** [免费证书生成工具转换为jks](https://blog.sprov.xyz/2019/05/06/crt-or-pem-to-jks/)
+* [KeyManager 多平台免费下载](https://keymanager.org/)
+* [如何将PEM证书转换成JKS证书](https://biteeniu.github.io/ssl/convert_pem_to_jks/)
 
-* mysql链接配置
+### mysql链接配置
 
 **NOTE:** 在`push-group`的resource目录的`c3p0-config.xml`中配置
 
 
-* zookeeper,mysql host配置
+### zookeeper,mysql host配置
 
 由于代码中使用了zookeeper,mysql相关的host,你可以在你启动的机器中配置相关host.修改`/etc/hosts`
 
