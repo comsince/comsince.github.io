@@ -2,7 +2,7 @@
 layout: post
 title: "即时聊天系统在Centos上单机部署实践"
 description: docker IM cloud native
-category: cloud-native
+category: IM
 ---
 
 本文主要说明基于[universe-push](https://github.com/comsince/universe-push)在`centos`单机上的部署流程，如果大家购买相关mysql服务，可以选择部署相关服务
