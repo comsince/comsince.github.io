@@ -13,6 +13,9 @@ category: IM
 [![Gitee stars](https://gitee.com/comsince/universe_push/badge/star.svg?theme=white)](https://gitee.com/comsince/universe_push)
 [![GitHub stars](https://img.shields.io/github/stars/comsince/universe_push?style=social)](https://github.com/comsince/universe_push)
 
+
+**<center><font size="5" color="#bd4147">**本文未经授权禁止转载**</font></center>**
+
 # 概述
 飞享是一个即时聊天系统整体解决方案,更像一个开箱即用的即时通讯产品化解决方案.在设计之初,尽量遵照平台原生开发的要求进行,因为我们始终觉得原生的体验是达到一个优秀即时通讯的基本要求.在对客户端,服务端设计的过程中,尽量采用业界通用的方案进行.不用过于依赖某项技术,因为我们任何只有合适的技术用在合适的系统上才能发挥它固有的价值.
 
@@ -301,8 +304,8 @@ password 为 usertoken使用session secret经过AES加密得出的.
 信令交互流程主要是指如何使用以上的信令进行业务处理，信令的设计都采用的发送确认机制，例如客户端发送`connect`信令后，正常情况下都会受到服务器返回的ack确认指令，这里就是`connect_ack`.
 下面主要针对`PUBLISH`信令说明，因为这个主信令下面有比较多的子信令，每个信令的具体含义已经在上面做了相应的说明。下面主要来说明具体业务是如何交互的。下面以发送消息说明
 
-* 客户端构造信令消息体，此时__signal__为__PUSHLISH__，子信令为__MS__，代表用户需要发送消息
-* 服务端接收到消息后解析指令，根据子信令处理相应的业务逻辑。处理成功后，服务端构造`PUSH__ACK`确认消息，此时主信令就是`PUSH_ACK`，子信令依旧保持不变为`MS`
+* 客户端构造信令消息体，此时**signal**为**PUSHLISH**，子信令为**MS**，代表用户需要发送消息
+* 服务端接收到消息后解析指令，根据子信令处理相应的业务逻辑。处理成功后，服务端构造**PUSH__ACK**确认消息，此时主信令就是`PUSH_ACK`，子信令依旧保持不变为`MS`
 * 客户端收到确认指令后，根据返回的子消息信令进行后续的业务处理
 * 由于信令支持messageId,用户可以根据messageId,确认是否是之前的消息，可以用其实现异步消息转为同步处理
 
@@ -322,10 +325,272 @@ password 为 usertoken使用session secret经过AES加密得出的.
 
 **NOTE：** 这里的Json格式定义有点类似二进制通讯协议，只不过由于websocket协议本身定义了消息头，消息长度，因为不需要我们自己处理，因此我们只需要关注以上字段既可
 
+## 基于消息信令的交互方式
 
-## 内容消息体格式定义
+业务交互主要是基于`PUBLISH`与`PUB_ACK`模式进行的,使用子信令进行业务类型区分,例如发送请求用户信息,websocket协议Json格式为
+```json
+{
+    "signal": "PUBLISH", //主信令
+    "sub_signal": "UPUI", //子信令
+    "message_id": 0,  //消息id
+    "content": ["userids"]     //用户id列表
+}
+```
 
-这里的消息体定义主要指在上面的json字段中content定义，我们知道content字段是携带真正通讯内容的载体，如文本，图片，视频等实体消息，因为content的定义决定了后续我们处理消息的方式
+了解完业务消息设计定义,你可以参考`unverse_push`项目的中`push-connector`中`com.comsince.github.websocket.model`包中定义的数据格式进行分析,了解不同业务信令下的数据格式定义
+
+## 发送消息体结构
+
+这里把发送消息体的定义单独列出来说明,是因为`MS`子信令的消息体结构设计跟上面的基本业务数据结构有很大的不同,有必要单独拿出来说明.这个这个消息体定义了发送聊天消息的各种类型,其也是以后作为扩展消息所必须要知道的数据结构
+
+**NOTE:** 以下是发送一个文本消息完整消息体
+
+```json
+{
+    "signal": "PUBLISH",
+    "subSignal": "MS",
+    "messageId": 81,
+    "content": {
+        "from": "4A4A4Aaa",
+        "content": {
+            "type": 1,
+            "searchableContent": "1234",
+            "pushContent": "",
+            "content": "",
+            "binaryContent": "",
+            "localContent": "",
+            "mediaType": 0,
+            "remoteMediaUrl": "",
+            "localMediaPath": "",
+            "mentionedType": 0,
+            "mentionedTargets": []
+        },
+        "messageId": 1589944408832,
+        "direction": 0,
+        "status": 0,
+        "messageUid": 0,
+        "timestamp": 1589944408832,
+        "to": "",
+        "conversationType": 0,
+        "target": "d9dRdRoo",
+        "line": 0
+    }
+}
+```
+
+主信令与子信令含义不再描述,这里重点说明`content`消息定义,
+
+**下图为消息定义参数对照表**
+
+<table>
+    <tr>
+        <th>字段名称</th>
+        <th>子字段</th>
+        <th>字段描述</th>  
+    </tr >
+    <tr>
+        <td>from</td>
+        <td>无</td>
+        <td>来源</td>
+    </tr>
+    <tr>
+        <td>messageId</td>
+        <td>无</td>
+        <td>消息id,发送时随机生成</td>
+    </tr>
+    <tr>
+        <td>direction</td>
+        <td>无</td>
+        <td>消息方向,接收还是发送</td>
+    </tr>
+    <tr>
+        <td>status</td>
+        <td>无</td>
+        <td>推送转台</td>
+    </tr>
+    <tr>
+        <td>messageUid</td>
+        <td>无</td>
+        <td>消息唯一Id,由服务端返回</td>
+    </tr>
+    <tr>
+        <td>timestamp</td>
+        <td>无</td>
+        <td>消息时间戳</td>
+    </tr>
+    <tr>
+        <td>to</td>
+        <td>无</td>
+        <td>目标</td>
+    </tr>
+    <tr>
+        <td >conversationType</td>
+        <td>无</td>
+        <td>会话类型,单聊/群组</td>
+    </tr>
+    <tr>
+        <td >target</td>
+        <td>无</td>
+        <td>目标接收者Id</td>
+    </tr>
+    <tr>
+        <td >line</td>
+        <td>无</td>
+        <td>线路</td>
+    </tr>
+    <tr>
+        <td rowspan="11">content</td>
+        <td>type</td>
+        <td>消息内容类型</td>
+    </tr>
+    <tr>
+        <td>searchableContent</td>
+        <td>可供搜索的文本内容</td>
+    </tr>
+    <tr>
+        <td>pushContent</td>
+        <td>推送内容</td>
+    </tr>
+    <tr>
+        <td>content</td>
+        <td>内容</td>
+    </tr>
+    <tr>
+        <td>binaryContent</td>
+        <td>二进制消息内容,经过编码</td>
+    </tr>
+    <tr>
+        <td>localContent</td>
+        <td>消息本地内容</td>
+    </tr>
+    <tr>
+        <td>mediaType</td>
+        <td>媒体类型</td>
+    </tr>
+    <tr>
+        <td>remoteMediaUrl</td>
+        <td>媒体远程url,例如图片,视频,文件url</td>
+    </tr>
+    <tr>
+        <td>localMediaPath</td>
+        <td>本地媒体文件路径</td>
+    </tr>
+    <tr>
+        <td>mentionedType</td>
+        <td>提及类型</td>
+    </tr>
+    <tr>
+        <td>mentionedTargets</td>
+        <td>提及的对象ID</td>
+    </tr>
+    
+</table> 
+
+**NOTE:** 消息最终发送时,都会转化为Json格式,下面给出几个消息类型的示例
+
+### 纯文本消息
+
+```json
+{
+    "signal": "PUBLISH",
+    "subSignal": "MS",
+    "messageId": 82,
+    "content": {
+        "from": "4A4A4Aaa",
+        "content": {
+            "mentionedType": 0,
+            "mentionedTargets": [],
+            "type": 1,
+            "searchableContent": "纯文本消息"
+        },
+        "messageId": 1589955328518,
+        "direction": 0,
+        "status": 0,
+        "messageUid": 0,
+        "timestamp": 1589955328518,
+        "to": "",
+        "conversationType": 0,
+        "target": "d9dRdRoo",
+        "line": 0
+    }
+}
+```
+
+### 图片类型消息
+
+```json
+{
+    "signal": "PUBLISH",
+    "subSignal": "MS",
+    "messageId": 84,
+    "content": {
+        "from": "4A4A4Aaa",
+        "content": {
+            "mentionedType": 0,
+            "mentionedTargets": [],
+            "type": 3,
+            "searchableContent": "[图片]",
+            "binaryContent": null,
+            "mediaType": 1,
+            "remoteMediaUrl": "http://image.comsince.cn/1-4A4A4Aaa-1589955429816-push-universe.png",
+            "localMediaPath": ""
+        },
+        "messageId": 1589955430361,
+        "direction": 0,
+        "status": 0,
+        "messageUid": 0,
+        "timestamp": 1589955430361,
+        "to": "",
+        "conversationType": 0,
+        "target": "d9dRdRoo",
+        "line": 0
+    }
+}
+```
+
+**NOTE:** 与文本消息的区别在图片类消息携带的是图片的`remoteMediaUrl`,`type`类型为3,注意对于一些内容为空的字段进行省略
+
+### 通知类消息
+
+通知类消息,例如`加群通知`,`退群通知`,`撤回消息`
+
+
+* 移除群组成员的通知类消息
+
+```json
+{
+    "content": {
+        "binaryContent": "eyJnIjoiYm9iQ2JDUFAiLCJvIjoiVllWTFZMMjIiLCJtcyI6WyJkemRKZEpfXyJdfQ==",
+        "content": "",
+        "mediaType": 0,
+        "mentionedType": 0,
+        "pushContent": "",
+        "remoteMediaUrl": "",
+        "searchableContent": "",
+        "type": 106
+    },
+    "conversationType": 1,
+    "direction": 0,
+    "from": "VYVLVL22",
+    "line": 0,
+    "messageId": 157747907456403130,
+    "messageUid": 0,
+    "status": 0,
+    "target": "bobCbCPP",
+    "timestamp": 1589956063904
+}
+```
+
+### 消息类型扩展说明
+
+为了以后能够支持更多的消息类型,支持更多的展示方式,本质还是定义出更多type类型的消息,例如可以添加相应的`商品链接消息`,展示`用户文章类分享`,这些都可以通过以上的数据结构扩展
+
+
+# 音视频通讯
+
+**NOTE:** 目前只支持一对一音视频通话
+音视频通话详见: [实时音视频开发的工程化实践](/2020/03/04/web-rtc)
+
 
 # 系统规划
 
@@ -338,3 +603,6 @@ password 为 usertoken使用session secret经过AES加密得出的.
 
 ## 可扩展性
 相信很多用户可能对系统在实际应用中的效果并不满意,因此考虑系统的可扩展性,二次开发的便利性,需要提升
+
+
+**<center><font size="5" color="#bd4147">**本文未经授权禁止转载**</font></center>**
