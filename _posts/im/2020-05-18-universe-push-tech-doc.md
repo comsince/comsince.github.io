@@ -591,6 +591,8 @@ password 为 usertoken使用session secret经过AES加密得出的.
 **NOTE:** 目前只支持一对一音视频通话
 音视频通话详见: [实时音视频开发的工程化实践](/2020/03/04/web-rtc)
 
+**NOTE:** 进行音视频前,请先检查浏览器的支持情况,可以打开此链接[检测](https://www.qcloudtrtc.com/webrtc-samples/abilitytest/index.html)
+
 
 # 系统规划
 
@@ -603,6 +605,9 @@ password 为 usertoken使用session secret经过AES加密得出的.
 
 ## 可扩展性
 相信很多用户可能对系统在实际应用中的效果并不满意,因此考虑系统的可扩展性,二次开发的便利性,需要提升
+
+## 接入方便
+服务端接入包括两种,基于TCP的二进制协议,web端基于websocket,为了简化接入人员的接入工作量,可以提供包括`Android`,`IOS`,`Web`的端的SDK,提供基础用于socket编程的基础sdk,包含信令消息发送与接收的sdk
 
 
 **<center><font size="5" color="#bd4147">**本文未经授权禁止转载**</font></center>**
