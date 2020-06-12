@@ -585,6 +585,38 @@ password 为 usertoken使用session secret经过AES加密得出的.
 
 为了以后能够支持更多的消息类型,支持更多的展示方式,本质还是定义出更多type类型的消息,例如可以添加相应的`商品链接消息`,展示`用户文章类分享`,这些都可以通过以上的数据结构扩展
 
+# 对象存储
+私有化对象存储可以采用[minio](http://docs.minio.org.cn/docs/)
+
+## 本地化安装
+
+```shell
+wget http://dl.minio.org.cn/server/minio/release/linux-amd64/minio
+chmod +x minio
+## 前台启动
+./minio server data/
+## 后台启动
+nohup ./minio server miniodata/ >/data/minio.log 2>&1 &
+## 修改参数启动
+MINIO_ACCESS_KEY=test MINIO_SECRET_KEY=test nohup ./minio  server  miniodata/  > /opt/minio/minio.log 2>&1 &
+```
+
+**NOTE:** 更多高级配置,参见[MinIO Server config.json (v18) 指南](http://docs.minio.org.cn/docs/master/minio-server-configuration-guide)
+
+## 聊天作为对象存储服务
+MinIO 默认的策略是分享地址的有效时间最多是7天，要突破这种限制，可以在 bucket 中进行策略设置。点击对应的 bucket ，edit policy 添加策略 *.*
+**NOTE:** 另外上传的文件必须带文件后缀,不然无法下载
+
+* [为MinIO Server设置Nginx代理](http://docs.minio.org.cn/docs/master/setup-nginx-proxy-with-minio)
+
+* 客户端可以使用相应的SDK进行上传,到指定的bucket
+* 上传成功后需要将设置对应的外网访问地址
+
+## 管理后台操作
+* 创建不同的bucket用于存储不同的文件类型
+
+## 参考资料
+* [MinIO Quickstart Guide](http://docs.minio.org.cn/docs/)
 
 # 音视频通讯
 
