@@ -23,6 +23,59 @@ validate_password = off
 systemctl restart mysqld
 ```
 
+# 对象存储
+私有化对象存储可以采用[minio](http://docs.minio.org.cn/docs/)
+
+## 本地化安装
+
+```shell
+wget http://dl.minio.org.cn/server/minio/release/linux-amd64/minio
+chmod +x minio
+## 前台启动
+./minio server data/
+## 后台启动
+nohup ./minio server miniodata/ >/data/minio.log 2>&1 &
+## 修改参数启动
+MINIO_ACCESS_KEY=test MINIO_SECRET_KEY=test nohup ./minio  server  miniodata/  > /opt/minio/minio.log 2>&1 &
+## 启动https 注意accesskey 和secretkey 保持不变
+MINIO_ACCESS_KEY=test MINIO_SECRET_KEY=test nohup ./minio  server --address ":443" /data/miniodata/  > /data/minio.log 2>&1 &
+
+```
+
+**NOTE:** 更多高级配置,参见[MinIO Server config.json (v18) 指南](http://docs.minio.org.cn/docs/master/minio-server-configuration-guide)
+
+## 聊天作为对象存储服务
+MinIO 默认的策略是分享地址的有效时间最多是7天，要突破这种限制，可以在 bucket 中进行策略设置。点击对应的 bucket ，edit policy 添加策略 *.*
+**NOTE:** 另外上传的文件必须带文件后缀,不然无法下载
+
+* [为MinIO Server设置Nginx代理](http://docs.minio.org.cn/docs/master/setup-nginx-proxy-with-minio)
+
+* 客户端可以使用相应的SDK进行上传,到指定的bucket
+* 上传成功后需要将设置对应的外网访问地址
+
+## 管理后台操作
+* 创建不同的bucket用于存储不同的文件类型，如下
+
+```java
+
+    public static String MINIO_BUCKET_GENERAL_NAME = "minio-bucket-general-name";
+    public static String MINIO_BUCKET_GENERAL_DOMAIN = MINIO_UPLOAD_ENDPOINT+"/"+MINIO_BUCKET_GENERAL_NAME;
+    public static String MINIO_BUCKET_IMAGE_NAME = "minio-bucket-image-name";
+    public static String MINIO_BUCKET_IMAGE_DOMAIN = MINIO_UPLOAD_ENDPOINT+"/"+MINIO_BUCKET_IMAGE_NAME;
+    public static String MINIO_BUCKET_VOICE_NAME = "minio-bucket-voice-name";
+    public static String MINIO_BUCKET_VOICE_DOMAIN = MINIO_UPLOAD_ENDPOINT+"/"+MINIO_BUCKET_VOICE_NAME;
+    public static String MINIO_BUCKET_VIDEO_NAME = "minio-bucket-video-name";
+    public static String MINIO_BUCKET_VIDEO_DOMAIN =  MINIO_UPLOAD_ENDPOINT+"/"+MINIO_BUCKET_VIDEO_NAME;
+    public static String MINIO_BUCKET_FILE_NAME = "minio-bucket-file-name";
+    public static String MINIO_BUCKET_FILE_DOMAIN = MINIO_UPLOAD_ENDPOINT+"/"+MINIO_BUCKET_FILE_NAME;
+    public static String MINIO_BUCKET_PORTRAIT_NAME = "minio-bucket-portrait-name";
+    public static String MINIO_BUCKET_PORTRAIT_DOMAIN = MINIO_UPLOAD_ENDPOINT+"/"+MINIO_BUCKET_PORTRAIT_NAME;
+    public static String MINIO_BUCKET_FAVORITE_NAME = "minio-bucket-favorite-name";
+    public static String MINIO_BUCKET_FAVORITE_DOMAIN = MINIO_UPLOAD_ENDPOINT+"/"+MINIO_BUCKET_FAVORITE_NAME;
+```
+
+## 参考资料
+* [MinIO Quickstart Guide](http://docs.minio.org.cn/docs/)
 
 # 系统软件安装
 
@@ -135,9 +188,94 @@ Starting zookeeper ... STARTED
 #push.ssl.truststore=classpath:trustkeystore.jks
 #push.ssl.password=123456
 ```
-**NOTE:** [免费证书生成工具转换为jks](https://blog.sprov.xyz/2019/05/06/crt-or-pem-to-jks/)
+**NOTE:** 
+* [免费证书生成工具转换为jks](https://blog.sprov.xyz/2019/05/06/crt-or-pem-to-jks/)
 * [KeyManager 多平台免费下载](https://keymanager.org/)
 * [如何将PEM证书转换成JKS证书](https://biteeniu.github.io/ssl/convert_pem_to_jks/)
+
+
+### certbot证书配置
+
+#### unbutu 安装
+
+
+```shell
+sudo apt-get update
+sudo apt-get install software-properties-common
+sudo add-apt-repository universe
+sudo add-apt-repository ppa:certbot/certbot
+sudo apt-get update
+```
+
+#### 生成证书
+
+生成证书可以使用nginx 自动绑定生成的方式，这里采用standalone方式，这个是后需要将你要生成证书的域名设置DNS解析
+
+```shell
+certbot certonly --standalone -d media.comsince.cn --staple-ocsp -m ljlong_2008@126.com --agree-tos
+
+Saving debug log to /var/log/letsencrypt/letsencrypt.log
+Plugins selected: Authenticator standalone, Installer None
+Obtaining a new certificate
+Performing the following challenges:
+http-01 challenge for media.comsince.cn
+Waiting for verification...
+Cleaning up challenges
+
+IMPORTANT NOTES:
+ - Congratulations! Your certificate and chain have been saved at:
+   /etc/letsencrypt/live/media.comsince.cn/fullchain.pem
+   Your key file has been saved at:
+   /etc/letsencrypt/live/media.comsince.cn/privkey.pem
+   Your cert will expire on 2020-09-11. To obtain a new or tweaked
+   version of this certificate in the future, simply run certbot
+   again. To non-interactively renew *all* of your certificates, run
+   "certbot renew"
+ - If you like Certbot, please consider supporting our work by:
+
+   Donating to ISRG / Let's Encrypt:   https://letsencrypt.org/donate
+   Donating to EFF:                    https://eff.org/donate-le
+
+```
+
+#### 证书续期问题
+
+```shell
+$certbot renew
+
+Saving debug log to /var/log/letsencrypt/letsencrypt.log
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Processing /etc/letsencrypt/renewal/chat.comsince.cn.conf
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+OCSP check failed for /etc/letsencrypt/archive/chat.comsince.cn/cert1.pem (are we offline?)
+Cert is due for renewal, auto-renewing...
+Plugins selected: Authenticator nginx, Installer nginx
+Starting new HTTPS connection (1): acme-v02.api.letsencrypt.org
+Renewing an existing certificate
+Performing the following challenges:
+http-01 challenge for chat.comsince.cn
+Waiting for verification...
+Cleaning up challenges
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+new certificate deployed with reload of nginx server; fullchain is
+/etc/letsencrypt/live/chat.comsince.cn/fullchain.pem
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+Congratulations, all renewals succeeded. The following certs have been renewed:
+  /etc/letsencrypt/live/chat.comsince.cn/fullchain.pem (success)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+```
+
+#### 参考资料
+
+* [certbot安装](https://certbot.eff.org/lets-encrypt/ubuntubionic-other)
+* [使用Certbot生成Let's Encrypt证书](http://docs.minio.org.cn/docs/master/generate-let-s-encypt-certificate-using-concert-for-minio)
+
 
 ### mysql链接配置
 
