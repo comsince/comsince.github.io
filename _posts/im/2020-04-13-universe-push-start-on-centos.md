@@ -271,6 +271,11 @@ Congratulations, all renewals succeeded. The following certs have been renewed:
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 ```
 
+#### 申请泛域名证书
+
+* [CentOS 7 上使用Certbot申请通配符证书](https://yq.aliyun.com/articles/713724)
+* [Ubuntu 18.04 使用 Certbot 申请并安装 Let's Encrypt 泛域名证书](https://www.timelate.com/archives/use-certbot-to-apply-and-install-letsencrypt-pan-domain-certificate.html)
+
 #### 参考资料
 
 * [certbot安装](https://certbot.eff.org/lets-encrypt/ubuntubionic-other)
