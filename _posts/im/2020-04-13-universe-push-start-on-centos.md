@@ -271,6 +271,11 @@ Congratulations, all renewals succeeded. The following certs have been renewed:
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 ```
 
+* 服务端证书更新
+当刷新了证书,服务端Jks也需要更新,使用KeyManager,使用格式转换工具,导入fullchain.pem,private.key即可
+
+![image](/images/im/keymanager-pem-setting.png)
+
 #### 申请泛域名证书
 
 * [CentOS 7 上使用Certbot申请通配符证书](https://yq.aliyun.com/articles/713724)
