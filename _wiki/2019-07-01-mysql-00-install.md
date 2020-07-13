@@ -62,6 +62,15 @@ Step5: 启动mysql
 **NOTE:** 这里提供对话式的选择配置设置，也可以使用如下命令更改root用户密码 `mysqladmin -u root password 'root'`
 
 
+# Myql备份与恢复
+
+## 备份
+
+```shell
+mysqldump -uroot -p wfchat > wfchat.sql
+```
+
 
 # 参考资料
 * [CentOS 6.5/6.6 安装（install）mysql 5.7 最完整版教程](https://segmentfault.com/a/1190000003049498)
+* [MySQL 备份和恢复机制](https://juejin.im/entry/5a0aa2026fb9a045132a369f)

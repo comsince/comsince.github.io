@@ -219,9 +219,20 @@ Server: WebSocket++/0.7.0
   * 建立推流通道,用于专门发送本地视频到KMS
   * 根据现有参与者,每一个参与者都建立一条拉流通道,用于分别接收群组中其他参与者的视频流
 
+### 基于IM的群组视频聊天的信令设计
+* 群组某个成员发起群组视频聊天,发起`CallStartMessage`,并等待加入者
+* 被通知者收到接收到的群组音视频通知,决定是否接收群组视频邀请
+* 如果被邀请者同意接收音视频邀请,则回应`callAnswerMessage`
+* 信令服务器接收到用户接收请求邀请,分别给发起者发送`SignalMessage`包含新加入的用户,接收者发送包含正在音视频通话的列表的`SignalMessage`
+
+## 交互设计  
+* 群组中任何一个用户,点击语音或者视频聊天,之后选择要参与的用户,目前群聊用户初步限定为9人
+* 一旦发起者建立群组会话,中间其他群组成员,不允许在进入,除非发起者邀请进入
+
 
 
 # 参考资料
 * [互动直播之WebRTC服务开源技术选型](https://juejin.im/post/5eca3f15e51d45789129173e#heading-21)
 * [WebRTC现状以及多人视频通话分析](https://juejin.im/post/5cb008c26fb9a068547345eb#heading-5)
 * [kurento 官方文档](https://doc-kurento.readthedocs.io/en/6.13.0/user/installation.html)
+* [架构设计：基于Webrtc、Kurento的一种低延迟架构实现](https://www.jianshu.com/p/ac307371def4)
