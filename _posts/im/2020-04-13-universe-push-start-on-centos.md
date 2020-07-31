@@ -276,6 +276,30 @@ Congratulations, all renewals succeeded. The following certs have been renewed:
 
 ![image](/images/im/keymanager-pem-setting.png)
 
+* keytool 显示jks详细信息
+
+```shell
+keytool -list -keystore comsince.cn.jks 
+输入密钥库口令:  
+
+密钥库类型: JKS
+密钥库提供方: SUN
+
+您的密钥库包含 1 个条目
+
+1, 2020-7-31, PrivateKeyEntry, 
+证书指纹 (SHA1): 02:72:5F:EB:86:D7:42:2B:58:5B:D9:F3:05:F3:E5:17:45:15:D6:A5
+
+```
+
+**NOTE:** 可以看到别名alias 为1
+
+* 生成truststore.jks
+
+```shell
+keytool -import -alias certificatekey -file {公钥证书}  -keystore comsince.cn.trustkeystore.jks
+```
+
 #### 申请泛域名证书
 
 * [CentOS 7 上使用Certbot申请通配符证书](https://yq.aliyun.com/articles/713724)
