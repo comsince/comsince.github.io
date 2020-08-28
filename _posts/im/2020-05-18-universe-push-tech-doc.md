@@ -8,12 +8,6 @@ category: IM
 本文档主要说明飞享即时聊天系统的技术相关文档,用于支持其他多端开发.说明系统的整体架构与后续技术`发展规划`,`技术愿景`,`未来商业化支持`
 
 
-[![Build Status](https://travis-ci.org/comsince/universe_push.svg?branch=master)](https://travis-ci.org/comsince/universe_push)
-[![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/comsince/universe_push/blob/master/LICENCE)
-[![Gitee stars](https://gitee.com/comsince/universe_push/badge/star.svg?theme=white)](https://gitee.com/comsince/universe_push)
-[![GitHub stars](https://img.shields.io/github/stars/comsince/universe_push?style=social)](https://github.com/comsince/universe_push)
-
-
 **<center><font size="5" color="#bd4147">**本文未经授权禁止转载**</font></center>**
 
 # 概述
