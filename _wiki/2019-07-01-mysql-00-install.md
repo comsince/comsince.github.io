@@ -1,6 +1,6 @@
 ---
 layout: wiki
-title: 【数据库】- MySQ基本安装
+title: 【数据库】- MySQL基本安装
 categories: [mysql]
 description: 
 keywords: mysql
