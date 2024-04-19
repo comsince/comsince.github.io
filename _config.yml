@@ -4,7 +4,7 @@
 #baseurl: https://comsince.github.io
 url: https://www.comsince.cn
 date_format: "ordinal"
-title: comsince
+title: 我的comsince技术小站
 subtitle: "坚持分享，分享快乐"
 description: "坚持分享，分享快乐"
 keywords: comsince, yurenfei
@@ -117,7 +117,7 @@ gitalk:
 #    Analytics     #
 # ---------------- #
 google:
-    analytics_id: UA-92285152-1
+    analytics_id: G-9NL9BTD41Z
 
 # ---------------- #
 #      Datas       #
