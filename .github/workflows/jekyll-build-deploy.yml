@@ -36,16 +36,15 @@ jobs:
 
 
       - name: Deploy to Server # 第二步，rsync推文件
-        uses: AEnterprise/rsync-deploy@v1.0 # 使用别人包装好的步骤镜像
+        uses: easingthemes/ssh-deploy@v2.0.8 # 使用别人包装好的步骤镜像
         with:
-          DEPLOY_KEY: ${{ secrets.SSH_PRIVATE_KEY }} # 引用配置，SSH私钥
-          ARGS: -avz --delete # rsync参数，排除.pyc文件
-          SERVER_PORT: '22' # SSH端口
-          FOLDER: _site/ # 要推送的文件夹，路径相对于代码仓库的根目录
-          SERVER_IP: ${{ secrets.SERVER_HOST }} # 引用配置，服务器的host名（IP或者域名domain.com）
-          USERNAME: ${{ secrets.SERVER_USERNAME }} # 引用配置，服务器登录名
-          SERVER_DESTINATION: /data/boot/comsince.cn # 部署到目标文件夹            
-
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          ARGS: '-avzr --delete'
+          REMOTE_HOST:  ${{ secrets.SERVER_HOST }}
+          REMOTE_USER: ${{ secrets.SERVER_USERNAME }}
+          SOURCE: '_site/'
+          TARGET: '/data/boot/comsince.cn'
+          
       - name: SSH into server
         uses: appleboy/ssh-action@master
         with:
