@@ -123,4 +123,4 @@ ALTER TABLE 表名 ROW_FORMAT=行格式名称
 ## 参考书籍
 
 * [MySQL有什么推荐的学习书籍？](https://www.zhihu.com/question/28385400/answer/87729818)
-* [MySQL技术内部-InnoDb引擎](/download/mysql/MySQL-Innodb-2.pdf)
+* [MySQL技术内部-InnoDb引擎](https://media.fsharechat.cn/minio/minio-bucket-file-name/MySQL-Innodb-2.pdf)

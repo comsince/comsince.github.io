@@ -378,7 +378,7 @@ sudo make install //将redis安装到usr目录
 
 ### 权限框架
 
-* [跟我学Shiro](/download/kaitao-shiro.pdf)
+* [跟我学Shiro](https://media.fsharechat.cn/minio/minio-bucket-file-name/kaitao-shiro.pdf)
 
 ### 分布式数据库
 为提升系统性能，实现高并发的需要有事需要实现数据库读写分离，需要使用数据库中间件

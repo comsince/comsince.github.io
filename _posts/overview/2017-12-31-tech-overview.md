@@ -9,7 +9,7 @@ linux的基本技能，主要说明linux环境下c编程，shell；着重于基�
 
 ## Linux 基础
 
-* [鸟哥的私房菜PDF](/download/linux-introduction.pdf)
+* [鸟哥的私房菜PDF](https://media.fsharechat.cn/minio/minio-bucket-file-name/linux-introduction.pdf)
 
 ## linux C 编程基础
   c 语言编程的基本语法这里不再赘述，基本大同小异，这里主要研究，在工程的条件下，如果快速的编译c代码，像一些面向对象的编程语言都有提供相应的工具入maven，gradle；c也有自己独特的方式。
@@ -49,7 +49,7 @@ linux的基本技能，主要说明linux环境下c编程，shell；着重于基�
 C没有像gradle和maven的编译工具，需要使用makefile来组织编译，不过以后可以使用CMake
 
 * [GNU make](https://www.gnu.org/software/make/manual/make.html)
-* [GNU Make 译文](/download/gun_make.pdf)
+* [GNU Make 译文](https://media.fsharechat.cn/minio/minio-bucket-file-name/gun_make.pdf)
 * [跟我一起写Makefile](http://wiki.ubuntu.org.cn/%E8%B7%9F%E6%88%91%E4%B8%80%E8%B5%B7%E5%86%99Makefile)
 
 ### CMake
@@ -130,7 +130,7 @@ Your APP_BUILD_SCRIPT points to an unknown file: ./main/cpp/jni/Android.mk
 ### Java I/O
 
 * [Java IO](http://ifeve.com/java-io/)
-* [java I/O书籍](/download/JavaIO.pdf)
+* [java I/O书籍](https://media.fsharechat.cn/minio/minio-bucket-file-name/JavaIO.pdf)
 * [Java NIO Tutorial](http://tutorials.jenkov.com/java-nio/index.html)
 * [java nio解决半包 粘包问题](https://blog.csdn.net/nongfuyumin/article/details/78343999)
 
@@ -143,9 +143,9 @@ Your APP_BUILD_SCRIPT points to an unknown file: ./main/cpp/jni/Android.mk
 
 ### Java Connurency
 
-* [Java并发编程实战](/download/Java-concurency-in-practice.pdf)
+* [Java并发编程实战](https://media.fsharechat.cn/minio/minio-bucket-file-name/Java-concurency-in-practice.pdf)
 * [通俗解释java并发原理教程](http://tutorials.jenkov.com/java-concurrency/thread-signaling.html)
-* [Java 并发编程的艺术](/download/Java_concurrency_artifact.pdf)
+* [Java 并发编程的艺术](https://media.fsharechat.cn/minio/minio-bucket-file-name/Java_concurrency_artifact.pdf)
 
 ### Java Reflection
   
@@ -161,7 +161,7 @@ AOP模式实现切面编程中，利用职责链模式，建立一种拦截器�
 
 #### Spring 框架原理
 
-* [深入解析Spring 内幕](/download/spring-tech-invoke_anayisis.pdf)
+* [深入解析Spring 内幕](https://media.fsharechat.cn/minio/minio-bucket-file-name/spring-tech-invoke_anayisis.pdf)
 * [Spring的BeanFactoryPostProcessor和BeanPostProcessor](https://blog.csdn.net/caihaijiang/article/details/35552859)
 * [Spring AOP aspect vs advisor 以及基于xml和annotation的两种配置](https://howtodoinjava.com/spring-aop/spring-aop-aspectj-xml-configuration-example/)
 * [aop:aspect与aop:advisor的区别](https://blog.csdn.net/u011983531/article/details/70504281)
@@ -206,7 +206,7 @@ AOP模式实现切面编程中，利用职责链模式，建立一种拦截器�
 
 #### 权限框架
 
-* [跟我学Shiro](/download/kaitao-shiro.pdf
+* [跟我学Shiro](https://media.fsharechat.cn/minio/minio-bucket-file-name/kaitao-shiro.pdf
 
 ### 设计模式
 
@@ -309,9 +309,9 @@ AOP模式实现切面编程中，利用职责链模式，建立一种拦截器�
 #### 书籍资料
 * [Hadoop实战-陆嘉恒]()
 * [Hadoop权威指南-第三版](/download/largfile-100M/Hadoop-overall.pdf)
-* [Hadoop技术内幕：深入解析Hadoop Common和HDFS](/download/bigdata/Hadoop_Common_HDFS.pdf)
-* [Hadoop技术内幕：深入解析YARN架构设计与实现原理](/download/bigdata/Hadoop_YARN_artitect.pdf)
-* [Hadoop技术内幕：深入解析MapReduce架构设计与实现原理 (大数据技术丛书)](/download/bigdata/Hadoop_MapReduce_artitect.pdf)
+* [Hadoop技术内幕：深入解析Hadoop Common和HDFS](https://media.fsharechat.cn/minio/minio-bucket-file-name/Hadoop_Common_HDFS.pdf)
+* [Hadoop技术内幕：深入解析YARN架构设计与实现原理](https://media.fsharechat.cn/minio/minio-bucket-file-name/Hadoop_YARN_artitect.pdf)
+* [Hadoop技术内幕：深入解析MapReduce架构设计与实现原理 (大数据技术丛书)](https://media.fsharechat.cn/minio/minio-bucket-file-name/Hadoop_MapReduce_artitect.pdf)
 
 ### Python
 * [Python教程](https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001431608990315a01b575e2ab041168ff0df194698afac000)
