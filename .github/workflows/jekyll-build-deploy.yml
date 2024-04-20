@@ -29,9 +29,10 @@ jobs:
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USERNAME }}
+          #这里的private key 是本地生成的，然后自己本地服务ssh，成功之后，进行远程服务登录，然后将本地的privatekey保存到github变量中
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            rsync -azv --delete _site/ /data/boo/comsince.cn
+            rsync -azv --delete _site/ /data/boot/comsince.cn
 
       - name: Reload Nginx
         run: sudo nginx -s reload
